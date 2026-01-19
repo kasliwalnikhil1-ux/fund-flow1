@@ -303,69 +303,7 @@ export function OutreachCampaignSection() {
               </div>
             </div>
 
-            {/* Bottom Status Panel */}
-            <div className="relative z-20 p-8 pt-0">
-              <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <motion.div 
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center"
-                    >
-                      <MessageSquare className="h-4 w-4 text-emerald-400" />
-                    </motion.div>
-                    <div>
-                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">Neural Synapse Active</span>
-                      <div className="flex gap-2">
-                        <span className="text-[6px] text-primary/60 uppercase font-black tracking-widest italic">Personalizing for target context...</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[12px] font-black text-emerald-400 block leading-none mb-1">99.4%</span>
-                    <span className="text-[6px] text-emerald-400/40 uppercase font-black tracking-tighter">Human Score</span>
-                  </div>
-                </div>
-                
-                {/* Live Drafting Preview Mockup */}
-                <div className="mb-4 bg-black/40 rounded-xl p-3 border border-white/5">
-                  <div className="flex gap-1.5 mb-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <motion.div 
-                      initial={{ width: "0%" }}
-                      animate={{ width: "80%" }}
-                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-                      className="h-1 bg-white/20 rounded-full" 
-                    />
-                    <motion.div 
-                      initial={{ width: "0%" }}
-                      animate={{ width: "60%" }}
-                      transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatDelay: 1 }}
-                      className="h-1 bg-white/10 rounded-full" 
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2.5">
-                  <div className="flex gap-2">
-                    <div className="h-2 w-1/3 bg-primary/30 rounded-full overflow-hidden">
-                       <motion.div 
-                         animate={{ x: ["-100%", "100%"] }}
-                         transition={{ duration: 1, repeat: Infinity }}
-                         className="h-full w-full bg-primary shadow-[0_0_10px_#8b5cf6]"
-                       />
-                    </div>
-                    <div className="h-2 w-2/3 bg-white/10 rounded-full" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
           {/* Card 2: Multi-Channel Execution */}
           <motion.div
