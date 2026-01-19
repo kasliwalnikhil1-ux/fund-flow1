@@ -37,7 +37,6 @@ const DollarSign = ({ className }: { className?: string }) => (
 
 const dataSources = [
   { name: "LinkedIn", logo: linkedinLogo },
-  { name: "X", logo: xLogo },
   { name: "Sales Nav", logo: salesNavLogo },
   { name: "Apollo.io", logo: apolloLogo },
   { name: "Bright Data", logo: brightDataLogo },
