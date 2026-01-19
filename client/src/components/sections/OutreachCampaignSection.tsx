@@ -203,7 +203,7 @@ export function OutreachCampaignSection() {
                   </div>
                 </div>
 
-                {/* 3. OUTPUT LAYER: The CRAFTING HYPER-PERSONALIZED DM */}
+                {/* 3. OUTPUT LAYER: The DM Synthesis Dashboard */}
                 <div className="relative w-full max-w-[400px]">
                   <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-3xl shadow-[0_0_100px_rgba(139,92,246,0.15)] relative overflow-hidden group">
                     {/* Glowing Accent */}
@@ -225,18 +225,15 @@ export function OutreachCampaignSection() {
                         >
                           <MessageSquare className="h-6 w-6 text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)]" />
                         </motion.div>
-                        <div>
-                          <motion.span 
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-xs font-black text-white uppercase tracking-[0.2em] block mb-1"
+                        <div className="flex gap-2">
+                          <motion.div
+                            animate={{ opacity: [0.4, 1, 0.4] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
                           >
-                            Crafting Hyper-Personalized DM
-                          </motion.span>
-                          <div className="flex gap-3">
-                            <span className="text-[8px] text-blue-400 uppercase font-bold tracking-widest animate-pulse">Neural Mapping...</span>
-                            <span className="text-[8px] text-amber-400 uppercase font-bold tracking-widest animate-pulse delay-700">Tone matching...</span>
-                          </div>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
+                          </motion.div>
                         </div>
                       </div>
                       <div className="text-right">
@@ -319,10 +316,9 @@ export function OutreachCampaignSection() {
                       <MessageSquare className="h-4 w-4 text-emerald-400" />
                     </motion.div>
                     <div>
-                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">CRAFTING HYPER-PERSONALIZED DM</span>
+                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">Neural Synapse Active</span>
                       <div className="flex gap-2">
-                        <span className="text-[6px] text-blue-400 uppercase font-black tracking-widest">Analyzing Activity</span>
-                        <span className="text-[6px] text-amber-400 uppercase font-black tracking-widest">Matching Tone</span>
+                        <span className="text-[6px] text-primary/60 uppercase font-black tracking-widest italic">Personalizing for target context...</span>
                       </div>
                     </div>
                   </div>
