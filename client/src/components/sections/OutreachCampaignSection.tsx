@@ -186,45 +186,68 @@ export function OutreachCampaignSection() {
                   </div>
 
                   {/* SVG for connecting lines */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-20" preserveAspectRatio="none">
                     <defs>
                       <filter id="glow-line">
                         <feGaussianBlur stdDeviation="2" result="blur"/>
                         <feComposite in="SourceGraphic" in2="blur" operator="over"/>
                       </filter>
+                      <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="rgba(139,92,246,0)" />
+                        <stop offset="50%" stopColor="rgba(139,92,246,0.3)" />
+                        <stop offset="100%" stopColor="rgba(139,92,246,0.5)" />
+                      </linearGradient>
+                      <linearGradient id="output-path-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#8b5cf6" />
+                        <stop offset="100%" stopColor="#10b981" />
+                      </linearGradient>
                     </defs>
                     
-                    {/* Dynamic Connecting Lines from Nodes to Core */}
+                    {/* Input: Nodes -> Synapse AI */}
                     {[0, 1, 2, 3].map((i) => {
-                      const startY = 50 + (i - 1.5) * 22; // Approximation for vertical alignment
+                      const startX = 22; // Approx % for icons on left
+                      const startY = 32 + (i * 12); // Vertical spacing matching the nodes
                       return (
-                        <g key={`line-${i}`} filter="url(#glow-line)">
+                        <g key={`in-line-${i}`} filter="url(#glow-line)">
                           <motion.path
-                            d={`M 15% ${startY}% L 50% 50%`}
+                            d={`M ${startX}% ${startY}% L 50% 50%`}
                             fill="none"
                             stroke="url(#line-grad)"
-                            strokeWidth="1"
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            whileInView={{ pathLength: 1, opacity: 1 }}
-                            transition={{ duration: 1, delay: i * 0.2 }}
+                            strokeWidth="1.5"
+                            strokeDasharray="4 4"
                           />
-                          
-                          {/* Data Particles flowing along the lines */}
-                          <motion.circle r="2" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
+                          <motion.circle r="3" fill="#8b5cf6">
                             <animateMotion 
-                              dur={`${2 + i * 0.5}s`} 
+                              dur={`${1.5 + i * 0.2}s`} 
                               repeatCount="indefinite" 
-                              path={`M 15% ${startY}% L 50% 50%`}
+                              path={`M ${startX}% ${startY}% L 50% 50%`}
                             />
                           </motion.circle>
                         </g>
                       );
                     })}
-                    
-                    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="rgba(139,92,246,0)" />
-                      <stop offset="100%" stopColor="rgba(139,92,246,0.3)" />
-                    </linearGradient>
+
+                    {/* Output: Synapse AI -> Drafting Dashboard */}
+                    <g filter="url(#glow-line)">
+                      <motion.path
+                        d="M 50% 50% L 50% 88%"
+                        fill="none"
+                        stroke="url(#output-path-grad)"
+                        strokeWidth="3"
+                        strokeDasharray="8 8"
+                      >
+                        <animate attributeName="stroke-dashoffset" from="16" to="0" dur="0.8s" repeatCount="indefinite" />
+                      </motion.path>
+                      
+                      {/* Processed Data Packet */}
+                      <motion.rect width="10" height="6" rx="2" fill="#10b981">
+                        <animateMotion 
+                          dur="1.2s" 
+                          repeatCount="indefinite" 
+                          path="M 50% 50% L 50% 88%"
+                        />
+                      </motion.rect>
+                    </g>
                   </svg>
 
                   <div className="flex-1 h-full" /> {/* Spacer to keep core centered */}
