@@ -71,7 +71,7 @@ export function InvestorMatchingSection() {
       title: "Intelligence Sourcing",
       phase: "Phase 01",
       icon: Search,
-      description: "Consolidating signals from multiple verified channels.",
+      description: "COLLECTING VERIFIED SIGNALS",
       content: (
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-xl">
@@ -120,7 +120,7 @@ export function InvestorMatchingSection() {
       title: "Neural Deep-Scan",
       phase: "Phase 02",
       icon: UserCheck,
-      description: "Verifying real-time industry investment activity.",
+      description: "ANALYZING INVESTOR INTENT",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-2">
           <div className="w-full space-y-1.5 relative z-10">
@@ -184,7 +184,7 @@ export function InvestorMatchingSection() {
       title: "Precision Matching",
       phase: "Phase 03",
       icon: Target,
-      description: "Identifying the ideal investor profile for your stage.",
+      description: "VERIFYING SECTOR ALIGNMENT",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center p-2 relative">
           <AnimatePresence mode="wait">
@@ -235,7 +235,7 @@ export function InvestorMatchingSection() {
       title: "CRM Deployment",
       phase: "Phase 04",
       icon: ZapIcon,
-      description: "",
+      description: "SYNCING OUTREACH SIGNALS",
       content: (
         <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
           <div className="relative flex items-center justify-center">
