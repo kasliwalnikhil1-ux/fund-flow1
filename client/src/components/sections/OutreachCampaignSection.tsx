@@ -201,6 +201,48 @@ export function OutreachCampaignSection() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Personalized Outreach Snippets */}
+                  <div className="w-full max-w-[450px] mt-6 flex flex-col gap-3">
+                    {[
+                      {
+                        platform: "LINKEDIN",
+                        icon: Linkedin,
+                        tag: "PERSONALIZED HOOK",
+                        content: "\"Hey {name}, loved your recent post about {topic}. Your approach to {industry} is unique. Would love to...\"",
+                        color: "text-blue-400"
+                      },
+                      {
+                        platform: "X / TWITTER",
+                        icon: XIcon,
+                        tag: "INTEREST BASED",
+                        content: "\"Caught your thread on {trend}. Great insights on {keyword}. I've been working on something similar...\"",
+                        color: "text-white"
+                      }
+                    ].map((snippet, i) => (
+                      <motion.div
+                        key={snippet.platform}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + i * 0.2 }}
+                        className="relative p-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm"
+                      >
+                        <div className="flex justify-between items-center mb-3">
+                          <div className="flex items-center gap-2">
+                            <snippet.icon className={`w-3.5 h-3.5 ${snippet.color}`} />
+                            <span className="text-[9px] font-bold text-white tracking-wider">{snippet.platform}</span>
+                          </div>
+                          <span className="text-[7px] font-black text-primary/60 uppercase tracking-widest px-2 py-0.5 rounded-full bg-primary/5 border border-primary/10">
+                            {snippet.tag}
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-white/60 font-medium italic leading-relaxed">
+                          {snippet.content}
+                        </p>
+                        <div className="absolute bottom-2 left-4 w-0.5 h-3 bg-primary/40 rounded-full" />
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
