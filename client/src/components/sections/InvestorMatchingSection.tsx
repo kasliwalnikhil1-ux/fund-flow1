@@ -117,40 +117,48 @@ export function InvestorMatchingSection() {
                   />
                 </div>
 
-                {/* Orbiting Source Icons */}
+                {/* Orbiting Source Icons - Spread around central point */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
                      const radius = 260;
                      const angle = (i * 360) / dataSources.length;
                      const angleRad = (angle - 90) * Math.PI / 180;
                      
+                     // X and Y relative to center
+                     const x = Math.cos(angleRad) * radius;
+                     const y = Math.sin(angleRad) * radius;
+
                      return (
-                       <div key={source.name} className="absolute flex flex-col items-center justify-center">
+                       <div key={source.name} className="absolute inset-0 flex items-center justify-center pointer-events-none">
                          <motion.div
                            initial={{ opacity: 0, scale: 0 }}
                            animate={{ opacity: 1, scale: 1 }}
                            transition={{ delay: i * 0.1 }}
-                           className="absolute flex flex-col items-center gap-2"
+                           className="absolute pointer-events-auto"
                            style={{
-                             transform: `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`
+                             x,
+                             y
                            }}
                          >
-                           <div className="p-4 rounded-2xl bg-white shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden w-20 h-20">
-                             <img src={source.logo} alt={source.name} className="w-full h-full object-contain relative z-10" />
+                           <div className="flex flex-col items-center gap-2">
+                             <div className="w-20 h-20 rounded-full bg-white shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden group hover:scale-110 transition-transform cursor-pointer relative">
+                               <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-100" />
+                               <img src={source.logo} alt={source.name} className="w-12 h-12 object-contain relative z-10" />
+                             </div>
+                             <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
                            </div>
-                           <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
                          </motion.div>
 
                          {/* Moving Data Particles toward Database (PRIMARY COLORS) */}
                          <motion.div
                             initial={{ 
-                              x: Math.cos(angleRad) * radius, 
-                              y: Math.sin(angleRad) * radius, 
+                              x, 
+                              y, 
                               opacity: 0 
                             }}
                             animate={{ 
-                              x: [Math.cos(angleRad) * radius, 0],
-                              y: [Math.sin(angleRad) * radius, 0],
+                              x: [x, 0],
+                              y: [y, 0],
                               opacity: [0, 1, 0]
                             }}
                             transition={{ 
