@@ -203,115 +203,117 @@ export function OutreachCampaignSection() {
                   </div>
                 </div>
 
-                {/* 3. OUTPUT LAYER: The DM Synthesis Dashboard */}
+                {/* 3. OUTPUT LAYER: Floating DM Synthesis Dashboard */}
                 <div className="relative w-full max-w-[500px]">
-                  <div className="relative overflow-hidden group">
-                    {/* Glowing Accent */}
+                  {/* Subtle ambient glow - no card container */}
+                  <motion.div 
+                    animate={{ opacity: [0.05, 0.15, 0.05] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-primary/20 rounded-full blur-[100px] pointer-events-none" 
+                  />
+                  
+                  {/* Floating Investor Profile */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex flex-col items-center mb-8 relative z-10"
+                  >
+                    {/* Floating Avatar with glow */}
                     <motion.div 
-                      animate={{ opacity: [0.1, 0.2, 0.1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 rounded-full blur-[120px] pointer-events-none" 
-                    />
-                    
-                    <div className="flex items-center justify-between mb-10 relative z-10 px-6">
-                      <div className="flex items-center gap-5">
-                        <div className="relative">
-                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-emerald-500 p-[1px]">
-                            <div className="w-full h-full rounded-full bg-[#050505] flex items-center justify-center overflow-hidden">
-                              <div className="w-full h-full bg-primary/10 flex items-center justify-center">
-                                <span className="text-lg font-bold text-primary">VC</span>
-                              </div>
-                            </div>
-                          </div>
-                          <motion.div 
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-black" 
-                          />
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-white tracking-tight leading-none mb-1.5">Investor Matching</h4>
-                          <div className="flex items-center gap-2">
-                            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                              <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-                              <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest">Positive Engagement Locked</span>
-                            </div>
-                          </div>
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="relative mb-4"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary via-primary/80 to-emerald-500 p-[2px] shadow-[0_0_40px_rgba(139,92,246,0.4)]">
+                        <div className="w-full h-full rounded-full bg-[#050505] flex items-center justify-center">
+                          <span className="text-xl font-bold bg-gradient-to-br from-primary to-emerald-400 bg-clip-text text-transparent">VC</span>
                         </div>
                       </div>
-                      <motion.div
-                        animate={{ opacity: [0.4, 1, 0.4] }}
+                      {/* Online indicator */}
+                      <motion.div 
+                        animate={{ scale: [1, 1.3, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
-                      >
-                        <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
-                      </motion.div>
+                        className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-[#050505] shadow-[0_0_12px_#10b981]" 
+                      />
+                    </motion.div>
+                    
+                    <h4 className="text-sm font-bold text-white tracking-tight mb-2">Investor Matching</h4>
+                    
+                    {/* Positive Engagement Locked Status */}
+                    <motion.div 
+                      animate={{ opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+                      <span className="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Positive Engagement Locked</span>
+                    </motion.div>
+                  </motion.div>
+                  
+                  {/* Abstract Chat Animation with Live Synthesis Active beside it */}
+                  <div className="relative z-10 flex items-start gap-6">
+                    {/* Live Synthesis Active - positioned beside the chat */}
+                    <div className="flex flex-col items-center gap-2 pt-4">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_#10b981] animate-pulse" />
+                      <span className="text-[7px] font-black text-white/50 uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">Live Synthesis Active</span>
                     </div>
                     
-                    {/* Live Synthesis Visualization - Chat Log Style */}
-                    <div className="relative z-10 px-6 flex flex-col gap-6">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
-                          <span className="text-[9px] font-black text-white/60 uppercase tracking-[0.3em]">Live Synthesis Active</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                           <div className="h-1 w-24 bg-white/5 rounded-full overflow-hidden">
-                              <motion.div 
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_15px_#10b981]"
-                              />
-                           </div>
-                           <motion.div
-                             animate={{ rotate: 360 }}
-                             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                           >
-                             <Star className="h-4 w-4 text-emerald-400" />
-                           </motion.div>
-                        </div>
-                      </div>
-
-                      <div className="min-h-[220px] flex flex-col justify-end gap-5">
-                        {[0, 1, 2, 3].map((i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                            animate={{ 
-                              opacity: [0, 1, 1, 0],
-                              y: [30, 0, -30, -60],
-                              scale: [0.9, 1, 1, 0.95]
-                            }}
-                            transition={{
-                              duration: 6,
-                              repeat: Infinity,
-                              delay: i * 1.5,
-                              ease: [0.16, 1, 0.3, 1]
-                            }}
-                            className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}
-                          >
-                            <div className={`
-                              flex flex-col gap-2 max-w-[80%]
-                              ${i % 2 === 0 ? 'items-start' : 'items-end'}
-                            `}>
-                              <div className={`
-                                h-3 rounded-full 
-                                ${i % 2 === 0 
-                                  ? 'bg-primary/20 w-32 rounded-bl-none' 
-                                  : 'bg-emerald-500/20 w-24 rounded-br-none'} 
-                                border border-white/5 relative overflow-hidden
-                              `}>
-                                <motion.div
-                                  animate={{ x: ["-100%", "200%"] }}
-                                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.4 }}
-                                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                                />
-                              </div>
-                              <div className={`h-1.5 rounded-full bg-white/5 ${i % 2 === 0 ? 'w-20' : 'w-16'}`} />
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
+                    {/* Abstract floating chat bubbles */}
+                    <div className="flex-1 min-h-[180px] flex flex-col justify-center gap-4 relative">
+                      {[0, 1, 2].map((i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                          animate={{ 
+                            opacity: [0, 0.8, 0.8, 0],
+                            x: i % 2 === 0 ? [-20, 0, 0, 20] : [20, 0, 0, -20],
+                            y: [20, 0, -20, -40]
+                          }}
+                          transition={{
+                            duration: 5,
+                            repeat: Infinity,
+                            delay: i * 1.2,
+                            ease: "easeInOut"
+                          }}
+                          className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}
+                        >
+                          <div className={`
+                            h-2.5 rounded-full backdrop-blur-sm
+                            ${i % 2 === 0 
+                              ? 'bg-gradient-to-r from-primary/30 to-primary/10 w-28' 
+                              : 'bg-gradient-to-l from-emerald-500/30 to-emerald-500/10 w-20'}
+                          `}>
+                            <motion.div
+                              animate={{ x: ["-100%", "200%"] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                              className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+                            />
+                          </div>
+                        </motion.div>
+                      ))}
+                      
+                      {/* Floating particles */}
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={`particle-${i}`}
+                          animate={{ 
+                            y: [0, -30, 0],
+                            opacity: [0, 0.6, 0],
+                            scale: [0.5, 1, 0.5]
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            delay: i * 0.6,
+                            ease: "easeInOut"
+                          }}
+                          className="absolute w-1 h-1 rounded-full bg-primary/40"
+                          style={{ 
+                            left: `${20 + i * 15}%`,
+                            top: `${30 + (i % 3) * 20}%`
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
