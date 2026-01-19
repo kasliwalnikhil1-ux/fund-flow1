@@ -99,7 +99,37 @@ export function OutreachCampaignSection() {
               <div className="w-full flex flex-col items-center gap-8 px-4 z-10">
                 
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
-                <div className="flex justify-center gap-4 lg:gap-6 w-full">
+                <div className="flex justify-center gap-4 lg:gap-6 w-full relative">
+                  {/* Falling Signals Container - Positioned absolutely relative to the platform icons */}
+                  <div className="absolute inset-x-0 -bottom-16 flex justify-around pointer-events-none">
+                    {[
+                      { icon: Activity, label: "Recent Post", x: "-20%", delay: 0 },
+                      { icon: Trophy, label: "Achievement", x: "10%", delay: 0.8 },
+                      { icon: ThumbsUp, label: "Engagement", x: "40%", delay: 1.5 }
+                    ].map((signal, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: -20, scale: 0.5 }}
+                        animate={{ 
+                          opacity: [0, 1, 1, 0],
+                          y: [0, 60],
+                          scale: [0.5, 1, 1, 0.5]
+                        }}
+                        transition={{ 
+                          duration: 3, 
+                          repeat: Infinity, 
+                          delay: signal.delay,
+                          ease: "linear"
+                        }}
+                        className="px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1.5 shadow-lg shadow-primary/5"
+                        style={{ left: signal.x }}
+                      >
+                        <signal.icon className="h-2 w-2 text-primary" />
+                        <span className="text-[6px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
                   {[
                     { icon: Globe, label: "Website", color: "text-blue-400", status: "Scanning..." },
                     { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", status: "Analyzing..." },
