@@ -100,64 +100,69 @@ export function OutreachCampaignSection() {
                 
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-6 w-full relative">
-                  {/* Falling Signals Container - Positioned absolutely relative to the platform icons */}
-                  <div className="absolute inset-x-0 -bottom-16 flex justify-around pointer-events-none">
-                    {[
-                      { icon: Activity, label: "Recent Post", x: "-20%", delay: 0 },
-                      { icon: Trophy, label: "Achievement", x: "10%", delay: 0.8 },
-                      { icon: ThumbsUp, label: "Engagement", x: "40%", delay: 1.5 }
-                    ].map((signal, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: -20, scale: 0.5 }}
-                        animate={{ 
-                          opacity: [0, 1, 1, 0],
-                          y: [0, 60],
-                          scale: [0.5, 1, 1, 0.5]
-                        }}
-                        transition={{ 
-                          duration: 3, 
-                          repeat: Infinity, 
-                          delay: signal.delay,
-                          ease: "linear"
-                        }}
-                        className="px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1.5 shadow-lg shadow-primary/5"
-                        style={{ left: signal.x }}
-                      >
-                        <signal.icon className="h-2 w-2 text-primary" />
-                        <span className="text-[6px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
                   {[
-                    { icon: Globe, label: "Website", color: "text-blue-400", status: "Scanning..." },
-                    { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", status: "Analyzing..." },
-                    { icon: XIcon, label: "X", color: "text-white", status: "Parsing..." },
-                    { icon: Facebook, label: "Facebook", color: "text-blue-600", status: "Extracting..." }
+                    { icon: Globe, label: "Website", color: "text-blue-400", status: "Scanning...", signals: [{ icon: Activity, label: "Recent Post", delay: 0 }] },
+                    { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", status: "Analyzing...", signals: [{ icon: Trophy, label: "Achievement", delay: 0.8 }] },
+                    { icon: XIcon, label: "X", color: "text-white", status: "Parsing...", signals: [{ icon: ThumbsUp, label: "Engagement", delay: 1.5 }] },
+                    { icon: Facebook, label: "Facebook", color: "text-blue-600", status: "Extracting...", signals: [] }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex flex-col items-center gap-2 flex-1 max-w-[80px]"
+                      className="flex flex-col items-center gap-2 flex-1 max-w-[80px] relative"
                     >
-                      <div className="w-full aspect-square rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group">
-                        {/* Light line scanning effect */}
-                        <motion.div 
-                          animate={{ y: ["-20%", "120%"] }}
-                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-                          className="absolute inset-x-0 h-[40%] bg-gradient-to-b from-transparent via-primary/20 to-transparent z-20 pointer-events-none"
-                        />
-                        <motion.div 
-                          animate={{ y: ["-100%", "500%"] }}
-                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-                          className="absolute inset-x-0 h-[1px] bg-primary/40 shadow-[0_0_10px_rgba(139,92,246,0.5)] z-30 pointer-events-none"
-                        />
-                        <platform.icon className={`h-6 w-6 lg:h-8 lg:w-8 ${platform.color} relative z-10 transition-transform group-hover:scale-110`} />
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+                      {/* Falling Signals for this specific icon */}
+                      <div className="absolute left-1/2 -translate-x-1/2 top-10 w-full h-32 pointer-events-none z-0">
+                        <AnimatePresence>
+                          {platform.signals.map((signal, sIndex) => (
+                            <motion.div
+                              key={`${platform.label}-signal-${sIndex}`}
+                              initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                              animate={{ 
+                                opacity: [0, 1, 1, 0],
+                                y: [0, 80],
+                                scale: [0.5, 1, 1, 0.5]
+                              }}
+                              transition={{ 
+                                duration: 3, 
+                                repeat: Infinity, 
+                                delay: signal.delay,
+                                ease: "linear"
+                              }}
+                              className="absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1.5 shadow-lg shadow-primary/5 whitespace-nowrap"
+                            >
+                              <signal.icon className="h-2 w-2 text-primary" />
+                              <span className="text-[6px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
+                            </motion.div>
+                          ))}
+                        </AnimatePresence>
                       </div>
+
+                      <div className="w-full aspect-square rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group z-10">
+                        {/* Precision light line scan (Page 1 Style) */}
+                        <motion.div 
+                          animate={{ y: ["-100%", "200%"] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
+                          className="absolute inset-x-0 h-[1px] bg-primary/40 shadow-[0_0_12px_#8b5cf6] z-30 pointer-events-none"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50" />
+                        <platform.icon className={`h-6 w-6 lg:h-8 lg:w-8 ${platform.color} relative z-10 transition-transform group-hover:scale-110 drop-shadow-[0_0_8px_rgba(139,92,246,0.3)]`} />
+                      </div>
+                      <div className="flex flex-col items-center text-center">
+                        <span className="text-[7px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">{platform.label}</span>
+                        <motion.span 
+                          animate={{ opacity: [0.4, 1, 0.4] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="text-[5px] font-bold text-primary uppercase whitespace-nowrap"
+                        >
+                          {platform.status}
+                        </motion.span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
                       <div className="flex flex-col items-center text-center">
                         <span className="text-[7px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">{platform.label}</span>
                         <motion.span 
