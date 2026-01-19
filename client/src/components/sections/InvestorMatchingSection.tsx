@@ -35,9 +35,9 @@ const dataSources = [
 ];
 
 const scanSources = [
-  { name: "Investor Website", icon: Globe, color: "text-blue-400" },
-  { name: "LinkedIn Profile", icon: Linkedin, color: "text-blue-600" },
-  { name: "X Timeline", icon: XIcon, color: "text-white" },
+  { name: "Website", icon: Globe, color: "text-blue-400" },
+  { name: "LinkedIn", icon: Linkedin, color: "text-blue-600" },
+  { name: "X", icon: XIcon, color: "text-white" },
 ];
 
 export function InvestorMatchingSection() {
@@ -123,7 +123,7 @@ export function InvestorMatchingSection() {
                      animate={{ opacity: 1, scale: 1 }}
                      className="flex items-center gap-2"
                    >
-                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">VERIFIED MATCH</span>
+                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">SCANNING...</span>
                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                    </motion.div>
                 )}
