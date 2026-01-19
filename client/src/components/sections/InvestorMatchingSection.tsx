@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
   Database, 
@@ -9,7 +9,8 @@ import {
   Linkedin, 
   UserCheck,
   Target,
-  ChevronRight
+  ChevronRight,
+  Send
 } from "lucide-react";
 
 // Local assets
@@ -39,15 +40,30 @@ const scanSources = [
   { name: "X Analysis", icon: XIcon },
 ];
 
+const matchProfiles = [
+  { initials: "JS", name: "Jason Schmidt", fund: "Schmidt Ventures", stage: "Pre-Seed / SaaS", check: "$250K - $1M", fit: "98%" },
+  { initials: "AL", name: "Amanda Lee", fund: "Horizon Capital", stage: "Seed / AI", check: "$500K - $2M", fit: "96%" },
+  { initials: "MR", name: "Mark Rossi", fund: "Nexus Fund", stage: "Series A / Fintech", check: "$1M - $5M", fit: "94%" }
+];
+
 export function InvestorMatchingSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [scanIndex, setScanIndex] = useState(0);
+  const [profileIndex, setProfileIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const scanInterval = setInterval(() => {
       setScanIndex((prev) => (prev + 1) % scanSources.length);
     }, 2000);
-    return () => clearInterval(interval);
+    
+    const profileInterval = setInterval(() => {
+      setProfileIndex((prev) => (prev + 1) % matchProfiles.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(scanInterval);
+      clearInterval(profileInterval);
+    };
   }, []);
 
   const cards = [
@@ -75,7 +91,15 @@ export function InvestorMatchingSection() {
             const y = Math.sin(angleRad) * radius;
             return (
               <div key={source.name} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <motion.div className="absolute pointer-events-auto" style={{ x, y }}>
+                <motion.div 
+                  className="absolute pointer-events-auto" 
+                  style={{ x, y }}
+                  animate={{ 
+                    x: [x, x + Math.random() * 5, x - Math.random() * 5, x],
+                    y: [y, y + Math.random() * 5, y - Math.random() * 5, y]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
+                >
                   <div className="w-8 h-8 rounded-full bg-white shadow-xl flex items-center justify-center border border-white/10 overflow-hidden">
                     <img src={source.logo} alt={source.name} className="w-4 h-4 object-contain opacity-80" />
                   </div>
@@ -163,50 +187,47 @@ export function InvestorMatchingSection() {
       icon: Target,
       description: "Identifying the ideal investor profile for your stage.",
       content: (
-        <div className="w-full h-full flex flex-col items-center justify-center p-2">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-3 relative overflow-hidden group"
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
-                   <span className="text-white font-bold text-xs">JS</span>
+        <div className="w-full h-full flex flex-col items-center justify-center p-2 relative">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={profileIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-3 relative overflow-hidden group"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
+                     <span className="text-white font-bold text-xs">{matchProfiles[profileIndex].initials}</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="text-[9px] font-bold text-white mb-0.5">{matchProfiles[profileIndex].name}</div>
+                  <div className="h-1 w-12 bg-white/5 rounded-full" />
                 </div>
               </div>
-              <div className="flex-1">
-                <div className="h-1.5 w-16 bg-white/10 rounded-full mb-1.5 overflow-hidden">
-                   <motion.div 
-                     initial={{ width: 0 }}
-                     animate={{ width: "100%" }}
-                     transition={{ duration: 1, delay: 0.5 }}
-                     className="h-full bg-primary"
-                   />
-                </div>
-                <div className="h-1 w-12 bg-white/5 rounded-full" />
+
+              <div className="grid grid-cols-2 gap-1.5 mb-3">
+                 <div className="p-1.5 rounded-lg bg-white/[0.02] border border-white/5">
+                    <div className="text-[5px] text-white/40 uppercase font-black mb-0.5">Thesis</div>
+                    <div className="text-[7px] text-white font-bold">{matchProfiles[profileIndex].stage}</div>
+                 </div>
+                 <div className="p-1.5 rounded-lg bg-white/[0.02] border border-white/5">
+                    <div className="text-[5px] text-white/40 uppercase font-black mb-0.5">Avg Check</div>
+                    <div className="text-[7px] text-white font-bold">{matchProfiles[profileIndex].check}</div>
+                 </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-1.5 mb-3">
-               <div className="p-1.5 rounded-lg bg-white/[0.02] border border-white/5">
-                  <div className="text-[5px] text-white/40 uppercase font-black mb-0.5">Thesis</div>
-                  <div className="text-[7px] text-white font-bold">Pre-Seed / SaaS</div>
-               </div>
-               <div className="p-1.5 rounded-lg bg-white/[0.02] border border-white/5">
-                  <div className="text-[5px] text-white/40 uppercase font-black mb-0.5">Avg Check</div>
-                  <div className="text-[7px] text-white font-bold">$250K - $1M</div>
-               </div>
-            </div>
-
-            <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-               <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest">Perfect Match</span>
-               </div>
-               <span className="text-[8px] font-bold text-emerald-400">98% Fit</span>
-            </div>
-          </motion.div>
+              <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                 <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest">Matched</span>
+                 </div>
+                 <span className="text-[8px] font-bold text-emerald-400">{matchProfiles[profileIndex].fit} Fit</span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       )
     },
@@ -224,20 +245,64 @@ export function InvestorMatchingSection() {
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
               className="absolute w-20 h-20 border border-dashed border-primary/30 rounded-full"
             />
-            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(139,92,246,0.1)]">
+            
+            <motion.div
+              animate={{ 
+                scale: [1, 1.1, 1],
+                boxShadow: ["0 0 20px rgba(139,92,246,0.1)", "0 0 40px rgba(139,92,246,0.3)", "0 0 20px rgba(139,92,246,0.1)"]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center relative z-10"
+            >
               <Database className="h-6 w-6 text-primary" />
-            </div>
-          </div>
-          <div className="flex flex-wrap justify-center gap-1 relative z-10 px-2">
-            {["HubSpot", "Salesforce", "Pipedrive"].map((crm) => (
-              <span 
-                key={crm}
-                className="px-2 py-1 rounded-lg bg-white/5 border border-white/5 text-[7px] font-black text-white/40 uppercase tracking-widest"
+            </motion.div>
+
+            {/* Outreach Particles */}
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ x: 0, y: 0, opacity: 0 }}
+                animate={{ 
+                  x: [0, 40, 80], 
+                  y: [0, -20, -40],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  delay: i * 0.6,
+                  ease: "easeOut" 
+                }}
+                className="absolute z-20"
               >
-                {crm}
-              </span>
+                <Send className="h-3 w-3 text-primary/60" />
+              </motion.div>
             ))}
           </div>
+          
+          <div className="flex flex-wrap justify-center gap-1 relative z-10 px-2">
+            {["HubSpot", "Salesforce", "Pipedrive"].map((crm, i) => (
+              <motion.span 
+                key={crm}
+                animate={{ 
+                  borderColor: ["rgba(255,255,255,0.05)", "rgba(139,92,246,0.3)", "rgba(255,255,255,0.05)"],
+                  backgroundColor: ["rgba(255,255,255,0.05)", "rgba(139,92,246,0.05)", "rgba(255,255,255,0.05)"]
+                }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                className="px-2 py-1 rounded-lg border text-[7px] font-black text-white/40 uppercase tracking-widest"
+              >
+                {crm}
+              </motion.span>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-1"
+          >
+            <span className="text-[6px] font-bold text-emerald-400 uppercase tracking-[0.2em] animate-pulse">Outreach Ready</span>
+          </motion.div>
         </div>
       )
     }
@@ -278,7 +343,6 @@ export function InvestorMatchingSection() {
               let zIndex = index;
               let scale = 1;
 
-              // Card spacing and rotation logic for 4 cards - kept tighter to stay within frame
               if (!anyHovered) {
                 rotate = (index - 1.5) * 6;
                 x = (index - 1.5) * 40; 
