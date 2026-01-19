@@ -309,31 +309,31 @@ export function InvestorMatchingSection() {
   ];
 
   return (
-    <section className="relative h-screen bg-[#020202] py-8 overflow-hidden flex flex-col justify-center">
-      <div className="container mx-auto px-6 relative z-10 flex flex-col h-full">
+    <section className="relative min-h-[100vh] lg:h-screen bg-[#020202] py-8 lg:py-0 overflow-hidden flex flex-col justify-center">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col h-full justify-center">
         
-        <div className="max-w-4xl mx-auto text-center mb-8 shrink-0">
+        <div className="max-w-4xl mx-auto text-center mb-8 lg:mb-12 shrink-0">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-2 tracking-tight"
           >
-            Investor-Matched. <br />
-            <span className="text-primary text-2xl md:text-4xl">Powered by Intelligence.</span>
+            Your Ideal Investor. <br />
+            <span className="text-primary text-2xl md:text-4xl lg:text-5xl">Verified & Outreach-Ready.</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-sm md:text-base text-white/60 max-w-xl mx-auto leading-relaxed"
+            className="text-sm md:text-base lg:text-lg text-white/60 max-w-xl mx-auto leading-relaxed"
           >
-            We verify activity, analyze and match you with the ones actively funding your sector.
+            Our neural engine verifies activity and intent, matching you with the investors actively funding your sector right now.
           </motion.p>
         </div>
 
         {/* Deck of Cards Container */}
-        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center">
-          <div className="flex flex-row justify-center items-center gap-2 md:gap-4 lg:gap-6">
+        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[400px]">
+          <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4 lg:gap-6 w-full">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
@@ -343,20 +343,33 @@ export function InvestorMatchingSection() {
               let zIndex = index;
               let scale = 1;
 
+              // Responsive animation logic
+              const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
               if (!anyHovered) {
-                rotate = (index - 1.5) * 6;
-                x = (index - 1.5) * 40; 
+                if (isMobile) {
+                  rotate = 0;
+                  x = 0;
+                } else {
+                  rotate = (index - 1.5) * 6;
+                  x = (index - 1.5) * 40; 
+                }
               } else if (isHovered) {
                 rotate = 0;
                 zIndex = 10;
                 scale = 1.1;
                 x = 0;
               } else {
-                const direction = index < hoveredCard ? -1 : 1;
-                x = direction * 30;
-                rotate = direction * 4;
-                scale = 0.9;
-                zIndex = 1;
+                if (!isMobile) {
+                  const direction = index < hoveredCard ? -1 : 1;
+                  x = direction * 30;
+                  rotate = direction * 4;
+                  scale = 0.9;
+                  zIndex = 1;
+                } else {
+                  scale = 0.95;
+                  opacity: 0.5;
+                }
               }
 
               return (
@@ -373,19 +386,19 @@ export function InvestorMatchingSection() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-[200px] md:w-[240px] aspect-[4/5] p-5 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[160px] xs:w-[180px] md:w-[220px] lg:w-[240px] aspect-[4/5] p-4 lg:p-5 rounded-[1.5rem] lg:rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
                   
                   <div className="text-center relative z-10 w-full">
                     <div className="flex items-center justify-center gap-1.5 mb-2">
-                      <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
-                        <card.icon className="h-3 w-3 text-primary" />
+                      <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+                        <card.icon className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-primary" />
                       </div>
-                      <span className="text-[7px] font-black text-primary uppercase tracking-[0.4em]">{card.phase}</span>
+                      <span className="text-[6px] lg:text-[7px] font-black text-primary uppercase tracking-[0.4em]">{card.phase}</span>
                     </div>
-                    <h3 className="text-sm font-bold text-white mb-1 tracking-tight">{card.title}</h3>
+                    <h3 className="text-xs lg:text-sm font-bold text-white mb-1 tracking-tight">{card.title}</h3>
                   </div>
 
                   <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-2">
@@ -393,7 +406,7 @@ export function InvestorMatchingSection() {
                   </div>
 
                   <div className="text-center relative z-10 mt-2">
-                    <p className="text-[8px] text-white/40 max-w-[160px] leading-tight">
+                    <p className="text-[7px] lg:text-[8px] text-white/40 max-w-[140px] lg:max-w-[160px] leading-tight">
                       {card.description}
                     </p>
                   </div>
@@ -405,8 +418,8 @@ export function InvestorMatchingSection() {
 
       </div>
 
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
+      <div className="absolute top-0 right-0 w-[400px] lg:w-[500px] h-[400px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] lg:blur-[150px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] lg:w-[500px] h-[400px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] lg:blur-[150px]" />
     </section>
   );
 }
