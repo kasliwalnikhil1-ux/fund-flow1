@@ -7,7 +7,9 @@ import {
   ZapIcon, 
   Globe, 
   Linkedin, 
-  UserCheck 
+  UserCheck,
+  Target,
+  ChevronRight
 } from "lucide-react";
 
 // Local assets
@@ -156,8 +158,75 @@ export function InvestorMatchingSection() {
     },
     {
       id: 2,
-      title: "Instant Sync",
+      title: "Precision Matching",
       phase: "Phase 03",
+      icon: Target,
+      description: "Identifying the ideal investor profile for your stage.",
+      content: (
+        <div className="w-full h-full flex flex-col items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl p-4 relative overflow-hidden group"
+          >
+            <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
+                   <span className="text-white font-bold text-sm">JS</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="h-2 w-24 bg-white/10 rounded-full mb-2 overflow-hidden">
+                   <motion.div 
+                     initial={{ width: 0 }}
+                     animate={{ width: "100%" }}
+                     transition={{ duration: 1, delay: 0.5 }}
+                     className="h-full bg-primary"
+                   />
+                </div>
+                <div className="h-1.5 w-16 bg-white/5 rounded-full" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 mb-4">
+               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5">
+                  <div className="text-[6px] text-white/40 uppercase font-black mb-1">Thesis</div>
+                  <div className="text-[8px] text-white font-bold">Pre-Seed / SaaS</div>
+               </div>
+               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5">
+                  <div className="text-[6px] text-white/40 uppercase font-black mb-1">Avg Check</div>
+                  <div className="text-[8px] text-white font-bold">$250K - $1M</div>
+               </div>
+            </div>
+
+            <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+               <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Perfect Match</span>
+               </div>
+               <span className="text-[8px] font-bold text-emerald-400">98% Fit</span>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="mt-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+          >
+            <span className="text-[8px] font-black text-primary uppercase tracking-widest">Verified Profile Found</span>
+            <ChevronRight className="h-3 w-3 text-primary" />
+          </motion.div>
+        </div>
+      )
+    },
+    {
+      id: 3,
+      title: "Instant Sync",
+      phase: "Phase 04",
       icon: ZapIcon,
       description: "Real-time delivery to your sales ecosystem.",
       content: (
@@ -222,9 +291,10 @@ export function InvestorMatchingSection() {
               let zIndex = index;
               let scale = 1;
 
+              // Card spacing and rotation logic for 4 cards
               if (!anyHovered) {
-                rotate = (index - 1) * 8;
-                x = (index - 1) * 60;
+                rotate = (index - 1.5) * 8;
+                x = (index - 1.5) * 50;
               } else if (isHovered) {
                 rotate = 0;
                 zIndex = 10;
@@ -240,7 +310,7 @@ export function InvestorMatchingSection() {
               return (
                 <motion.div
                   key={card.id}
-                  initial={{ opacity: 0, y: 50, rotate: (index - 1) * 15 }}
+                  initial={{ opacity: 0, y: 50, rotate: (index - 1.5) * 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   animate={{ 
                     rotate, 
@@ -251,7 +321,7 @@ export function InvestorMatchingSection() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="w-[280px] aspect-[4/5] p-6 lg:p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[260px] md:w-[280px] aspect-[4/5] p-6 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
