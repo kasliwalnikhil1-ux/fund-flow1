@@ -14,11 +14,13 @@ import {
   Share2
 } from "lucide-react";
 
-const XIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+// Importing local assets from attached_assets
+import linkedinLogo from "@assets/icons8-linkedin-48_1768851532438.png";
+import xLogo from "@assets/icons8-x-50_1768851727235.png";
+import salesNavLogo from "@assets/download_(1)_1768851727203.jpeg";
+import apolloLogo from "@assets/download_(1)_1768851727228.png";
+import crunchbaseLogo from "@assets/download_1768851727230.jpeg";
+import brightDataLogo from "@assets/download_1768851727230.png";
 
 const User = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -34,14 +36,13 @@ const DollarSign = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Updated data sources as per user request
 const dataSources = [
-  { name: "LinkedIn", icon: Linkedin, color: "#0077B5" },
-  { name: "X", icon: XIcon, color: "#000000" },
-  { name: "Sales Nav", icon: Search, color: "#00a0dc" },
-  { name: "Apollo.io", icon: Target, color: "#ff8f00" },
-  { name: "Bright Data", icon: Globe, color: "#0071C5" },
-  { name: "Crunchbase", icon: Database, color: "#0288d1" },
+  { name: "LinkedIn", logo: linkedinLogo },
+  { name: "X", logo: xLogo },
+  { name: "Sales Nav", logo: salesNavLogo },
+  { name: "Apollo.io", logo: apolloLogo },
+  { name: "Bright Data", logo: brightDataLogo },
+  { name: "Crunchbase", logo: crunchbaseLogo },
 ];
 
 const industries = [
@@ -52,7 +53,7 @@ const industries = [
 ];
 
 export function InvestorMatchingSection() {
-  const [step, setStep] = useState(0); // 0: data collection, 1: profile scan, 2: crm storage
+  const [step, setStep] = useState(0); 
   const [activeIndustry, setActiveIndustry] = useState(0);
 
   useEffect(() => {
@@ -75,7 +76,6 @@ export function InvestorMatchingSection() {
     <section className="relative min-h-screen bg-[#020202] py-24 overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Intro Text */}
         <div className="max-w-4xl mx-auto text-center mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,6 @@ export function InvestorMatchingSection() {
           </motion.p>
         </div>
 
-        {/* Animation Container */}
         <div className="relative h-[600px] flex items-center justify-center">
           
           <AnimatePresence mode="wait">
@@ -107,7 +106,7 @@ export function InvestorMatchingSection() {
                 exit={{ opacity: 0, scale: 1.1 }}
                 className="relative w-full h-full flex items-center justify-center"
               >
-                {/* Central Database Hub - Database Symbol */}
+                {/* Central Database Hub */}
                 <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(255,255,255,0.15)]">
                   <div className="flex flex-col items-center justify-center text-emerald-600">
                     <Database className="h-20 w-20" strokeWidth={2.5} />
@@ -119,31 +118,50 @@ export function InvestorMatchingSection() {
                   />
                 </div>
 
-                {/* Orbiting Source Icons (Specific User-Requested Logos) */}
+                {/* Orbiting Source Icons with Data Collection Animation */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
                      const radius = 260;
                      const angle = (i * 360) / dataSources.length;
                      return (
-                       <motion.div
-                         key={source.name}
-                         initial={{ opacity: 0, scale: 0 }}
-                         animate={{ opacity: 1, scale: 1 }}
-                         transition={{ delay: i * 0.1 }}
-                         className="absolute flex flex-col items-center gap-2"
-                         style={{
-                           transform: `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`
-                         }}
-                       >
-                         <div className="p-5 rounded-2xl bg-white shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer border border-black/5">
-                           <source.icon className="h-8 w-8 text-black" style={{ color: source.color === '#ffffff' ? '#000' : source.color }} />
-                         </div>
-                         <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
-                         <div className="absolute top-1/2 left-1/2 -z-10 w-[1px] h-[280px] bg-white/10 origin-bottom -translate-x-1/2 -translate-y-full" />
-                       </motion.div>
+                       <div key={source.name} className="absolute flex flex-col items-center justify-center">
+                         <motion.div
+                           initial={{ opacity: 0, scale: 0 }}
+                           animate={{ opacity: 1, scale: 1 }}
+                           transition={{ delay: i * 0.1 }}
+                           className="absolute flex flex-col items-center gap-2"
+                           style={{
+                             transform: `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`
+                           }}
+                         >
+                           <div className="p-4 rounded-2xl bg-white shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer border border-black/5 overflow-hidden w-20 h-20">
+                             <img src={source.logo} alt={source.name} className="w-full h-full object-contain" />
+                           </div>
+                           <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
+                         </motion.div>
+
+                         {/* Moving Data Particles toward Database */}
+                         <motion.div
+                            initial={{ x: 0, y: 0, opacity: 0 }}
+                            animate={{ 
+                              x: Math.sin(angle * Math.PI / 180) * -radius,
+                              y: Math.cos(angle * Math.PI / 180) * radius,
+                              opacity: [0, 1, 0]
+                            }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              delay: i * 0.3,
+                              ease: "linear" 
+                            }}
+                            className="absolute w-2 h-2 bg-emerald-400 rounded-full blur-[2px]"
+                            style={{
+                              transform: `rotate(${angle}deg) translateY(-${radius}px)`
+                            }}
+                         />
+                       </div>
                      );
                    })}
-                   {/* Orbit Rings */}
                    <div className="absolute w-[520px] h-[520px] border border-dashed border-white/5 rounded-full" />
                 </div>
                 
