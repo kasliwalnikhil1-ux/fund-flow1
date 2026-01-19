@@ -212,16 +212,10 @@ export function OutreachCampaignSection() {
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-primary/20 rounded-full blur-[100px] pointer-events-none" 
                   />
                   
-                  {/* Abstract Chat Animation with Live Synthesis Active beside it */}
-                  <div className="relative z-10 flex items-start gap-6">
-                    {/* Live Synthesis Active - positioned beside the chat */}
-                    <div className="flex flex-col items-center gap-2 pt-4">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_#10b981] animate-pulse" />
-                      <span className="text-[7px] font-black text-white/50 uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">Live Synthesis Active</span>
-                    </div>
-                    
+                  {/* Abstract Chat Animation */}
+                  <div className="relative z-10">
                     {/* Abstract floating chat bubbles */}
-                    <div className="flex-1 min-h-[180px] flex flex-col justify-center gap-4 relative">
+                    <div className="min-h-[180px] flex flex-col justify-center gap-4 relative">
                       {[0, 1, 2].map((i) => (
                         <motion.div
                           key={i}
