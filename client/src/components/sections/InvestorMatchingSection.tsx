@@ -32,7 +32,7 @@ const dataSources = [
 ];
 
 const scanSources = [
-  { name: "Website Scanning", icon: Globe },
+  { name: "Portfolio Website", icon: Globe },
   { name: "LinkedIn Profile", icon: Linkedin },
   { name: "X Analysis", icon: XIcon },
 ];
@@ -92,10 +92,10 @@ export function InvestorMatchingSection() {
     },
     {
       id: 1,
-      title: "Investor Deep-Scan",
+      title: "Neural Deep-Scan",
       phase: "Phase 02",
       icon: UserCheck,
-      description: "Neural analysis of investor activity and focus.",
+      description: "Verifying real-time industry investment activity.",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
           <div className="w-full space-y-2 relative z-10">
@@ -121,7 +121,7 @@ export function InvestorMatchingSection() {
                         animate={{ opacity: 1 }}
                         className="text-[6px] text-primary font-bold uppercase tracking-tighter"
                       >
-                        Analyzing focus...
+                        Checking Industry Fit...
                       </motion.span>
                     )}
                   </div>
@@ -147,8 +147,8 @@ export function InvestorMatchingSection() {
           
           <div className="mt-4 text-center p-2.5 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
             <div className="relative z-10">
-              <div className="text-sm font-display font-bold text-white tracking-tighter uppercase">Verified Match</div>
-              <div className="text-[7px] text-primary font-black uppercase tracking-[0.2em]">Neural Match Confirmed</div>
+              <div className="text-sm font-display font-bold text-white tracking-tighter uppercase">Industry Match</div>
+              <div className="text-[7px] text-primary font-black uppercase tracking-[0.2em]">Active Sector Funder</div>
             </div>
           </div>
         </div>
