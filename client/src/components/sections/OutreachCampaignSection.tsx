@@ -72,15 +72,12 @@ export function OutreachCampaignSection() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="group relative aspect-square p-0 rounded-[2.5rem] bg-[#050505] border border-white/5 overflow-hidden flex flex-col shadow-2xl"
+            className="group relative h-full p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
           >
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-50" />
             
-            {/* Top Bar Decoration */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-            <div className="relative z-20 p-8 pb-0">
+            <div className="relative z-20">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 backdrop-blur-sm">
@@ -97,12 +94,12 @@ export function OutreachCampaignSection() {
               </div>
             </div>
 
-            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10 min-h-[400px]">
+            <div className="flex-1 relative flex flex-col items-center justify-center py-6">
               {/* Inspiration: Neural Scanning Storyboard */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center gap-12 px-4 z-10">
+              <div className="w-full flex flex-col items-center gap-8 px-4 z-10">
                 
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
-                <div className="flex justify-center gap-4 lg:gap-8 relative">
+                <div className="flex justify-center gap-4 lg:gap-6 w-full">
                   {[
                     { icon: Globe, label: "Website", color: "text-blue-400", status: "Scanning..." },
                     { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", status: "Analyzing..." },
@@ -114,9 +111,9 @@ export function OutreachCampaignSection() {
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex flex-col items-center gap-2"
+                      className="flex flex-col items-center gap-2 flex-1 max-w-[80px]"
                     >
-                      <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group">
+                      <div className="w-full aspect-square rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group">
                         {/* Light line scanning effect */}
                         <motion.div 
                           animate={{ y: ["-20%", "120%"] }}
@@ -131,12 +128,12 @@ export function OutreachCampaignSection() {
                         <platform.icon className={`h-6 w-6 lg:h-8 lg:w-8 ${platform.color} relative z-10 transition-transform group-hover:scale-110`} />
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
                       </div>
-                      <div className="flex flex-col items-center">
-                        <span className="text-[7px] font-black text-white/40 uppercase tracking-widest">{platform.label}</span>
+                      <div className="flex flex-col items-center text-center">
+                        <span className="text-[7px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">{platform.label}</span>
                         <motion.span 
                           animate={{ opacity: [0.4, 1, 0.4] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
-                          className="text-[5px] font-bold text-primary uppercase"
+                          className="text-[5px] font-bold text-primary uppercase whitespace-nowrap"
                         >
                           {platform.status}
                         </motion.span>
@@ -147,46 +144,16 @@ export function OutreachCampaignSection() {
 
                 {/* 2. NEURAL SYNTHESIS: The AI Core processing signals */}
                 <div className="relative flex flex-col items-center justify-center">
-                  {/* Floating Signals (Recent Posts, Achievements, etc) */}
-                  <div className="absolute -top-12 flex gap-4">
-                    {[
-                      { icon: Activity, label: "Recent Post", delay: 0 },
-                      { icon: Trophy, label: "Achievement", delay: 0.5 },
-                      { icon: ThumbsUp, label: "Engagement", delay: 1 }
-                    ].map((signal, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ 
-                          opacity: [0, 1, 0],
-                          y: [0, 40],
-                          scale: [0.5, 1, 0.5]
-                        }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
-                          delay: signal.delay,
-                          ease: "easeIn"
-                        }}
-                        className="px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1"
-                      >
-                        <signal.icon className="h-2 w-2 text-primary" />
-                        <span className="text-[5px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
                   <motion.div
                     animate={{ 
                       boxShadow: ["0 0 20px rgba(139,92,246,0.2)", "0 0 60px rgba(139,92,246,0.6)", "0 0 20px rgba(139,92,246,0.2)"]
                     }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="w-20 h-20 rounded-full bg-black border-2 border-primary/40 backdrop-blur-3xl flex items-center justify-center relative group"
+                    className="w-16 h-16 rounded-full bg-black border-2 border-primary/40 backdrop-blur-3xl flex items-center justify-center relative group"
                   >
                     <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
-                    <Cpu className="h-10 w-10 text-primary relative z-10 animate-pulse" />
+                    <Cpu className="h-8 w-8 text-primary relative z-10 animate-pulse" />
                     
-                    {/* Rotating Tech Rings */}
                     <motion.div 
                       animate={{ rotate: 360 }}
                       transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
@@ -206,48 +173,47 @@ export function OutreachCampaignSection() {
                       ))}
                     </div>
                   </div>
+                </div>
 
-                  {/* Personalized Outreach Snippets */}
-                  <div className="w-full max-w-[450px] mt-6 flex flex-col gap-3">
-                    {[
-                      {
-                        platform: "LINKEDIN",
-                        icon: Linkedin,
-                        tag: "PERSONALIZED HOOK",
-                        content: "\"Hey {name}, loved your recent post about {topic}. Your approach to {industry} is unique. Would love to...\"",
-                        color: "text-blue-400"
-                      },
-                      {
-                        platform: "X / TWITTER",
-                        icon: XIcon,
-                        tag: "INTEREST BASED",
-                        content: "\"Caught your thread on {trend}. Great insights on {keyword}. I've been working on something similar...\"",
-                        color: "text-white"
-                      }
-                    ].map((snippet, i) => (
-                      <motion.div
-                        key={snippet.platform}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 + i * 0.2 }}
-                        className="relative p-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm"
-                      >
-                        <div className="flex justify-between items-center mb-3">
-                          <div className="flex items-center gap-2">
-                            <snippet.icon className={`w-3.5 h-3.5 ${snippet.color}`} />
-                            <span className="text-[9px] font-bold text-white tracking-wider">{snippet.platform}</span>
-                          </div>
-                          <span className="text-[7px] font-black text-primary/60 uppercase tracking-widest px-2 py-0.5 rounded-full bg-primary/5 border border-primary/10">
-                            {snippet.tag}
-                          </span>
+                {/* Personalized Outreach Snippets */}
+                <div className="w-full flex flex-col gap-3">
+                  {[
+                    {
+                      platform: "LINKEDIN",
+                      icon: Linkedin,
+                      tag: "PERSONALIZED HOOK",
+                      content: "\"Hey {name}, loved your recent post about {topic}. Your approach to {industry} is unique. Would love to...\"",
+                      color: "text-blue-400"
+                    },
+                    {
+                      platform: "X / TWITTER",
+                      icon: XIcon,
+                      tag: "INTEREST BASED",
+                      content: "\"Caught your thread on {trend}. Great insights on {keyword}. I've been working on something similar...\"",
+                      color: "text-white"
+                    }
+                  ].map((snippet, i) => (
+                    <motion.div
+                      key={snippet.platform}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 + i * 0.2 }}
+                      className="relative p-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm"
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="flex items-center gap-2">
+                          <snippet.icon className={`w-3.5 h-3.5 ${snippet.color}`} />
+                          <span className="text-[9px] font-bold text-white tracking-wider">{snippet.platform}</span>
                         </div>
-                        <p className="text-[10px] text-white/60 font-medium italic leading-relaxed">
-                          {snippet.content}
-                        </p>
-                        <div className="absolute bottom-2 left-4 w-0.5 h-3 bg-primary/40 rounded-full" />
-                      </motion.div>
-                    ))}
-                  </div>
+                        <span className="text-[7px] font-black text-primary/60 uppercase tracking-widest px-2 py-0.5 rounded-full bg-primary/5 border border-primary/10">
+                          {snippet.tag}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-white/60 font-medium italic leading-relaxed">
+                        {snippet.content}
+                      </p>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </div>
