@@ -96,115 +96,153 @@ export function OutreachCampaignSection() {
               </div>
             </div>
 
-            <div className="flex-1 relative flex items-center justify-center overflow-hidden">
-              {/* Mind-Map Style Flow */}
-              <div className="relative w-full h-full flex items-center justify-center scale-90 lg:scale-100">
-                {/* Connecting Branches (Mind Map Lines) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
-                  <defs>
-                    <filter id="mindmap-glow">
-                      <feGaussianBlur stdDeviation="3" result="blur"/>
-                      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                    </filter>
-                  </defs>
-                  
-                  {/* Radial Branches from Center to Platforms */}
+            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10">
+              {/* Inspiration-based Mind Map Layout */}
+              <div className="relative w-full h-full flex flex-col items-center justify-start gap-8 px-4">
+                
+                {/* 1. Top Row: Platform Icons */}
+                <div className="flex justify-center gap-6 lg:gap-10">
                   {[
-                    { x: 25, y: 30 }, // Top Left (Web)
-                    { x: 25, y: 70 }, // Bottom Left (Linkedin)
-                    { x: 75, y: 30 }, // Top Right (X)
-                    { x: 75, y: 70 }  // Bottom Right (FB)
-                  ].map((pos, i) => (
-                    <g key={`branch-${i}`} filter="url(#mindmap-glow)">
-                      <motion.path
-                        d={`M 50 50 L ${pos.x} ${pos.y}`}
-                        stroke="rgba(139,92,246,0.2)"
-                        strokeWidth="2"
-                        strokeDasharray="4 4"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: i * 0.2 }}
-                      />
-                      
-                      {/* Activity Data flowing BACK to center */}
-                      <motion.circle r="3" fill={i % 2 === 0 ? "#8b5cf6" : "#10b981"}>
-                        <animateMotion 
-                          dur="2s" 
-                          repeatCount="indefinite" 
-                          path={`M ${pos.x} ${pos.y} L 50 50`}
-                          begin={`${i * 0.5}s`}
-                        />
-                      </motion.circle>
-                    </g>
+                    { icon: Globe, label: "Website", color: "bg-blue-500", iconColor: "text-white" },
+                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]", iconColor: "text-white" },
+                    { icon: XIcon, label: "X", color: "bg-black", iconColor: "text-white" },
+                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]", iconColor: "text-white" }
+                  ].map((platform, i) => (
+                    <motion.div
+                      key={platform.label}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex flex-col items-center gap-1.5"
+                    >
+                      <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl ${platform.color} flex items-center justify-center shadow-lg border border-white/10`}>
+                        <platform.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${platform.iconColor}`} />
+                      </div>
+                      <span className="text-[10px] font-medium text-white/60 tracking-tight">{platform.label}</span>
+                    </motion.div>
                   ))}
+                </div>
 
-                  {/* Final Output Branch to DM */}
-                  <motion.path
-                    d="M 50 50 L 50 90"
-                    stroke="url(#dm-branch-grad)"
-                    strokeWidth="4"
-                    strokeDasharray="8 4"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 1.5 }}
-                  />
-                  <linearGradient id="dm-branch-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#10b981" />
-                  </linearGradient>
-                </svg>
+                {/* 2. Middle Row: Signal Cards (Floating) */}
+                <div className="relative flex justify-center gap-4 w-full h-24 lg:h-32 mt-4">
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    {[30, 43, 57, 70].map((x, i) => (
+                      <motion.path
+                        key={i}
+                        d={`M ${x}% 0 L ${x}% 20`}
+                        stroke="rgba(255,255,255,0.1)"
+                        strokeWidth="1"
+                        strokeDasharray="4 4"
+                      />
+                    ))}
+                  </svg>
+                  
+                  {[
+                    { label: "Recent Posts", icon: Activity, delay: 0.3 },
+                    { label: "Achievements", icon: Trophy, delay: 0.4, highlight: true },
+                    { label: "Engagement Signals", icon: ThumbsUp, delay: 0.5 }
+                  ].map((card, i) => (
+                    <motion.div
+                      key={card.label}
+                      initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: card.delay }}
+                      className={`relative w-28 lg:w-36 p-3 rounded-xl border backdrop-blur-md shadow-xl flex flex-col items-center gap-2 ${
+                        card.highlight 
+                        ? "bg-white/10 border-white/20 z-10 scale-105" 
+                        : "bg-white/5 border-white/10"
+                      }`}
+                    >
+                      <span className="text-[8px] lg:text-[10px] font-bold text-white/80 uppercase tracking-tight text-center leading-tight">
+                        {card.label}
+                      </span>
+                      <div className="w-full h-8 bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
+                        <card.icon className={`h-4 w-4 ${card.highlight ? "text-amber-400" : "text-white/40"}`} />
+                      </div>
+                      {card.highlight && (
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2">
+                          <motion.div 
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex gap-1"
+                          >
+                            <Trophy className="h-3 w-3 text-amber-400 fill-amber-400" />
+                          </motion.div>
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
 
-                {/* Central Person Node */}
-                <div className="relative z-30">
+                {/* 3. Bottom Area: The Resulting DM Card */}
+                <div className="relative w-full max-w-sm mt-4">
+                  {/* Flow Arrow from Image */}
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <motion.div 
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="rgba(139,92,246,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </motion.div>
+                  </div>
+
                   <motion.div
-                    animate={{ 
-                      scale: [1, 1.05, 1],
-                      boxShadow: ["0 0 40px rgba(139,92,246,0.2)", "0 0 80px rgba(139,92,246,0.4)", "0 0 40px rgba(139,92,246,0.2)"]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gradient-to-b from-primary/40 to-primary/10 border-2 border-primary/50 backdrop-blur-3xl flex flex-col items-center justify-center relative overflow-hidden group"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="bg-[#f8f9ff] rounded-2xl p-5 shadow-2xl border border-primary/20 relative overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-                    <User className="h-10 w-10 lg:h-14 lg:w-14 text-white z-10 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
-                    <span className="text-[8px] font-black text-white/80 uppercase tracking-[0.3em] mt-2 z-10 font-display">PROFILE CORE</span>
+                    {/* Glowing Purple Border from Image */}
+                    <div className="absolute inset-0 border-2 border-primary/40 rounded-2xl pointer-events-none" />
+                    
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
+                        <User className="w-full h-full p-2 text-gray-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-gray-900 leading-none">Hi [Name]</span>
+                          <div className="flex gap-0.5">
+                            {[1, 2, 3].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gray-300" />)}
+                          </div>
+                        </div>
+                        <span className="text-[10px] text-gray-400 font-medium">Direct Message</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 relative">
+                      <div className="bg-primary/5 rounded-xl p-3 border border-primary/10">
+                        <p className="text-[11px] text-gray-700 leading-relaxed font-medium">
+                          Loved your recent post about! <br />
+                          Congrats on the [Topic] <br />
+                          Achievement!
+                        </p>
+                      </div>
+
+                      {/* Floating Sparkle Icon from Image */}
+                      <div className="absolute -right-2 top-0">
+                        <motion.div
+                          animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
+                          transition={{ duration: 4, repeat: Infinity }}
+                          className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg transform rotate-6"
+                        >
+                          <Star className="h-6 w-6 text-white fill-white" />
+                        </motion.div>
+                      </div>
+
+                      <div className="flex justify-end pr-2 opacity-50">
+                        <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
 
-                {/* Platform Nodes (Mind Map Outer Ring) */}
-                {[
-                  { icon: Globe, label: "WEB", x: "25%", y: "30%", color: "text-blue-400", activity: ThumbsUp },
-                  { icon: Linkedin, label: "IN", x: "25%", y: "70%", color: "text-blue-600", activity: Trophy },
-                  { icon: XIcon, label: "X", x: "75%", y: "30%", color: "text-white", activity: Activity },
-                  { icon: Facebook, label: "FB", x: "75%", y: "70%", color: "text-blue-500", activity: Star }
-                ].map((node, i) => (
-                  <motion.div
-                    key={node.label}
-                    style={{ left: node.x, top: node.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: i * 0.2 + 0.5 }}
-                      className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl hover:border-primary/50 transition-all group"
-                    >
-                      <node.icon className={`h-6 w-6 ${node.color} mb-1`} />
-                      <span className="text-[6px] font-black text-white/40 uppercase tracking-widest">{node.label}</span>
-                      
-                      {/* Smaller Sub-nodes (Activities) */}
-                      <motion.div
-                        animate={{ 
-                          scale: [1, 1.2, 1],
-                          opacity: [0.5, 1, 0.5]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                        className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-md flex items-center justify-center"
-                      >
-                        <node.activity className="h-3 w-3 text-primary" />
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
-                ))}
               </div>
             </div>
 
