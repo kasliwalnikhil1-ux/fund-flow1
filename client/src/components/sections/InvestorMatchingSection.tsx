@@ -6,11 +6,11 @@ import {
   Database, 
   Cpu, 
   Zap, 
-  LineChart,
-  Target,
-  Layout,
-  Table,
-  Share2
+  LineChart, 
+  Target, 
+  Layout, 
+  Table, 
+  Share2 
 } from "lucide-react";
 
 // Local assets from attached_assets
@@ -100,82 +100,78 @@ export function InvestorMatchingSection() {
             {step === 0 && (
               <motion.div 
                 key="collection"
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
                 className="relative w-full h-full flex items-center justify-center"
               >
-                {/* Central Database Hub */}
-                <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(139,92,246,0.15)]">
-                  <div className="flex flex-col items-center justify-center text-primary">
-                    <Database className="h-20 w-20" strokeWidth={2.5} />
+                {/* Central Database Hub - More integrated, less "huge white block" */}
+                <div className="relative z-10 w-32 h-32 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
+                  <div className="flex flex-col items-center justify-center text-primary/80">
+                    <Database className="h-12 w-12" strokeWidth={1.5} />
                   </div>
                   <motion.div 
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute inset-0 bg-primary/10 rounded-full blur-2xl"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="absolute inset-0 bg-primary rounded-3xl blur-2xl"
                   />
                 </div>
 
-                {/* Orbiting Source Icons - Spread around central point */}
+                {/* Orbiting Source Icons - Closer and more muted */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
-                     const radius = 260;
+                     const radius = 200; // Closer radius
                      const angle = (i * 360) / dataSources.length;
                      const angleRad = (angle - 90) * Math.PI / 180;
                      
-                     // X and Y relative to center
                      const x = Math.cos(angleRad) * radius;
                      const y = Math.sin(angleRad) * radius;
 
                      return (
                        <div key={source.name} className="absolute inset-0 flex items-center justify-center pointer-events-none">
                          <motion.div
-                           initial={{ opacity: 0, scale: 0 }}
+                           initial={{ opacity: 0, scale: 0.8 }}
                            animate={{ opacity: 1, scale: 1 }}
                            transition={{ delay: i * 0.1 }}
                            className="absolute pointer-events-auto"
-                           style={{
-                             x,
-                             y
-                           }}
+                           style={{ x, y }}
                          >
                            <div className="flex flex-col items-center gap-2">
-                             <div className="w-20 h-20 rounded-full bg-white shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden group hover:scale-110 transition-transform cursor-pointer relative">
-                               <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-100" />
-                               <img src={source.logo} alt={source.name} className="w-12 h-12 object-contain relative z-10" />
+                             <div className="w-14 h-14 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex items-center justify-center group hover:scale-105 transition-transform cursor-pointer overflow-hidden">
+                               <img 
+                                 src={source.logo} 
+                                 alt={source.name} 
+                                 className="w-8 h-8 object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
+                               />
                              </div>
-                             <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
+                             <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">{source.name}</span>
                            </div>
                          </motion.div>
 
-                         {/* Moving Data Particles toward Database (PRIMARY COLORS) */}
+                         {/* Moving Data Particles toward Database (SOFTER) */}
                          <motion.div
-                            initial={{ 
-                              x, 
-                              y, 
-                              opacity: 0 
-                            }}
+                            initial={{ x, y, opacity: 0 }}
                             animate={{ 
                               x: [x, 0],
                               y: [y, 0],
-                              opacity: [0, 1, 0]
+                              opacity: [0, 0.5, 0]
                             }}
                             transition={{ 
-                              duration: 1.5, 
+                              duration: 2, 
                               repeat: Infinity, 
-                              delay: i * 0.4,
+                              delay: i * 0.5,
                               ease: "easeIn" 
                             }}
-                            className="absolute w-3 h-3 bg-primary rounded-full blur-[2px] shadow-[0_0_10px_#8b5cf6]"
+                            className="absolute w-1 h-1 bg-primary/40 rounded-full blur-[1px]"
                          />
                        </div>
                      );
                    })}
-                   <div className="absolute w-[520px] h-[520px] border border-dashed border-white/5 rounded-full" />
+                   {/* Subtle Orbit Ring */}
+                   <div className="absolute w-[400px] h-[400px] border border-white/[0.03] rounded-full" />
                 </div>
                 
-                <div className="absolute bottom-0 text-primary font-black uppercase tracking-[0.4em] text-xs">
+                <div className="absolute bottom-0 text-white/20 font-bold uppercase tracking-[0.4em] text-[10px]">
                    Phase 1: Multi-Source Intelligence Gathering
                 </div>
               </motion.div>
@@ -184,63 +180,63 @@ export function InvestorMatchingSection() {
             {step === 1 && (
               <motion.div 
                 key="profiling"
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
+                exit={{ opacity: 0, x: -50 }}
                 className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8 items-center"
               >
-                <div className="col-span-1 p-8 rounded-[3rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl relative overflow-hidden h-[400px] flex flex-col justify-center">
+                <div className="col-span-1 p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl relative overflow-hidden h-[400px] flex flex-col justify-center">
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent" />
                   <div className="flex items-center gap-4 mb-8">
-                    <div className="w-16 h-16 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                      <User className="h-8 w-8 text-primary" />
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                      <User className="h-7 w-7 text-primary" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-white">Investor DNA</h4>
-                      <p className="text-[10px] text-white/40 uppercase tracking-widest">Scanning Profiles...</p>
+                      <h4 className="text-lg font-bold text-white">Investor DNA</h4>
+                      <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold">Scanning Profiles...</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                      {["LinkedIn Profile", "X / Twitter", "Personal Website"].map((p) => (
                        <div key={p} className="flex items-center gap-3">
-                         <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
-                         <span className="text-sm text-white/70">{p} verified</span>
+                         <div className="w-1.5 h-1.5 rounded-full bg-primary/60 shadow-[0_0_8px_rgba(139,92,246,0.3)]" />
+                         <span className="text-sm text-white/50">{p} verified</span>
                        </div>
                      ))}
                   </div>
                   <motion.div 
                     animate={{ y: [0, 300, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-0 left-0 w-full h-1 bg-primary/40 shadow-[0_0_15px_rgba(139,92,246,0.8)] z-20"
+                    className="absolute top-0 left-0 w-full h-1 bg-primary/20 shadow-[0_0_15px_rgba(139,92,246,0.4)] z-20"
                   />
                 </div>
 
                 <div className="hidden md:flex flex-col items-center justify-center">
-                  <Zap className="h-10 w-10 text-primary animate-pulse" />
-                  <div className="w-px h-24 bg-gradient-to-b from-primary to-transparent" />
+                  <Zap className="h-8 w-8 text-primary/40 animate-pulse" />
+                  <div className="w-px h-20 bg-gradient-to-b from-primary/20 to-transparent" />
                 </div>
 
-                <div className="col-span-1 p-8 rounded-[3rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl h-[400px] flex flex-col justify-center">
-                  <h4 className="text-xs font-black text-white/40 uppercase tracking-widest mb-10">Actively Investing In</h4>
+                <div className="col-span-1 p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl h-[400px] flex flex-col justify-center">
+                  <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-10">Actively Investing In</h4>
                   <div className="grid grid-cols-2 gap-4">
                     {industries.map((ind, i) => (
                       <motion.div 
                         key={ind.name}
                         animate={{ 
                           opacity: activeIndustry === i ? 1 : 0.2,
-                          scale: activeIndustry === i ? 1.05 : 1,
-                          backgroundColor: activeIndustry === i ? "rgba(139, 92, 246, 0.15)" : "transparent"
+                          scale: activeIndustry === i ? 1.02 : 1,
+                          backgroundColor: activeIndustry === i ? "rgba(139, 92, 246, 0.1)" : "transparent"
                         }}
                         className="p-4 rounded-2xl border border-white/5 flex flex-col items-center gap-3 transition-colors"
                       >
-                        <ind.icon className="h-6 w-6 text-primary" />
-                        <span className="text-[10px] font-black text-white uppercase tracking-widest">{ind.name}</span>
+                        <ind.icon className="h-5 w-5 text-primary/60" />
+                        <span className="text-[9px] font-bold text-white/80 uppercase tracking-widest">{ind.name}</span>
                       </motion.div>
                     ))}
                   </div>
                 </div>
 
-                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary font-black uppercase tracking-[0.4em] text-xs">
+                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-white/20 font-bold uppercase tracking-[0.4em] text-[10px]">
                    Phase 2: Deep Profile Intelligence & Sector Matching
                 </div>
               </motion.div>
@@ -249,16 +245,16 @@ export function InvestorMatchingSection() {
             {step === 2 && (
               <motion.div 
                 key="crm"
-                initial={{ opacity: 0, y: 100 }}
+                initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -100 }}
+                exit={{ opacity: 0, y: -50 }}
                 className="w-full max-w-2xl text-center"
               >
-                <div className="p-12 rounded-[4rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl relative overflow-hidden">
-                  <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 blur-[100px]" />
+                <div className="p-12 rounded-[3.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl relative overflow-hidden">
+                  <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 blur-[100px]" />
                   <div className="flex flex-col items-center gap-8">
-                    <div className="w-24 h-24 rounded-[2rem] bg-primary/10 border border-primary/30 flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
-                      <Database className="h-12 w-12 text-primary" />
+                    <div className="w-20 h-20 rounded-3xl bg-primary/5 border border-primary/20 flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.05)]">
+                      <Database className="h-10 w-10 text-primary/60" />
                     </div>
                     <div className="space-y-4">
                       <h4 className="text-3xl font-display font-bold text-white tracking-tight">Synced to your CRM</h4>
@@ -271,10 +267,10 @@ export function InvestorMatchingSection() {
                       {["HubSpot", "Salesforce", "Pipedrive"].map((crm, i) => (
                         <motion.div
                           key={crm}
-                          initial={{ opacity: 0, y: 20 }}
+                          initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.2 }}
-                          className="px-6 py-3 rounded-2xl bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-white/60"
+                          transition={{ delay: i * 0.15 }}
+                          className="px-6 py-2 rounded-xl bg-white/5 border border-white/5 text-[9px] font-bold uppercase tracking-widest text-white/40"
                         >
                           {crm}
                         </motion.div>
@@ -283,7 +279,7 @@ export function InvestorMatchingSection() {
                   </div>
                 </div>
                 
-                <div className="mt-12 text-primary font-black uppercase tracking-[0.4em] text-xs">
+                <div className="mt-12 text-white/20 font-bold uppercase tracking-[0.4em] text-[10px]">
                    Phase 3: Automated CRM Deployment
                 </div>
               </motion.div>
