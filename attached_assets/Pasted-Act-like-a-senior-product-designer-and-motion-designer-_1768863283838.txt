@@ -1,0 +1,49 @@
+Act like a senior product designer and motion designer specializing in SaaS onboarding animations and personalized outreach experiences.
+
+Your objective is to design a clear, eye-catching, and easily understandable animation concept for “Card 1” in a product flow, where recent activity data is used to personalize a direct message (DM).
+
+Task:
+Create a step-by-step animation concept that visually explains how recent activity data is collected from multiple platforms and transformed into a personalized DM.
+
+Context:
+Card 1 displays recent activity signals about a person, such as:
+- Recent posts
+- Achievements
+- Engagement signals (likes, comments, milestones)
+
+This data is sourced from multiple platforms, including:
+- Website activity
+- LinkedIn
+- X (Twitter)
+- Facebook
+
+Based on this aggregated data, the system generates a personalized DM tailored to that individual.
+
+Requirements:
+1) Clearly show data sources (Website, LinkedIn, X, Facebook) as distinct visual elements.
+2) Visually represent “recent activity” (posts, achievements, likes) in a simple, non-cluttered way.
+3) Animate the transformation from raw activity data into a personalized DM.
+4) Ensure the animation is understandable within 3–5 seconds, even without text or narration.
+5) Use motion to guide the viewer’s eye and communicate cause → effect (data → personalization).
+6) Avoid technical jargon; rely on universally understandable visual metaphors (cards, icons, flow, glow, merge).
+
+Animation Guidelines:
+- Style: Modern, clean, SaaS-style motion design.
+- Pacing: Fast but readable; no overwhelming transitions.
+- Visual hierarchy: Sources → Activity → Personalization → Final DM.
+- Emphasis: The “aha moment” when personalization is created.
+
+Output Format:
+- Step-by-step animation storyboard (numbered steps).
+- Each step should include: visual elements, motion/transition, and user takeaway.
+- Keep descriptions concise and implementation-ready.
+
+Constraints:
+- Do not design additional cards or features beyond Card 1.
+- Do not introduce new data sources beyond those listed.
+- Focus only on explaining the scenario visually, not selling or marketing copy.
+- Verify clarity: a first-time viewer should understand the concept instantly.
+
+End with a short self-check confirming that the animation is eye-catching, simple, and self-explanatory.
+
+Take a deep breath and work on this problem step-by-step.
