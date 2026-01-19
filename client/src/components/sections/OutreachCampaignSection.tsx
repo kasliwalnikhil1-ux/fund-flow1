@@ -174,17 +174,69 @@ export function OutreachCampaignSection() {
                   );
                 })}
 
-                {/* Flowing Data Stream Particles */}
+                {/* Flowing Data Stream Particles - Enhanced Path Visualization */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
-                  <motion.circle 
-                    r="2" 
-                    fill="#8b5cf6" 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <animateMotion dur="3s" repeatCount="indefinite" path="M 10% 50% Q 30% 20%, 50% 50%" />
-                  </motion.circle>
+                  <defs>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  
+                  {/* Data from Nodes to Core */}
+                  {[0, 90, 180, 270].map((angle, i) => (
+                    <g key={`data-flow-${i}`} filter="url(#glow)">
+                      {/* Achievements (Gold) */}
+                      <motion.circle r="2.5" fill="#fbbf24">
+                        <animateMotion 
+                          dur={`${2 + i}s`} 
+                          repeatCount="indefinite" 
+                          path={`M ${50 + 35 * Math.cos(angle * Math.PI / 180)}% ${50 + 35 * Math.sin(angle * Math.PI / 180)}% L 50% 50%`}
+                          begin={`${i * 0.5}s`}
+                        />
+                      </motion.circle>
+                      
+                      {/* Recent Posts (Purple) */}
+                      <motion.circle r="2" fill="#8b5cf6">
+                        <animateMotion 
+                          dur={`${1.5 + i}s`} 
+                          repeatCount="indefinite" 
+                          path={`M ${50 + 35 * Math.cos(angle * Math.PI / 180)}% ${50 + 35 * Math.sin(angle * Math.PI / 180)}% L 50% 50%`}
+                          begin={`${i * 0.3}s`}
+                        />
+                      </motion.circle>
+
+                      {/* Engagement/Comments (Emerald) */}
+                      <motion.circle r="1.5" fill="#10b981">
+                        <animateMotion 
+                          dur={`${3 + i}s`} 
+                          repeatCount="indefinite" 
+                          path={`M ${50 + 35 * Math.cos(angle * Math.PI / 180)}% ${50 + 35 * Math.sin(angle * Math.PI / 180)}% L 50% 50%`}
+                          begin={`${i * 0.7}s`}
+                        />
+                      </motion.circle>
+                    </g>
+                  ))}
+
+                  {/* Output from Core to Draft */}
+                  <g filter="url(#glow)">
+                    <motion.path
+                      d="M 50% 50% Q 50% 70%, 50% 90%"
+                      fill="none"
+                      stroke="url(#output-gradient)"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
+                    >
+                      <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1s" repeatCount="indefinite" />
+                    </motion.path>
+                    <linearGradient id="output-gradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                  </g>
                 </svg>
               </div>
             </div>
@@ -194,31 +246,61 @@ export function OutreachCampaignSection() {
               <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                    <motion.div 
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center"
+                    >
                       <MessageSquare className="h-4 w-4 text-emerald-400" />
-                    </div>
+                    </motion.div>
                     <div>
-                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">PROCESSED OUTPUT</span>
-                      <span className="text-[7px] text-white/30 uppercase font-black tracking-widest">Neural Calibration Active</span>
+                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">CRAFTING HYPER-PERSONALIZED DM</span>
+                      <div className="flex gap-2">
+                        <span className="text-[6px] text-blue-400 uppercase font-black tracking-widest">Analyzing Activity</span>
+                        <span className="text-[6px] text-amber-400 uppercase font-black tracking-widest">Matching Tone</span>
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
                     <span className="text-[12px] font-black text-emerald-400 block leading-none mb-1">99.4%</span>
-                    <span className="text-[6px] text-emerald-400/40 uppercase font-black tracking-tighter">Match Accuracy</span>
+                    <span className="text-[6px] text-emerald-400/40 uppercase font-black tracking-tighter">Human Score</span>
                   </div>
                 </div>
+                
+                {/* Live Drafting Preview Mockup */}
+                <div className="mb-4 bg-black/40 rounded-xl p-3 border border-white/5">
+                  <div className="flex gap-1.5 mb-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <motion.div 
+                      initial={{ width: "0%" }}
+                      animate={{ width: "80%" }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                      className="h-1 bg-white/20 rounded-full" 
+                    />
+                    <motion.div 
+                      initial={{ width: "0%" }}
+                      animate={{ width: "60%" }}
+                      transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatDelay: 1 }}
+                      className="h-1 bg-white/10 rounded-full" 
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2.5">
                   <div className="flex gap-2">
                     <div className="h-2 w-1/3 bg-primary/30 rounded-full overflow-hidden">
                        <motion.div 
                          animate={{ x: ["-100%", "100%"] }}
                          transition={{ duration: 1, repeat: Infinity }}
-                         className="h-full w-full bg-primary"
+                         className="h-full w-full bg-primary shadow-[0_0_10px_#8b5cf6]"
                        />
                     </div>
                     <div className="h-2 w-2/3 bg-white/10 rounded-full" />
                   </div>
-                  <div className="h-2 w-full bg-white/5 rounded-full" />
                 </div>
               </div>
             </div>
