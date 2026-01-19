@@ -35,7 +35,7 @@ const dataSources = [
 ];
 
 const scanSources = [
-  { name: "Website", icon: Globe, color: "text-blue-400" },
+  { name: "Website Scanning", icon: Globe, color: "text-blue-400" },
   { name: "LinkedIn", icon: Linkedin, color: "text-blue-600" },
   { name: "X", icon: XIcon, color: "text-white" },
 ];
@@ -125,7 +125,7 @@ export function InvestorMatchingSection() {
                      animate={{ opacity: 1, scale: 1 }}
                      className="flex items-center gap-2"
                    >
-                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">SCANNING...</span>
+                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">MATCHING...</span>
                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                    </motion.div>
                 )}
@@ -140,7 +140,7 @@ export function InvestorMatchingSection() {
           />
           
           <div className="mt-8 text-center p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
-            <div className="text-xl font-display font-bold text-emerald-400 tracking-tighter">Perfect Match Found</div>
+            <div className="text-xl font-display font-bold text-emerald-400 tracking-tighter">Investor Verified</div>
             <div className="text-[8px] text-emerald-400/60 uppercase tracking-[0.2em] font-black">Active Industry Funder</div>
           </div>
         </div>
