@@ -117,11 +117,16 @@ export function OutreachCampaignSection() {
                       className="flex flex-col items-center gap-2"
                     >
                       <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group">
-                        {/* Page 1 Style Scanning Beam */}
+                        {/* Light line scanning effect */}
                         <motion.div 
-                          animate={{ y: ["-100%", "200%"] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                          className="absolute top-0 left-0 w-full h-[2px] bg-primary shadow-[0_0_15px_#8b5cf6] z-20"
+                          animate={{ y: ["-20%", "120%"] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+                          className="absolute inset-x-0 h-[40%] bg-gradient-to-b from-transparent via-primary/20 to-transparent z-20 pointer-events-none"
+                        />
+                        <motion.div 
+                          animate={{ y: ["-100%", "500%"] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+                          className="absolute inset-x-0 h-[1px] bg-primary/40 shadow-[0_0_10px_rgba(139,92,246,0.5)] z-30 pointer-events-none"
                         />
                         <platform.icon className={`h-6 w-6 lg:h-8 lg:w-8 ${platform.color} relative z-10 transition-transform group-hover:scale-110`} />
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
