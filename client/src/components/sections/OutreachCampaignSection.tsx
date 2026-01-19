@@ -126,7 +126,7 @@ export function OutreachCampaignSection() {
                         className="absolute inset-0 blur-2xl bg-primary/60"
                       />
                     </div>
-                    <span className="text-[10px] lg:text-[12px] font-black text-white uppercase tracking-[0.5em] mb-1 z-10 font-display">INTELLIGENCE</span>
+                    <span className="text-[10px] lg:text-[12px] font-black text-white uppercase tracking-[0.5em] mb-1 z-10 font-display">SYNAPSE AI</span>
                     <div className="h-1 w-16 bg-primary/30 rounded-full overflow-hidden z-10">
                       <motion.div 
                         animate={{ x: ["-100%", "100%"] }}
@@ -144,54 +144,33 @@ export function OutreachCampaignSection() {
                   { icon: XIcon, label: "X", angle: 180, color: "text-white" },
                   { icon: Facebook, label: "FB", angle: 270, color: "text-blue-500" }
                 ].map((node, i) => {
-                  const radius = typeof window !== 'undefined' && window.innerWidth < 1024 ? 120 : 170;
-                  const rad = (node.angle * Math.PI) / 180;
-                  const x = radius * Math.cos(rad);
-                  const y = radius * Math.sin(rad);
-
+                  const radius = typeof window !== 'undefined' && window.innerWidth < 1024 ? 130 : 190;
                   return (
-                    <div key={node.label} className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        style={{ x, y }}
+                    <motion.div
+                      key={node.label}
+                      animate={{ 
+                        rotate: 360,
+                      }}
+                      transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <motion.div 
+                        style={{ x: radius }}
                         className="relative"
                       >
                         <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500"
+                          animate={{ rotate: -360 }}
+                          transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
+                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500 hover:scale-110"
                         >
                           <node.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${node.color} mb-1.5`} />
                           <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
                         
                         {/* Connecting Line to Core */}
-                        <div 
-                          className="absolute top-1/2 left-1/2 w-[120px] h-[1px] bg-gradient-to-r from-transparent to-primary/20 -z-10 origin-left"
-                          style={{ transform: `rotate(${node.angle + 180}deg) translateY(-50%)` }}
-                        />
-
-                        {/* Activity Signals Floating around the node */}
-                        <AnimatePresence>
-                          <motion.div
-                            animate={{ 
-                              y: [0, -10, 0],
-                              opacity: [0, 1, 0]
-                            }}
-                            transition={{ 
-                              duration: 3,
-                              repeat: Infinity,
-                              delay: i * 0.5
-                            }}
-                            className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap"
-                          >
-                            <div className="px-2 py-1 rounded-full bg-primary/20 border border-primary/30 backdrop-blur-md">
-                              <span className="text-[6px] font-black text-white uppercase tracking-tighter">
-                                {i === 0 ? "RECENT POST" : i === 1 ? "ACHIEVEMENT" : i === 2 ? "MILESTONE" : "NEW COMMENT"}
-                              </span>
-                            </div>
-                          </motion.div>
-                        </AnimatePresence>
+                        <div className="absolute top-1/2 right-full w-[140px] h-[1px] bg-gradient-to-l from-primary/30 to-transparent -translate-y-1/2 -z-10" />
                       </motion.div>
-                    </div>
+                    </motion.div>
                   );
                 })}
 
