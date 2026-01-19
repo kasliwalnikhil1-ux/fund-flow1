@@ -8,10 +8,9 @@ import {
   CheckCircle2,
   Search,
   ZapIcon,
-  ShieldCheck,
   Globe,
   Linkedin,
-  Facebook
+  UserCheck
 } from "lucide-react";
 
 // Local assets
@@ -36,10 +35,9 @@ const dataSources = [
 ];
 
 const scanSources = [
-  { name: "Website", icon: Globe, color: "text-blue-400" },
-  { name: "LinkedIn", icon: Linkedin, color: "text-blue-600" },
-  { name: "X (Twitter)", icon: XIcon, color: "text-white" },
-  { name: "Facebook", icon: Facebook, color: "text-blue-500" },
+  { name: "Investor Website", icon: Globe, color: "text-blue-400" },
+  { name: "LinkedIn Profile", icon: Linkedin, color: "text-blue-600" },
+  { name: "X Timeline", icon: XIcon, color: "text-white" },
 ];
 
 export function InvestorMatchingSection() {
@@ -97,10 +95,10 @@ export function InvestorMatchingSection() {
     },
     {
       id: 1,
-      title: "Thesis Alignment",
+      title: "Investor Deep-Scan",
       phase: "Phase 02",
-      icon: ShieldCheck,
-      description: "Neural analysis of investor activity and sector focus.",
+      icon: UserCheck,
+      description: "Scanning every profile for active sector investment match.",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-6">
           <div className="w-full space-y-4 relative z-10">
@@ -113,7 +111,7 @@ export function InvestorMatchingSection() {
                   x: scanIndex === i ? 0 : -5,
                   backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.15)" : "rgba(255, 255, 255, 0.02)"
                 }}
-                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between"
+                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between shadow-lg"
               >
                 <div className="flex items-center gap-3">
                   <source.icon className={`h-5 w-5 ${source.color}`} />
@@ -125,24 +123,23 @@ export function InvestorMatchingSection() {
                      animate={{ opacity: 1, scale: 1 }}
                      className="flex items-center gap-2"
                    >
-                     <span className="text-[8px] font-bold text-primary animate-pulse">MATCHING...</span>
-                     <CheckCircle2 className="h-4 w-4 text-primary" />
+                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">VERIFIED MATCH</span>
+                     <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                    </motion.div>
                 )}
               </motion.div>
             ))}
           </div>
 
-          {/* Neural Scan Line */}
           <motion.div 
             animate={{ y: [-100, 100, -100] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent shadow-[0_0_20px_rgba(139,92,246,0.8)] z-0"
           />
           
-          <div className="mt-6 text-center">
-            <div className="text-2xl font-display font-bold text-primary tracking-tighter">Thesis Verified</div>
-            <div className="text-[8px] text-white/40 uppercase tracking-[0.2em]">Cross-Platform Analysis</div>
+          <div className="mt-8 text-center p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
+            <div className="text-xl font-display font-bold text-emerald-400 tracking-tighter">Perfect Match Found</div>
+            <div className="text-[8px] text-emerald-400/60 uppercase tracking-[0.2em] font-black">Active Industry Funder</div>
           </div>
         </div>
       )
