@@ -68,7 +68,7 @@ export function InvestorMatchingSection() {
             />
           </div>
           {dataSources.map((source, i) => {
-            const radius = 65;
+            const radius = 75;
             const angle = (i * 360) / dataSources.length;
             const angleRad = (angle - 90) * Math.PI / 180;
             const x = Math.cos(angleRad) * radius;
@@ -76,8 +76,8 @@ export function InvestorMatchingSection() {
             return (
               <div key={source.name} className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <motion.div className="absolute pointer-events-auto" style={{ x, y }}>
-                  <div className="w-8 h-8 rounded-full bg-white shadow-xl flex items-center justify-center border border-white/10 overflow-hidden">
-                    <img src={source.logo} alt={source.name} className="w-4 h-4 object-contain opacity-80" />
+                  <div className="w-9 h-9 rounded-full bg-white shadow-xl flex items-center justify-center border border-white/10 overflow-hidden">
+                    <img src={source.logo} alt={source.name} className="w-5 h-5 object-contain opacity-80" />
                   </div>
                 </motion.div>
                 <motion.div
@@ -100,7 +100,7 @@ export function InvestorMatchingSection() {
       description: "Verifying real-time industry investment activity.",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
-          <div className="w-full space-y-1.5 relative z-10">
+          <div className="w-full space-y-2 relative z-10">
             {scanSources.map((source, i) => (
               <motion.div 
                 key={source.name}
@@ -109,19 +109,19 @@ export function InvestorMatchingSection() {
                   scale: scanIndex === i ? 1 : 0.95,
                   backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.1)" : "rgba(255, 255, 255, 0.02)"
                 }}
-                className="p-1.5 rounded-lg border border-white/10 flex items-center justify-between backdrop-blur-sm"
+                className="p-2.5 rounded-xl border border-white/10 flex items-center justify-between backdrop-blur-sm"
               >
-                <div className="flex items-center gap-2">
-                  <div className={`p-1 rounded-md bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary border-primary/20' : 'text-white/40'}`}>
-                    <source.icon className="h-3 w-3" />
+                <div className="flex items-center gap-2.5">
+                  <div className={`p-1.5 rounded-lg bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary border-primary/20' : 'text-white/40'}`}>
+                    <source.icon className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="text-[8px] font-black text-white uppercase tracking-wider block leading-none">{source.name}</span>
+                    <span className="text-[10px] font-black text-white uppercase tracking-wider block leading-none">{source.name}</span>
                     {scanIndex === i && (
                       <motion.span 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-[6px] text-primary font-bold uppercase tracking-tighter block mt-0.5"
+                        className="text-[7px] text-primary font-bold uppercase tracking-tighter block mt-1"
                       >
                         Checking Industry Fit...
                       </motion.span>
@@ -132,9 +132,9 @@ export function InvestorMatchingSection() {
                    <motion.div
                      initial={{ opacity: 0, scale: 0.5 }}
                      animate={{ opacity: 1, scale: 1 }}
-                     className="flex items-center gap-1"
+                     className="flex items-center gap-1.5"
                    >
-                     <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
+                     <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                    </motion.div>
                 )}
               </motion.div>
@@ -142,15 +142,15 @@ export function InvestorMatchingSection() {
           </div>
 
           <motion.div 
-            animate={{ y: [-60, 60, -60] }}
+            animate={{ y: [-80, 80, -80] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent shadow-[0_0_15px_rgba(139,92,246,0.6)] z-0"
           />
           
-          <div className="mt-3 text-center p-2 rounded-lg bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
+          <div className="mt-4 text-center p-3 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
             <div className="relative z-10">
-              <div className="text-xs font-display font-bold text-white tracking-tighter uppercase">Industry Match</div>
-              <div className="text-[6px] text-primary font-black uppercase tracking-[0.2em]">Active Sector Funder</div>
+              <div className="text-sm font-display font-bold text-white tracking-tighter uppercase">Industry Match</div>
+              <div className="text-[8px] text-primary font-black uppercase tracking-[0.2em]">Active Sector Funder</div>
             </div>
           </div>
         </div>
@@ -167,20 +167,20 @@ export function InvestorMatchingSection() {
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl p-4 relative overflow-hidden group"
+            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl p-5 relative overflow-hidden group"
           >
-            <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-100 transition-opacity">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             </div>
             
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden">
+            <div className="flex items-center gap-4 mb-5">
+              <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden">
                 <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/10 flex items-center justify-center">
-                   <span className="text-white font-bold text-sm">JS</span>
+                   <span className="text-white font-bold text-base">JS</span>
                 </div>
               </div>
               <div className="flex-1">
-                <div className="h-2 w-24 bg-white/10 rounded-full mb-2 overflow-hidden">
+                <div className="h-2.5 w-28 bg-white/10 rounded-full mb-2.5 overflow-hidden">
                    <motion.div 
                      initial={{ width: 0 }}
                      animate={{ width: "100%" }}
@@ -188,37 +188,37 @@ export function InvestorMatchingSection() {
                      className="h-full bg-primary"
                    />
                 </div>
-                <div className="h-1.5 w-16 bg-white/5 rounded-full" />
+                <div className="h-2 w-20 bg-white/5 rounded-full" />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 mb-4">
-               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div className="text-[6px] text-white/40 uppercase font-black mb-1">Thesis</div>
-                  <div className="text-[8px] text-white font-bold">Pre-Seed / SaaS</div>
+            <div className="grid grid-cols-2 gap-3 mb-5">
+               <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
+                  <div className="text-[7px] text-white/40 uppercase font-black mb-1">Thesis</div>
+                  <div className="text-[10px] text-white font-bold">Pre-Seed / SaaS</div>
                </div>
-               <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div className="text-[6px] text-white/40 uppercase font-black mb-1">Avg Check</div>
-                  <div className="text-[8px] text-white font-bold">$250K - $1M</div>
+               <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
+                  <div className="text-[7px] text-white/40 uppercase font-black mb-1">Avg Check</div>
+                  <div className="text-[10px] text-white font-bold">$250K - $1M</div>
                </div>
             </div>
 
-            <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-               <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Perfect Match</span>
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+               <div className="flex items-center gap-2.5">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">Perfect Match</span>
                </div>
-               <span className="text-[8px] font-bold text-emerald-400">98% Fit</span>
+               <span className="text-[10px] font-bold text-emerald-400">98% Fit</span>
             </div>
           </motion.div>
           
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="mt-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+            className="mt-5 flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
           >
-            <span className="text-[8px] font-black text-primary uppercase tracking-widest">Verified Profile Found</span>
-            <ChevronRight className="h-3 w-3 text-primary" />
+            <span className="text-[9px] font-black text-primary uppercase tracking-widest">Verified Profile Found</span>
+            <ChevronRight className="h-3.5 w-3.5 text-primary" />
           </motion.div>
         </div>
       )
@@ -235,17 +235,17 @@ export function InvestorMatchingSection() {
             <motion.div 
               animate={{ rotate: 360 }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-              className="absolute w-24 h-24 border border-dashed border-primary/30 rounded-full"
+              className="absolute w-28 h-28 border border-dashed border-primary/30 rounded-full"
             />
-            <div className="w-14 h-14 rounded-[1.2rem] bg-primary/10 border border-primary/20 flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(139,92,246,0.1)]">
-              <Database className="h-7 w-7 text-primary" />
+            <div className="w-16 h-16 rounded-[1.5rem] bg-primary/10 border border-primary/20 flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(139,92,246,0.1)]">
+              <Database className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-1.5 relative z-10 px-4">
+          <div className="flex flex-wrap justify-center gap-2 relative z-10 px-4">
             {["HubSpot", "Salesforce", "Pipedrive"].map((crm) => (
               <span 
                 key={crm}
-                className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[8px] font-black text-white/40 uppercase tracking-widest"
+                className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[9px] font-black text-white/40 uppercase tracking-widest"
               >
                 {crm}
               </span>
@@ -260,7 +260,7 @@ export function InvestorMatchingSection() {
     <section className="relative min-h-screen bg-[#020202] py-24 overflow-hidden flex flex-col justify-center">
       <div className="container mx-auto px-6 relative z-10">
         
-        <div className="max-w-4xl mx-auto text-center mb-20">
+        <div className="max-w-4xl mx-auto text-center mb-24">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -280,8 +280,8 @@ export function InvestorMatchingSection() {
         </div>
 
         {/* Deck of Cards Container */}
-        <div className="relative h-[600px] max-w-6xl mx-auto flex items-center justify-center">
-          <div className="flex flex-row justify-center items-center gap-4 lg:gap-8">
+        <div className="relative h-[650px] max-w-7xl mx-auto flex items-center justify-center">
+          <div className="flex flex-row justify-center items-center gap-6 lg:gap-12">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
@@ -291,19 +291,19 @@ export function InvestorMatchingSection() {
               let zIndex = index;
               let scale = 1;
 
-              // Card spacing and rotation logic for 4 cards
+              // Card spacing and rotation logic for 4 cards - expanded range
               if (!anyHovered) {
-                rotate = (index - 1.5) * 8;
-                x = (index - 1.5) * 50;
+                rotate = (index - 1.5) * 10;
+                x = (index - 1.5) * 80; // Increased spacing to keep within range
               } else if (isHovered) {
                 rotate = 0;
                 zIndex = 10;
-                scale = 1.05;
+                scale = 1.08;
               } else {
                 const direction = index < hoveredCard ? -1 : 1;
-                x = direction * 40;
-                rotate = direction * 5;
-                scale = 0.95;
+                x = direction * 60;
+                rotate = direction * 8;
+                scale = 0.92;
                 zIndex = 1;
               }
 
@@ -320,28 +320,28 @@ export function InvestorMatchingSection() {
                   }}
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="w-[260px] md:w-[280px] aspect-[4/5] p-6 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  transition={{ type: "spring", stiffness: 200, damping: 18 }}
+                  className="w-[280px] md:w-[320px] aspect-[4/5.5] p-7 md:p-9 rounded-[3rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
                   
                   <div className="text-center relative z-10 w-full">
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                      <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                        <card.icon className="h-4 w-4 text-primary" />
+                    <div className="flex items-center justify-center gap-2.5 mb-5">
+                      <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                        <card.icon className="h-4.5 w-4.5 text-primary" />
                       </div>
-                      <span className="text-[8px] font-black text-primary uppercase tracking-[0.4em]">{card.phase}</span>
+                      <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em]">{card.phase}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{card.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2.5 tracking-tight">{card.title}</h3>
                   </div>
 
-                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-1">
+                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-3">
                     {card.content}
                   </div>
 
-                  <div className="text-center relative z-10 mt-1 flex flex-col items-center gap-1">
-                    <p className="text-[10px] text-white/40 max-w-[200px] leading-relaxed">
+                  <div className="text-center relative z-10 mt-3 flex flex-col items-center gap-2">
+                    <p className="text-[11px] text-white/40 max-w-[240px] leading-relaxed">
                       {card.description}
                     </p>
                   </div>
@@ -353,8 +353,8 @@ export function InvestorMatchingSection() {
 
       </div>
 
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[180px]" />
+      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[180px]" />
     </section>
   );
 }
