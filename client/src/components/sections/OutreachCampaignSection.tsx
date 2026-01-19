@@ -189,76 +189,76 @@ export function OutreachCampaignSection() {
                   <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
                     <defs>
                       <filter id="glow-line">
-                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
                         <feComposite in="SourceGraphic" in2="blur" operator="over"/>
                       </filter>
                     </defs>
                     
                     {/* Dynamic Connecting Lines from Nodes to Core */}
                     {[0, 1, 2, 3].map((i) => {
-                      // Adjusting Y coordinates to match the vertical flex layout (approx 25%, 42%, 58%, 75%)
-                      const startY = 28 + i * 14.5; 
+                      const startY = 50 + (i - 1.5) * 22; // Approximation for vertical alignment
                       return (
                         <g key={`line-${i}`} filter="url(#glow-line)">
                           <motion.path
-                            d={`M 18% ${startY}% L 50% 50%`}
+                            d={`M 15% ${startY}% L 50% 50%`}
                             fill="none"
                             stroke="url(#line-grad)"
-                            strokeWidth="1.5"
-                            strokeDasharray="4 4"
+                            strokeWidth="1"
                             initial={{ pathLength: 0, opacity: 0 }}
-                            whileInView={{ pathLength: 1, opacity: 0.4 }}
+                            whileInView={{ pathLength: 1, opacity: 1 }}
                             transition={{ duration: 1, delay: i * 0.2 }}
                           />
                           
                           {/* Data Particles flowing along the lines */}
-                          <motion.circle r="2.5" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
+                          <motion.circle r="2" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
                             <animateMotion 
-                              dur={`${1.5 + i * 0.2}s`} 
+                              dur={`${2 + i * 0.5}s`} 
                               repeatCount="indefinite" 
-                              path={`M 18% ${startY}% L 50% 50%`}
-                            />
-                            <motion.div 
-                              animate={{ opacity: [0, 1, 0] }}
-                              transition={{ duration: 1, repeat: Infinity }}
+                              path={`M 15% ${startY}% L 50% 50%`}
                             />
                           </motion.circle>
                         </g>
                       );
                     })}
                     
-                    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0.5">
-                      <stop offset="0%" stopColor="rgba(139,92,246,0.1)" />
-                      <stop offset="100%" stopColor="rgba(139,92,246,0.8)" />
+                    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="rgba(139,92,246,0)" />
+                      <stop offset="100%" stopColor="rgba(139,92,246,0.3)" />
                     </linearGradient>
-
-                    {/* Final Output Stream: Core -> Drafting Panel */}
-                    <g filter="url(#glow-line)">
-                      <motion.path
-                        d="M 50% 50% C 50% 65%, 50% 70%, 50% 85%"
-                        fill="none"
-                        stroke="url(#output-stream-grad)"
-                        strokeWidth="4"
-                        strokeDasharray="8 4"
-                      >
-                        <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite" />
-                      </motion.path>
-                      
-                      {/* Large Pulse Particle for "The Decision" */}
-                      <motion.circle r="4" fill="#10b981">
-                        <animateMotion 
-                          dur="2s" 
-                          repeatCount="indefinite" 
-                          path="M 50% 50% C 50% 65%, 50% 70%, 50% 85%"
-                        />
-                      </motion.circle>
-
-                      <linearGradient id="output-stream-grad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#8b5cf6" />
-                        <stop offset="100%" stopColor="#10b981" />
-                      </linearGradient>
-                    </g>
                   </svg>
+
+                  <div className="flex-1 h-full" /> {/* Spacer to keep core centered */}
+                </div>
+
+                {/* Flowing Data Stream Particles - Enhanced Path Visualization */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
+                  <defs>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  
+                  {/* Output from Core to Draft - Enhanced Glow */}
+                  <g filter="url(#glow)">
+                    <motion.path
+                      d="M 50% 50% Q 50% 70%, 50% 85%"
+                      fill="none"
+                      stroke="url(#output-gradient)"
+                      strokeWidth="3"
+                      strokeDasharray="6 6"
+                    >
+                      <animate attributeName="stroke-dashoffset" from="30" to="0" dur="1.5s" repeatCount="indefinite" />
+                    </motion.path>
+                    <linearGradient id="output-gradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                  </g>
+                </svg>
               </div>
             </div>
 
