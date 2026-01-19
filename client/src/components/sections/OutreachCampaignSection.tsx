@@ -125,19 +125,19 @@ export function OutreachCampaignSection() {
                       {/* Connection Pipe to AI Agent */}
                       <svg className="absolute left-12 top-1/2 w-[200px] h-[200px] pointer-events-none overflow-visible" style={{ transform: 'translateY(-50%)' }}>
                         <defs>
-                          <path id={`pipe-${i}`} d={`M 0 50 C 50 50, 80 ${50 - (i - 1.5) * 60}, 130 ${50 - (i - 1.5) * 60}`} />
+                          <path id={`pipe-${i}`} d={`M 0 50 C 60 50, 80 ${50 - (i - 1.5) * 60}, 145 ${50 - (i - 1.5) * 60}`} />
                         </defs>
                         
                         {/* The Pipe Structure */}
                         <path
-                          d={`M 0 50 C 50 50, 80 ${50 - (i - 1.5) * 60}, 130 ${50 - (i - 1.5) * 60}`}
+                          d={`M 0 50 C 60 50, 80 ${50 - (i - 1.5) * 60}, 145 ${50 - (i - 1.5) * 60}`}
                           stroke="rgba(139, 92, 246, 0.1)"
                           strokeWidth="8"
                           fill="none"
                           strokeLinecap="round"
                         />
                         <motion.path
-                          d={`M 0 50 C 50 50, 80 ${50 - (i - 1.5) * 60}, 130 ${50 - (i - 1.5) * 60}`}
+                          d={`M 0 50 C 60 50, 80 ${50 - (i - 1.5) * 60}, 145 ${50 - (i - 1.5) * 60}`}
                           stroke="url(#line-gradient)"
                           strokeWidth="2"
                           fill="none"
@@ -172,7 +172,7 @@ export function OutreachCampaignSection() {
                                   dur="3s"
                                   repeatCount="indefinite"
                                   begin={`${p * 1.5 + i * 0.4}s`}
-                                  path={`M 0 50 C 50 50, 80 ${50 - (i - 1.5) * 60}, 130 ${50 - (i - 1.5) * 60}`}
+                                  path={`M 0 50 C 60 50, 80 ${50 - (i - 1.5) * 60}, 145 ${50 - (i - 1.5) * 60}`}
                                 />
                               </foreignObject>
                             </motion.g>
@@ -194,12 +194,12 @@ export function OutreachCampaignSection() {
                 </svg>
 
                 {/* Output: Personalized DM - Right Side */}
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 z-30">
                   {/* Connection from Agent to DM */}
                   <motion.div
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
-                    className="absolute -left-12 top-1/2 w-12 h-1 bg-gradient-to-r from-primary/40 to-primary/0 origin-left"
+                    className="absolute -left-16 top-1/2 w-16 h-1 bg-gradient-to-r from-primary/40 to-transparent origin-left"
                   />
                   
                   <motion.div
