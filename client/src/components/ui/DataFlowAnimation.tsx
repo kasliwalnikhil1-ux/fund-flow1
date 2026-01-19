@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Globe, CheckCircle2, User, DollarSign, Facebook, MessageSquareText, Cpu } from "lucide-react";
+import { Linkedin, Globe, CheckCircle2, User, DollarSign, Facebook, MessageSquareText } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -89,7 +89,7 @@ export function DataFlowAnimation() {
           </motion.div>
         </motion.div>
 
-        {/* Center: Intelligence Hub Connection */}
+        {/* Center: Intelligence Hub Connection - Logo/Symbol Removed */}
         <div className="flex flex-col items-center justify-center relative">
           <motion.div
             animate={{ 
@@ -110,13 +110,6 @@ export function DataFlowAnimation() {
               className="absolute inset-0 bg-primary/5 rounded-full blur-2xl"
             />
           </motion.div>
-
-          {/* Neural/AI Symbol in the middle - Subtle */}
-          <div className="absolute inset-0 flex items-center justify-center">
-             <div className="p-4 rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/5">
-               <Cpu className="h-10 w-10 text-white/30" strokeWidth={1.5} />
-             </div>
-          </div>
 
           {/* Connecting Lines Animation */}
           <div className="absolute w-[400px] h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
