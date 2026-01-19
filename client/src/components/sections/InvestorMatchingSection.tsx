@@ -9,7 +9,6 @@ import {
   Linkedin, 
   UserCheck,
   Target,
-  ChevronRight,
   Send
 } from "lucide-react";
 
@@ -233,10 +232,10 @@ export function InvestorMatchingSection() {
     },
     {
       id: 3,
-      title: "Instant Sync",
+      title: "CRM Deployment",
       phase: "Phase 04",
       icon: ZapIcon,
-      description: "Real-time delivery to your sales ecosystem.",
+      description: "",
       content: (
         <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
           <div className="relative flex items-center justify-center">
@@ -257,7 +256,7 @@ export function InvestorMatchingSection() {
               <Database className="h-6 w-6 text-primary" />
             </motion.div>
 
-            {/* Outreach Particles */}
+            {/* Data Collection Particles */}
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
@@ -279,29 +278,14 @@ export function InvestorMatchingSection() {
               </motion.div>
             ))}
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-1 relative z-10 px-2">
-            {["HubSpot", "Salesforce", "Pipedrive"].map((crm, i) => (
-              <motion.span 
-                key={crm}
-                animate={{ 
-                  borderColor: ["rgba(255,255,255,0.05)", "rgba(139,92,246,0.3)", "rgba(255,255,255,0.05)"],
-                  backgroundColor: ["rgba(255,255,255,0.05)", "rgba(139,92,246,0.05)", "rgba(255,255,255,0.05)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                className="px-2 py-1 rounded-lg border text-[7px] font-black text-white/40 uppercase tracking-widest"
-              >
-                {crm}
-              </motion.span>
-            ))}
-          </div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mt-1"
+            className="flex flex-col items-center gap-2"
           >
-            <span className="text-[6px] font-bold text-emerald-400 uppercase tracking-[0.2em] animate-pulse">Outreach Ready</span>
+            <span className="text-[8px] font-bold text-white uppercase tracking-[0.2em]">Data Pushed to CRM</span>
+            <span className="text-[6px] font-bold text-emerald-400 uppercase tracking-[0.2em] animate-pulse">Ready for Outreach</span>
           </motion.div>
         </div>
       )
