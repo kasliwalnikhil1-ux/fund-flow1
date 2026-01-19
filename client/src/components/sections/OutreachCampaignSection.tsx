@@ -98,162 +98,179 @@ export function OutreachCampaignSection() {
             </div>
 
             <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10 min-h-[500px]">
-              {/* Sequential Storytelling Animation */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center gap-12 px-4 z-10">
+              {/* Inspiration: Neural Scanning Storyboard */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center gap-16 px-4 z-10">
                 
-                {/* 1. SOURCE LAYER: Platforms appearing one by one */}
-                <div className="flex justify-center gap-6 lg:gap-10 relative">
+                {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
+                <div className="flex justify-center gap-4 lg:gap-8 relative">
                   {[
-                    { icon: Globe, label: "Website", color: "bg-blue-500" },
-                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]" },
-                    { icon: XIcon, label: "X", color: "bg-black" },
-                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]" }
+                    { icon: Globe, label: "Web", color: "bg-blue-500", status: "Scanning..." },
+                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]", status: "Analyzing..." },
+                    { icon: XIcon, label: "X", color: "bg-black", status: "Parsing..." },
+                    { icon: Facebook, label: "FB", color: "bg-[#1877f2]", status: "Extracting..." }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
-                      initial={{ opacity: 0, scale: 0, y: -20 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ 
-                        duration: 0.6, 
-                        delay: i * 0.2,
-                        type: "spring",
-                        stiffness: 100 
-                      }}
-                      className="flex flex-col items-center gap-1.5"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex flex-col items-center gap-2"
                     >
-                      <div className={`w-14 h-14 rounded-2xl ${platform.color} flex items-center justify-center shadow-xl border border-white/10 relative overflow-hidden group`}>
-                        <platform.icon className="h-7 w-7 text-white relative z-10" />
+                      <div className={`w-12 h-12 lg:w-16 lg:h-16 rounded-2xl ${platform.color} flex items-center justify-center shadow-2xl border border-white/10 relative overflow-hidden`}>
+                        {/* Page 1 Style Scanning Beam */}
                         <motion.div 
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                          className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100"
+                          animate={{ y: ["-100%", "200%"] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
+                          className="absolute top-0 left-0 w-full h-[2px] bg-white shadow-[0_0_15px_white] z-20"
                         />
+                        <platform.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white relative z-10" />
+                        <div className="absolute inset-0 bg-black/20" />
                       </div>
-                      <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{platform.label}</span>
+                      <div className="flex flex-col items-center">
+                        <span className="text-[7px] font-black text-white/40 uppercase tracking-widest">{platform.label}</span>
+                        <motion.span 
+                          animate={{ opacity: [0.4, 1, 0.4] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="text-[5px] font-bold text-primary uppercase"
+                        >
+                          {platform.status}
+                        </motion.span>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* 2. PROCESSING LAYER: The "AI Pulse" that gathers the data */}
-                <div className="relative flex items-center justify-center w-full h-20">
-                  {/* Flowing Data Particles from Sources to AI Core */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                    {[28, 42, 58, 72].map((x, i) => (
-                      <g key={i}>
-                        <motion.circle r="3" fill="#8b5cf6" filter="blur(1px)">
-                          <animateMotion 
-                            dur="1.5s" 
-                            repeatCount="indefinite" 
-                            path={`M ${x}% -40 L 50% 50%`}
-                            begin={`${i * 0.4}s`}
-                          />
-                        </motion.circle>
-                      </g>
+                {/* 2. NEURAL SYNTHESIS: The AI Core processing signals */}
+                <div className="relative flex flex-col items-center justify-center">
+                  {/* Floating Signals (Recent Posts, Achievements, etc) */}
+                  <div className="absolute -top-12 flex gap-4">
+                    {[
+                      { icon: Activity, label: "Recent Post", delay: 0 },
+                      { icon: Trophy, label: "Achievement", delay: 0.5 },
+                      { icon: ThumbsUp, label: "Engagement", delay: 1 }
+                    ].map((signal, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ 
+                          opacity: [0, 1, 0],
+                          y: [0, 40],
+                          scale: [0.5, 1, 0.5]
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity, 
+                          delay: signal.delay,
+                          ease: "easeIn"
+                        }}
+                        className="px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1"
+                      >
+                        <signal.icon className="h-2 w-2 text-primary" />
+                        <span className="text-[5px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
+                      </motion.div>
                     ))}
-                  </svg>
+                  </div>
 
                   <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ delay: 1, duration: 0.8, type: "spring" }}
-                    className="relative flex items-center justify-center"
+                    animate={{ 
+                      boxShadow: ["0 0 20px rgba(139,92,246,0.2)", "0 0 60px rgba(139,92,246,0.6)", "0 0 20px rgba(139,92,246,0.2)"]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-20 h-20 rounded-full bg-black border-2 border-primary/40 backdrop-blur-3xl flex items-center justify-center relative group"
                   >
-                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary/40 backdrop-blur-xl flex items-center justify-center">
-                      <Cpu className="h-8 w-8 text-primary" />
-                      {/* Radial Ripple */}
-                      <motion.div 
-                        animate={{ scale: [1, 2], opacity: [0.5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 rounded-full border border-primary/50"
-                      />
-                    </div>
-                    <div className="absolute -bottom-6 whitespace-nowrap">
-                      <span className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Neural Synthesis</span>
-                    </div>
+                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
+                    <Cpu className="h-10 w-10 text-primary relative z-10 animate-pulse" />
+                    
+                    {/* Rotating Tech Rings */}
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-[-8px] border border-dashed border-primary/20 rounded-full"
+                    />
                   </motion.div>
+                  <div className="mt-4 flex flex-col items-center">
+                    <span className="text-[8px] font-black text-white uppercase tracking-[0.4em]">Neural Synth Engine</span>
+                    <div className="flex gap-0.5 mt-1">
+                      {[1, 2, 3].map(i => (
+                        <motion.div 
+                          key={i}
+                          animate={{ opacity: [0.2, 1, 0.2] }}
+                          transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                          className="w-1 h-1 rounded-full bg-primary" 
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                {/* 3. OUTPUT LAYER: The Personalized DM Card */}
-                <div className="relative w-full max-w-[340px]">
-                  {/* Flowing Output Stream */}
-                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-12 pointer-events-none">
-                    <motion.path
-                      d="M 4 0 L 4 48"
-                      stroke="url(#outputFlow)"
-                      strokeWidth="2"
-                      strokeDasharray="4 4"
-                      className="origin-top"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ delay: 1.8, duration: 0.5 }}
-                    />
-                    <linearGradient id="outputFlow" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#10b981" />
-                    </linearGradient>
-                  </svg>
-
+                {/* 3. OUTPUT LAYER: The DM Creation (Visualized as a clean message bubble) */}
+                <div className="relative w-full max-w-[300px]">
                   <motion.div
-                    initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ delay: 2, duration: 0.8 }}
-                    className="bg-white rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 border-primary/20 relative"
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: 1, duration: 0.8 }}
+                    className="bg-[#f0f2f5] rounded-3xl p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4)] border border-white/20 relative"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
-                        <User className="w-6 h-6 text-gray-400" />
+                    {/* Message Header */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center border-2 border-white">
+                        <User className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-black text-gray-900 leading-none">Hi Jason Schmidt</span>
-                          <div className="flex gap-1 items-center">
-                            <motion.div 
-                              animate={{ opacity: [1, 0, 1] }}
-                              transition={{ duration: 1, repeat: Infinity }}
-                              className="w-1.5 h-1.5 rounded-full bg-emerald-500" 
-                            />
-                            <span className="text-[7px] font-bold text-emerald-600 uppercase">Personalized</span>
-                          </div>
-                        </div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">Hyper-Customized Outreach</span>
+                        <div className="h-2 w-24 bg-gray-200 rounded-full mb-2" />
+                        <div className="h-1.5 w-16 bg-gray-100 rounded-full" />
                       </div>
                     </div>
 
+                    {/* The "Neural" Message Content */}
                     <div className="space-y-2 relative">
-                      <div className="bg-primary/5 rounded-xl p-3 border border-primary/10">
-                        <motion.p 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 2.5, duration: 0.5 }}
-                          className="text-[11px] text-gray-800 leading-relaxed font-medium"
-                        >
-                          "Loved your recent post about <span className="text-primary font-bold italic underline">SaaS efficiency</span>! 
-                          Congrats on the <span className="text-primary font-bold italic underline">LinkedIn milestone</span>. 
-                          We should connect!"
-                        </motion.p>
+                      <div className="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                        <div className="space-y-2">
+                          <motion.div 
+                            initial={{ width: "0%" }}
+                            animate={{ width: "90%" }}
+                            transition={{ delay: 1.5, duration: 1 }}
+                            className="h-2 bg-primary/10 rounded-full" 
+                          />
+                          <motion.div 
+                            initial={{ width: "0%" }}
+                            animate={{ width: "70%" }}
+                            transition={{ delay: 1.8, duration: 1 }}
+                            className="h-2 bg-primary/5 rounded-full" 
+                          />
+                          <motion.div 
+                            initial={{ width: "0%" }}
+                            animate={{ width: "85%" }}
+                            transition={{ delay: 2.1, duration: 1 }}
+                            className="h-2 bg-primary/5 rounded-full" 
+                          />
+                        </div>
                       </div>
 
-                      {/* AI Quality Badge */}
-                      <div className="absolute -right-6 -top-4">
+                      {/* Sparkle Badge */}
+                      <div className="absolute -right-4 -top-6">
                         <motion.div
-                          initial={{ scale: 0, rotate: -20 }}
-                          animate={{ scale: 1, rotate: 10 }}
-                          transition={{ delay: 3, type: "spring" }}
-                          className="bg-primary text-white p-2 rounded-xl shadow-lg border-2 border-white/20"
+                          initial={{ scale: 0, rotate: -45 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ delay: 2.5, type: "spring" }}
+                          className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg transform rotate-6"
                         >
-                          <Star className="h-5 w-5 fill-white" />
+                          <Star className="h-7 w-7 text-white fill-white" />
                         </motion.div>
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
-                      <span className="text-[8px] font-black text-gray-300 uppercase tracking-[0.2em]">Ready to send</span>
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Send className="h-3 w-3 text-primary" />
+                    {/* Footer */}
+                    <div className="mt-6 flex justify-between items-center opacity-30">
+                      <div className="flex gap-1">
+                        <div className="w-4 h-4 rounded-full bg-gray-200" />
+                        <div className="w-4 h-4 rounded-full bg-gray-200" />
                       </div>
+                      <Send className="h-4 w-4 text-gray-400" />
                     </div>
                   </motion.div>
                 </div>
+
               </div>
             </div>
 
