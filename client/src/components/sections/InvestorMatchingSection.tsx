@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { 
-  Linkedin, 
   Globe, 
   Search, 
   Database, 
@@ -14,7 +13,7 @@ import {
   Share2
 } from "lucide-react";
 
-// Importing local assets from attached_assets
+// Local assets from attached_assets
 import linkedinLogo from "@assets/icons8-linkedin-48_1768851532438.png";
 import xLogo from "@assets/icons8-x-50_1768851727235.png";
 import salesNavLogo from "@assets/download_(1)_1768851727203.jpeg";
@@ -107,18 +106,18 @@ export function InvestorMatchingSection() {
                 className="relative w-full h-full flex items-center justify-center"
               >
                 {/* Central Database Hub */}
-                <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(255,255,255,0.15)]">
-                  <div className="flex flex-col items-center justify-center text-emerald-600">
+                <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(139,92,246,0.15)]">
+                  <div className="flex flex-col items-center justify-center text-primary">
                     <Database className="h-20 w-20" strokeWidth={2.5} />
                   </div>
                   <motion.div 
                     animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute inset-0 bg-emerald-400/10 rounded-full blur-2xl"
+                    className="absolute inset-0 bg-primary/10 rounded-full blur-2xl"
                   />
                 </div>
 
-                {/* Orbiting Source Icons with Data Collection Animation */}
+                {/* Orbiting Source Icons */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
                      const radius = 260;
@@ -136,13 +135,13 @@ export function InvestorMatchingSection() {
                              transform: `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`
                            }}
                          >
-                           <div className="p-4 rounded-2xl bg-white shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer border border-black/5 overflow-hidden w-20 h-20">
-                             <img src={source.logo} alt={source.name} className="w-full h-full object-contain" />
+                           <div className="p-4 rounded-2xl bg-white shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden w-20 h-20">
+                             <img src={source.logo} alt={source.name} className="w-full h-full object-contain relative z-10" />
                            </div>
                            <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
                          </motion.div>
 
-                         {/* Moving Data Particles toward Database (FIXED PATH) */}
+                         {/* Moving Data Particles toward Database (PRIMARY COLORS) */}
                          <motion.div
                             initial={{ 
                               x: Math.cos(angleRad) * radius, 
@@ -160,28 +159,7 @@ export function InvestorMatchingSection() {
                               delay: i * 0.4,
                               ease: "easeIn" 
                             }}
-                            className="absolute w-3 h-3 bg-emerald-400 rounded-full blur-[2px] shadow-[0_0_10px_#34d399]"
-                         />
-                         
-                         {/* Additional particle for density */}
-                         <motion.div
-                            initial={{ 
-                              x: Math.cos(angleRad) * radius, 
-                              y: Math.sin(angleRad) * radius, 
-                              opacity: 0 
-                            }}
-                            animate={{ 
-                              x: [Math.cos(angleRad) * radius, 0],
-                              y: [Math.sin(angleRad) * radius, 0],
-                              opacity: [0, 1, 0]
-                            }}
-                            transition={{ 
-                              duration: 1.5, 
-                              repeat: Infinity, 
-                              delay: i * 0.4 + 0.75,
-                              ease: "easeIn" 
-                            }}
-                            className="absolute w-2 h-2 bg-emerald-200 rounded-full blur-[1px]"
+                            className="absolute w-3 h-3 bg-primary rounded-full blur-[2px] shadow-[0_0_10px_#8b5cf6]"
                          />
                        </div>
                      );
@@ -271,8 +249,8 @@ export function InvestorMatchingSection() {
                 <div className="p-12 rounded-[4rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl relative overflow-hidden">
                   <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 blur-[100px]" />
                   <div className="flex flex-col items-center gap-8">
-                    <div className="w-24 h-24 rounded-[2rem] bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.1)]">
-                      <Database className="h-12 w-12 text-emerald-500" />
+                    <div className="w-24 h-24 rounded-[2rem] bg-primary/10 border border-primary/30 flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
+                      <Database className="h-12 w-12 text-primary" />
                     </div>
                     <div className="space-y-4">
                       <h4 className="text-3xl font-display font-bold text-white tracking-tight">Synced to your CRM</h4>
@@ -308,7 +286,7 @@ export function InvestorMatchingSection() {
       </div>
 
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[150px]" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
     </section>
   );
 }
