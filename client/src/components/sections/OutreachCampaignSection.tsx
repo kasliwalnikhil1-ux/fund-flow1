@@ -212,44 +212,6 @@ export function OutreachCampaignSection() {
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-primary/20 rounded-full blur-[100px] pointer-events-none" 
                   />
                   
-                  {/* Floating Investor Profile */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col items-center mb-8 relative z-10"
-                  >
-                    {/* Floating Avatar with glow */}
-                    <motion.div 
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      className="relative mb-4"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary via-primary/80 to-emerald-500 p-[2px] shadow-[0_0_40px_rgba(139,92,246,0.4)]">
-                        <div className="w-full h-full rounded-full bg-[#050505] flex items-center justify-center">
-                          <span className="text-xl font-bold bg-gradient-to-br from-primary to-emerald-400 bg-clip-text text-transparent">VC</span>
-                        </div>
-                      </div>
-                      {/* Online indicator */}
-                      <motion.div 
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-[#050505] shadow-[0_0_12px_#10b981]" 
-                      />
-                    </motion.div>
-                    
-                    <h4 className="text-sm font-bold text-white tracking-tight mb-2">Investor Matching</h4>
-                    
-                    {/* Positive Engagement Locked Status */}
-                    <motion.div 
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-                      <span className="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Positive Engagement Locked</span>
-                    </motion.div>
-                  </motion.div>
-                  
                   {/* Abstract Chat Animation with Live Synthesis Active beside it */}
                   <div className="relative z-10 flex items-start gap-6">
                     {/* Live Synthesis Active - positioned beside the chat */}
