@@ -137,42 +137,98 @@ export function OutreachCampaignSection() {
                   </motion.div>
                 </div>
 
-                {/* Floating Node Orbits */}
-                {[
-                  { icon: Globe, label: "WEB", angle: 0, color: "text-blue-400" },
-                  { icon: Linkedin, label: "IN", angle: 90, color: "text-blue-600" },
-                  { icon: XIcon, label: "X", angle: 180, color: "text-white" },
-                  { icon: Facebook, label: "FB", angle: 270, color: "text-blue-500" }
-                ].map((node, i) => {
-                  const radius = typeof window !== 'undefined' && window.innerWidth < 1024 ? 130 : 190;
-                  return (
-                    <motion.div
-                      key={node.label}
-                      animate={{ 
-                        rotate: 360,
-                      }}
-                      transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <motion.div 
-                        style={{ x: radius }}
-                        className="relative"
+                {/* Vertical Nodes and Connecting Lines */}
+                <div className="absolute inset-0 flex items-center justify-between px-12 lg:px-20 pointer-events-none">
+                  {/* Left Side: Nodes */}
+                  <div className="flex flex-col gap-8 lg:gap-12 relative z-40 pointer-events-auto">
+                    {[
+                      { icon: Globe, label: "WEB", color: "text-blue-400" },
+                      { icon: Linkedin, label: "IN", color: "text-blue-600" },
+                      { icon: XIcon, label: "X", color: "text-white" },
+                      { icon: Facebook, label: "FB", color: "text-blue-500" }
+                    ].map((node, i) => (
+                      <motion.div
+                        key={node.label}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="relative group"
                       >
                         <motion.div
-                          animate={{ rotate: -360 }}
-                          transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
-                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500 hover:scale-110"
+                          whileHover={{ scale: 1.1, x: 5 }}
+                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500"
                         >
                           <node.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${node.color} mb-1.5`} />
                           <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
-                        
-                        {/* Connecting Line to Core */}
-                        <div className="absolute top-1/2 right-full w-[140px] h-[1px] bg-gradient-to-l from-primary/30 to-transparent -translate-y-1/2 -z-10" />
+
+                        {/* Activity Signals */}
+                        <motion.div
+                          animate={{ 
+                            y: [0, -5, 0],
+                            opacity: [0, 1, 0]
+                          }}
+                          transition={{ 
+                            duration: 3,
+                            repeat: Infinity,
+                            delay: i * 0.5
+                          }}
+                          className="absolute -top-6 left-0 whitespace-nowrap"
+                        >
+                          <div className="px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 backdrop-blur-md">
+                            <span className="text-[5px] font-black text-white uppercase tracking-tighter">
+                              {i === 0 ? "POST" : i === 1 ? "ACHIEVEMENT" : i === 2 ? "SIGNAL" : "ENGAGEMENT"}
+                            </span>
+                          </div>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                  );
-                })}
+                    ))}
+                  </div>
+
+                  {/* SVG for connecting lines */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
+                    <defs>
+                      <filter id="glow-line">
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Dynamic Connecting Lines from Nodes to Core */}
+                    {[0, 1, 2, 3].map((i) => {
+                      const startY = 50 + (i - 1.5) * 22; // Approximation for vertical alignment
+                      return (
+                        <g key={`line-${i}`} filter="url(#glow-line)">
+                          <motion.path
+                            d={`M 15% ${startY}% L 50% 50%`}
+                            fill="none"
+                            stroke="url(#line-grad)"
+                            strokeWidth="1"
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            whileInView={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 1, delay: i * 0.2 }}
+                          />
+                          
+                          {/* Data Particles flowing along the lines */}
+                          <motion.circle r="2" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
+                            <animateMotion 
+                              dur={`${2 + i * 0.5}s`} 
+                              repeatCount="indefinite" 
+                              path={`M 15% ${startY}% L 50% 50%`}
+                            />
+                          </motion.circle>
+                        </g>
+                      );
+                    })}
+                    
+                    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="rgba(139,92,246,0)" />
+                      <stop offset="100%" stopColor="rgba(139,92,246,0.3)" />
+                    </linearGradient>
+                  </svg>
+
+                  <div className="flex-1 h-full" /> {/* Spacer to keep core centered */}
+                </div>
 
                 {/* Flowing Data Stream Particles - Enhanced Path Visualization */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
@@ -186,57 +242,6 @@ export function OutreachCampaignSection() {
                     </filter>
                   </defs>
                   
-                  {/* Data from Nodes to Core */}
-                  {[0, 90, 180, 270].map((angle, i) => {
-                    const radius = 35; // % units
-                    const startX = 50 + radius * Math.cos(angle * Math.PI / 180);
-                    const startY = 50 + radius * Math.sin(angle * Math.PI / 180);
-                    
-                    return (
-                      <g key={`data-flow-${i}`} filter="url(#glow)">
-                        {/* Activity Burst at source */}
-                        <motion.circle
-                          cx={`${startX}%`}
-                          cy={`${startY}%`}
-                          r="0"
-                          fill="white"
-                          animate={{ r: [0, 10, 0], opacity: [0, 0.5, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                        />
-
-                        {/* Achievements (Gold) */}
-                        <motion.circle r="3" fill="#fbbf24" shadow-sm>
-                          <animateMotion 
-                            dur={`${2}s`} 
-                            repeatCount="indefinite" 
-                            path={`M ${startX}% ${startY}% L 50% 50%`}
-                            begin={`${i * 0.5}s`}
-                          />
-                        </motion.circle>
-                        
-                        {/* Recent Posts (Purple) */}
-                        <motion.circle r="2.5" fill="#8b5cf6">
-                          <animateMotion 
-                            dur={`${1.5}s`} 
-                            repeatCount="indefinite" 
-                            path={`M ${startX}% ${startY}% L 50% 50%`}
-                            begin={`${i * 0.8}s`}
-                          />
-                        </motion.circle>
-
-                        {/* Engagement/Comments (Emerald) */}
-                        <motion.circle r="2" fill="#10b981">
-                          <animateMotion 
-                            dur={`${2.5}s`} 
-                            repeatCount="indefinite" 
-                            path={`M ${startX}% ${startY}% L 50% 50%`}
-                            begin={`${i * 0.3}s`}
-                          />
-                        </motion.circle>
-                      </g>
-                    );
-                  })}
-
                   {/* Output from Core to Draft - Enhanced Glow */}
                   <g filter="url(#glow)">
                     <motion.path
