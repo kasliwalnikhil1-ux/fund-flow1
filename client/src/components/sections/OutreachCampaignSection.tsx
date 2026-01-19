@@ -104,10 +104,10 @@ export function OutreachCampaignSection() {
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-8 relative">
                   {[
-                    { icon: Globe, label: "Web", color: "bg-blue-500", status: "Scanning..." },
+                    { icon: Globe, label: "Website", color: "bg-blue-500", status: "Scanning..." },
                     { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]", status: "Analyzing..." },
                     { icon: XIcon, label: "X", color: "bg-black", status: "Parsing..." },
-                    { icon: Facebook, label: "FB", color: "bg-[#1877f2]", status: "Extracting..." }
+                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]", status: "Extracting..." }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
@@ -236,49 +236,46 @@ export function OutreachCampaignSection() {
                           </motion.div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <motion.span 
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-xl font-black text-emerald-400 block leading-none"
-                        >
-                          99.4%
-                        </motion.span>
-                        <span className="text-[8px] text-emerald-400/60 uppercase font-black tracking-tighter">Human Score</span>
-                      </div>
                     </div>
                     
-                    {/* Live Drafting Visualization */}
-                    <div className="space-y-4 relative z-10">
-                      <div className="bg-black/40 rounded-2xl p-4 border border-white/5 shadow-inner">
-                        <div className="flex gap-1.5 mb-4">
-                          <div className="w-2 h-2 rounded-full bg-rose-500/40" />
-                          <div className="w-2 h-2 rounded-full bg-amber-500/40" />
-                          <div className="w-2 h-2 rounded-full bg-emerald-500/40" />
-                        </div>
-                        <div className="space-y-2.5">
-                          <motion.div 
-                            initial={{ width: "0%" }}
-                            animate={{ width: ["0%", "85%", "85%", "95%", "95%"] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                            className="h-1.5 bg-gradient-to-r from-primary/40 to-primary/10 rounded-full" 
-                          />
-                          <motion.div 
-                            initial={{ width: "0%" }}
-                            animate={{ width: ["0%", "0%", "65%", "65%", "80%"] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                            className="h-1.5 bg-gradient-to-r from-primary/30 to-primary/5 rounded-full" 
-                          />
-                          <motion.div 
-                            initial={{ width: "0%" }}
-                            animate={{ width: ["0%", "0%", "0%", "45%", "60%"] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                            className="h-1.5 bg-gradient-to-r from-primary/20 to-primary/5 rounded-full" 
-                          />
-                        </div>
+                    {/* Live Synthesis Visualization - Chat Log Style */}
+                    <div className="space-y-4 relative z-10 px-4">
+                      <div className="bg-black/40 rounded-2xl p-6 border border-white/5 shadow-inner min-h-[180px] flex flex-col justify-end gap-4">
+                        {[0, 1, 2, 3].map((i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                            animate={{ 
+                              opacity: [0, 1, 1, 0],
+                              y: [20, 0, -20, -40],
+                              scale: [0.9, 1, 1, 0.95]
+                            }}
+                            transition={{
+                              duration: 5,
+                              repeat: Infinity,
+                              delay: i * 1.25,
+                              ease: "easeInOut"
+                            }}
+                            className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}
+                          >
+                            <div className={`
+                              h-3 rounded-full 
+                              ${i % 2 === 0 
+                                ? 'bg-primary/20 w-3/4 rounded-bl-none' 
+                                : 'bg-emerald-500/10 w-1/2 rounded-br-none'} 
+                              border border-white/5 relative overflow-hidden
+                            `}>
+                              <motion.div
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                              />
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
 
-                      <div className="flex items-center justify-between px-2">
+                      <div className="flex items-center justify-between px-2 mt-4">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                           <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Synthesis Active</span>
