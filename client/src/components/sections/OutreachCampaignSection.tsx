@@ -203,76 +203,7 @@ export function OutreachCampaignSection() {
                   </div>
                 </div>
 
-                {/* 3. OUTPUT LAYER: Floating DM Synthesis Dashboard */}
-                <div className="relative w-full max-w-[500px]">
-                  {/* Subtle ambient glow - no card container */}
-                  <motion.div 
-                    animate={{ opacity: [0.05, 0.15, 0.05] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-primary/20 rounded-full blur-[100px] pointer-events-none" 
-                  />
-                  
-                  {/* Abstract Chat Animation */}
-                  <div className="relative z-10">
-                    {/* Abstract floating chat bubbles */}
-                    <div className="min-h-[180px] flex flex-col justify-center gap-4 relative">
-                      {[0, 1, 2].map((i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                          animate={{ 
-                            opacity: [0, 0.8, 0.8, 0],
-                            x: i % 2 === 0 ? [-20, 0, 0, 20] : [20, 0, 0, -20],
-                            y: [20, 0, -20, -40]
-                          }}
-                          transition={{
-                            duration: 5,
-                            repeat: Infinity,
-                            delay: i * 1.2,
-                            ease: "easeInOut"
-                          }}
-                          className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}
-                        >
-                          <div className={`
-                            h-2.5 rounded-full backdrop-blur-sm
-                            ${i % 2 === 0 
-                              ? 'bg-gradient-to-r from-primary/30 to-primary/10 w-28' 
-                              : 'bg-gradient-to-l from-emerald-500/30 to-emerald-500/10 w-20'}
-                          `}>
-                            <motion.div
-                              animate={{ x: ["-100%", "200%"] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                              className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                      
-                      {/* Floating particles */}
-                      {[...Array(5)].map((_, i) => (
-                        <motion.div
-                          key={`particle-${i}`}
-                          animate={{ 
-                            y: [0, -30, 0],
-                            opacity: [0, 0.6, 0],
-                            scale: [0.5, 1, 0.5]
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.6,
-                            ease: "easeInOut"
-                          }}
-                          className="absolute w-1 h-1 rounded-full bg-primary/40"
-                          style={{ 
-                            left: `${20 + i * 15}%`,
-                            top: `${30 + (i % 3) * 20}%`
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
 
