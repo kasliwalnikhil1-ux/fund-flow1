@@ -1,11 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Twitter, Globe, CheckCircle2, Search, User, DollarSign } from "lucide-react";
+import { Linkedin, Globe, CheckCircle2, Search, User, DollarSign, Send } from "lucide-react";
 import { useEffect, useState } from "react";
+
+// Using a custom X icon since Lucide doesn't have a modern one
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 const sources = [
   { icon: Linkedin, color: "text-blue-400", label: "LinkedIn" },
-  { icon: Twitter, color: "text-sky-400", label: "X / Twitter" },
-  { icon: Globe, color: "text-purple-400", label: "Web Intelligence" },
+  { icon: XIcon, color: "text-white", label: "X" },
+  { icon: Globe, color: "text-emerald-400", label: "Web Intelligence" },
 ];
 
 const mockInvestors = [
@@ -45,7 +52,7 @@ export function DataFlowAnimation() {
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute inset-0 border-2 border-primary/40 border-dashed rounded-[3rem]"
             />
-            <Search className="h-16 w-16 text-primary drop-shadow-[0_0_20px_rgba(139,92,246,0.6)]" />
+            <Send className="h-16 w-16 text-primary drop-shadow-[0_0_20px_rgba(139,92,246,0.6)]" />
           </div>
 
           {/* Data Sources Orbiting - Larger and clearer */}
@@ -73,53 +80,51 @@ export function DataFlowAnimation() {
             </motion.div>
           ))}
 
-          {/* Floating Investor Cards - Adjusted position and style to match reference image panels */}
+          {/* Floating Investor Cards - Shifted to Right for Center-Focused Text */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStep}
               initial={{ opacity: 0, x: 100, y: 0, scale: 0.9, rotateY: 35 }}
-              animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotateY: 15 }}
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotateY: 20 }}
               exit={{ opacity: 0, x: -100, y: 0, scale: 0.9, rotateY: -35 }}
               transition={{ duration: 1.2, ease: "circOut" }}
-              className="absolute right-[10%] top-1/2 -translate-y-1/2 z-20"
+              className="absolute right-[5%] top-1/2 -translate-y-1/2 z-20 hidden lg:block"
             >
-              <div className="w-96 p-8 rounded-[2.5rem] bg-card/60 border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)] backdrop-blur-3xl overflow-hidden group">
-                {/* Background Glow inside card */}
+              <div className="w-[450px] p-10 rounded-[3rem] bg-card/60 border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] backdrop-blur-3xl overflow-hidden group">
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 blur-[60px] group-hover:bg-primary/30 transition-colors" />
                 
-                <div className="flex items-center gap-6 mb-8 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center border border-white/10">
-                    <User className="h-8 w-8 text-white" />
+                <div className="flex items-center gap-6 mb-10 relative z-10">
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center border border-white/10">
+                    <User className="h-10 w-10 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-2xl text-white tracking-tight">{mockInvestors[activeStep].name}</h4>
-                    <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-black">{mockInvestors[activeStep].firm}</p>
+                    <h4 className="font-display font-bold text-3xl text-white tracking-tight">{mockInvestors[activeStep].name}</h4>
+                    <p className="text-xs text-white/40 uppercase tracking-[0.4em] font-black">{mockInvestors[activeStep].firm}</p>
                   </div>
                 </div>
                 
-                <div className="space-y-6 relative z-10">
-                  <div className="flex items-center justify-between py-5 border-y border-white/5">
-                    <span className="text-[10px] text-white/30 uppercase font-black tracking-widest">Investment Thesis</span>
-                    <span className="text-sm font-bold text-white/80">{mockInvestors[activeStep].stage}</span>
+                <div className="space-y-8 relative z-10">
+                  <div className="flex items-center justify-between py-6 border-y border-white/10">
+                    <span className="text-xs text-white/30 uppercase font-black tracking-widest">Thesis Match</span>
+                    <span className="text-lg font-bold text-white/80">{mockInvestors[activeStep].stage}</span>
                   </div>
                   
                   <div className="flex items-center justify-between pt-2">
-                    <div className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-primary/20 border border-primary/30">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                      <span className="text-[10px] font-black text-primary uppercase tracking-widest">{mockInvestors[activeStep].status}</span>
+                    <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-primary/20 border border-primary/30">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      <span className="text-xs font-black text-primary uppercase tracking-widest">{mockInvestors[activeStep].status}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-yellow-500 text-[10px] font-black tracking-[0.15em] bg-yellow-500/10 px-4 py-2 rounded-2xl border border-yellow-500/20">
-                      <DollarSign className="h-4 w-4" />
-                      QUALIFIED
+                    <div className="flex items-center gap-3 text-yellow-500 text-xs font-black tracking-[0.2em] bg-yellow-500/10 px-6 py-3 rounded-2xl border border-yellow-500/20">
+                      <DollarSign className="h-5 w-5" />
+                      MATCHED
                     </div>
                   </div>
                 </div>
 
-                {/* Glowing Scan Bar - To match the panel style */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5 overflow-hidden">
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/5 overflow-hidden">
                   <motion.div 
-                    className="h-full w-40 bg-gradient-to-r from-transparent via-primary to-transparent"
-                    animate={{ x: ["-100%", "300%"] }}
+                    className="h-full w-40 bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_15px_hsl(var(--primary))]"
+                    animate={{ x: ["-100%", "400%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   />
                 </div>
@@ -128,21 +133,21 @@ export function DataFlowAnimation() {
           </AnimatePresence>
         </div>
 
-        {/* Dynamic Multi-Color Particles - more visible */}
-        {[...Array(30)].map((_, i) => (
+        {/* Dynamic Multi-Color Particles */}
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute w-2 h-2 rounded-full blur-[1px] ${
-              i % 3 === 0 ? 'bg-red-500/50' : i % 3 === 1 ? 'bg-yellow-400/50' : 'bg-primary/50'
+            className={`absolute w-2 h-2 rounded-full blur-[1.5px] ${
+              i % 3 === 0 ? 'bg-red-500/60' : i % 3 === 1 ? 'bg-yellow-400/60' : 'bg-primary/60'
             }`}
             animate={{
-              x: [Math.random() * 1600 - 800, Math.random() * 1600 - 800],
-              y: [Math.random() * 1200 - 600, Math.random() * 1200 - 600],
-              opacity: [0, 0.8, 0],
-              scale: [0, 1.5, 0],
+              x: [Math.random() * 1800 - 900, Math.random() * 1800 - 900],
+              y: [Math.random() * 1400 - 700, Math.random() * 1400 - 700],
+              opacity: [0, 1, 0],
+              scale: [0, 2, 0],
             }}
             transition={{
-              duration: Math.random() * 10 + 5,
+              duration: Math.random() * 12 + 6,
               repeat: Infinity,
               ease: "linear",
             }}
