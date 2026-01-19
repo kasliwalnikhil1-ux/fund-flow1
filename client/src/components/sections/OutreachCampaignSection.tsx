@@ -15,7 +15,8 @@ import {
   Trophy,
   Activity,
   ThumbsUp,
-  Star
+  Star,
+  Cpu
 } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
