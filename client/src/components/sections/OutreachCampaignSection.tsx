@@ -163,19 +163,6 @@ export function OutreachCampaignSection() {
                     </motion.div>
                   ))}
                 </div>
-                      <div className="flex flex-col items-center text-center">
-                        <span className="text-[7px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">{platform.label}</span>
-                        <motion.span 
-                          animate={{ opacity: [0.4, 1, 0.4] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                          className="text-[5px] font-bold text-primary uppercase whitespace-nowrap"
-                        >
-                          {platform.status}
-                        </motion.span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
 
                 {/* 2. NEURAL SYNTHESIS: The AI Core processing signals */}
                 <div className="relative flex flex-col items-center justify-center">
