@@ -104,10 +104,10 @@ export function OutreachCampaignSection() {
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-8 relative">
                   {[
-                    { icon: Globe, label: "Website", color: "bg-blue-500", status: "Scanning..." },
-                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]", status: "Analyzing..." },
-                    { icon: XIcon, label: "X", color: "bg-black", status: "Parsing..." },
-                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]", status: "Extracting..." }
+                    { icon: Globe, label: "Website", color: "text-blue-400", status: "Scanning..." },
+                    { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", status: "Analyzing..." },
+                    { icon: XIcon, label: "X", color: "text-white", status: "Parsing..." },
+                    { icon: Facebook, label: "Facebook", color: "text-blue-600", status: "Extracting..." }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
@@ -116,15 +116,15 @@ export function OutreachCampaignSection() {
                       transition={{ delay: i * 0.1 }}
                       className="flex flex-col items-center gap-2"
                     >
-                      <div className={`w-12 h-12 lg:w-16 lg:h-16 rounded-2xl ${platform.color} flex items-center justify-center shadow-2xl border border-white/10 relative overflow-hidden`}>
+                      <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden group">
                         {/* Page 1 Style Scanning Beam */}
                         <motion.div 
                           animate={{ y: ["-100%", "200%"] }}
                           transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                          className="absolute top-0 left-0 w-full h-[2px] bg-white shadow-[0_0_15px_white] z-20"
+                          className="absolute top-0 left-0 w-full h-[2px] bg-primary shadow-[0_0_15px_#8b5cf6] z-20"
                         />
-                        <platform.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white relative z-10" />
-                        <div className="absolute inset-0 bg-black/20" />
+                        <platform.icon className={`h-6 w-6 lg:h-8 lg:w-8 ${platform.color} relative z-10 transition-transform group-hover:scale-110`} />
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-[7px] font-black text-white/40 uppercase tracking-widest">{platform.label}</span>
@@ -202,12 +202,9 @@ export function OutreachCampaignSection() {
                     </div>
                   </div>
                 </div>
-
-                
               </div>
             </div>
-
-            </motion.div>
+          </motion.div>
 
           {/* Card 2: Multi-Channel Execution */}
           <motion.div
