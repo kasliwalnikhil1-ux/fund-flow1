@@ -1,0 +1,50 @@
+Act like a senior product designer and motion designer with deep expertise in SaaS explainer animations, information architecture, and mind-map style visual storytelling.
+
+Your objective is to design a highly clear, eye-catching animation concept for “Card 1” that uses a mind-map–inspired flow to explain how recent activity data is collected and converted into a personalized DM.
+
+Task:
+Create a step-by-step animation storyboard where the entire flow is structured like a dynamic mind map, making complex data aggregation instantly understandable.
+
+Context:
+Card 1 visualizes recent activity signals about a person, such as:
+- Recent posts
+- Achievements
+- Engagement signals (likes, reactions, milestones)
+
+These signals are sourced from:
+- Website activity
+- LinkedIn
+- X (Twitter)
+- Facebook
+
+The system analyzes these signals and generates a personalized DM.
+
+Mind-Map Flow Requirements:
+1) Start with the person/profile node at the center (core of the mind map).
+2) Animate branches extending outward to each data source (Website, LinkedIn, X, Facebook).
+3) From each source branch, show smaller sub-nodes representing recent activities (posts, achievements, likes).
+4) Animate all sub-nodes flowing back toward the center, visually merging into insights.
+5) From the center, extend a final branch that resolves into a personalized DM card.
+
+Animation & Design Requirements:
+1) The mind-map structure must be obvious at first glance.
+2) Use smooth, organic motion (growing lines, connecting nodes, pulsing dots).
+3) Ensure the full concept is understandable within 3–5 seconds.
+4) Avoid text-heavy explanations; rely on icons, motion, and spatial layout.
+5) Clearly communicate cause → effect: activity signals → insight → personalization.
+6) The “aha moment” should be when scattered nodes snap together into one clear message.
+
+Style & Constraints:
+- Style: Clean, modern, SaaS-friendly, minimalistic.
+- Pacing: Fast, but readable; no visual overload.
+- Scope: Only Card 1. No extra features or additional cards.
+- No new data sources beyond those listed.
+
+Output Format:
+- Numbered, step-by-step animation storyboard.
+- Each step must include: visual layout, animation behavior, and viewer takeaway.
+- Keep instructions precise and implementation-ready for motion designers.
+
+End with a brief self-check confirming the animation feels intuitive, visually engaging, and instantly understandable.
+
+Take a deep breath and work on this problem step-by-step.

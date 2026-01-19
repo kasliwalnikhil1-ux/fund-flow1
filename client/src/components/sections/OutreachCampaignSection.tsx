@@ -6,13 +6,16 @@ import {
   Facebook, 
   MessageSquare, 
   Mail, 
-  Cpu, 
+  User,
   Zap,
   CheckCircle2,
   Share2,
   FileText,
   MessageCircle,
-  Trophy
+  Trophy,
+  Activity,
+  ThumbsUp,
+  Star
 } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -93,165 +96,114 @@ export function OutreachCampaignSection() {
             </div>
 
             <div className="flex-1 relative flex items-center justify-center overflow-hidden">
-              {/* Grand Visual Element: The Core */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Large Rotating Rings */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[80%] h-[80%] border border-white/5 rounded-full"
-                />
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[60%] h-[60%] border border-primary/10 rounded-full"
-                />
+              {/* Mind-Map Style Flow */}
+              <div className="relative w-full h-full flex items-center justify-center scale-90 lg:scale-100">
+                {/* Connecting Branches (Mind Map Lines) */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+                  <defs>
+                    <filter id="mindmap-glow">
+                      <feGaussianBlur stdDeviation="3" result="blur"/>
+                      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                  </defs>
+                  
+                  {/* Radial Branches from Center to Platforms */}
+                  {[
+                    { x: 25, y: 30 }, // Top Left (Web)
+                    { x: 25, y: 70 }, // Bottom Left (Linkedin)
+                    { x: 75, y: 30 }, // Top Right (X)
+                    { x: 75, y: 70 }  // Bottom Right (FB)
+                  ].map((pos, i) => (
+                    <g key={`branch-${i}`} filter="url(#mindmap-glow)">
+                      <motion.path
+                        d={`M 50 50 L ${pos.x} ${pos.y}`}
+                        stroke="rgba(139,92,246,0.2)"
+                        strokeWidth="2"
+                        strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: i * 0.2 }}
+                      />
+                      
+                      {/* Activity Data flowing BACK to center */}
+                      <motion.circle r="3" fill={i % 2 === 0 ? "#8b5cf6" : "#10b981"}>
+                        <animateMotion 
+                          dur="2s" 
+                          repeatCount="indefinite" 
+                          path={`M ${pos.x} ${pos.y} L 50 50`}
+                          begin={`${i * 0.5}s`}
+                        />
+                      </motion.circle>
+                    </g>
+                  ))}
 
-                {/* The Central Hub */}
+                  {/* Final Output Branch to DM */}
+                  <motion.path
+                    d="M 50 50 L 50 90"
+                    stroke="url(#dm-branch-grad)"
+                    strokeWidth="4"
+                    strokeDasharray="8 4"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 1.5 }}
+                  />
+                  <linearGradient id="dm-branch-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="#10b981" />
+                  </linearGradient>
+                </svg>
+
+                {/* Central Person Node */}
                 <div className="relative z-30">
                   <motion.div
                     animate={{ 
                       scale: [1, 1.05, 1],
-                      boxShadow: ["0 0 40px rgba(139,92,246,0.1)", "0 0 100px rgba(139,92,246,0.5)", "0 0 40px rgba(139,92,246,0.1)"]
+                      boxShadow: ["0 0 40px rgba(139,92,246,0.2)", "0 0 80px rgba(139,92,246,0.4)", "0 0 40px rgba(139,92,246,0.2)"]
                     }}
                     transition={{ duration: 4, repeat: Infinity }}
-                    className="w-32 h-32 lg:w-48 lg:h-48 rounded-full bg-gradient-to-b from-primary/30 to-primary/5 border border-primary/40 backdrop-blur-3xl flex flex-col items-center justify-center p-4 text-center relative overflow-hidden"
+                    className="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gradient-to-b from-primary/40 to-primary/10 border-2 border-primary/50 backdrop-blur-3xl flex flex-col items-center justify-center relative overflow-hidden group"
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
-                    <div className="relative">
-                      <Cpu className="h-12 w-12 lg:h-20 lg:w-20 text-primary mb-2 opacity-90 filter drop-shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
-                      <motion.div 
-                        animate={{ opacity: [0, 0.5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 blur-2xl bg-primary/60"
-                      />
-                    </div>
-                    <span className="text-[10px] lg:text-[12px] font-black text-white uppercase tracking-[0.5em] mb-1 z-10 font-display">SYNAPSE AI</span>
-                    <div className="h-1 w-16 bg-primary/30 rounded-full overflow-hidden z-10">
-                      <motion.div 
-                        animate={{ x: ["-100%", "100%"] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="h-full w-full bg-primary shadow-[0_0_10px_#8b5cf6]"
-                      />
-                    </div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
+                    <User className="h-10 w-10 lg:h-14 lg:w-14 text-white z-10 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                    <span className="text-[8px] font-black text-white/80 uppercase tracking-[0.3em] mt-2 z-10 font-display">PROFILE CORE</span>
                   </motion.div>
                 </div>
 
-                {/* Vertical Nodes and Connecting Lines */}
-                <div className="absolute inset-0 flex items-center justify-between px-12 lg:px-20 pointer-events-none">
-                  {/* Left Side: Nodes */}
-                  <div className="flex flex-col gap-8 lg:gap-12 relative z-40 pointer-events-auto">
-                    {[
-                      { icon: Globe, label: "WEB", color: "text-blue-400", signals: ["RECENT POST", "WEB EVENT"] },
-                      { icon: Linkedin, label: "IN", color: "text-blue-600", signals: ["ACHIEVEMENT", "NEW ROLE"] },
-                      { icon: XIcon, label: "X", color: "text-white", signals: ["MILESTONE", "ENGAGEMENT"] },
-                      { icon: Facebook, label: "FB", color: "text-blue-500", signals: ["EVENT", "SIGNAL"] }
-                    ].map((node, i) => (
-                      <motion.div
-                        key={node.label}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="relative group"
-                      >
-                        <motion.div
-                          whileHover={{ scale: 1.1, x: 5 }}
-                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500"
-                        >
-                          <node.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${node.color} mb-1.5`} />
-                          <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
-                        </motion.div>
-
-                        <motion.div
-                          key={`signal-${i}`}
-                          animate={{ 
-                            y: [0, -15, 0],
-                            opacity: [0, 1, 0],
-                            scale: [0.8, 1, 0.8]
-                          }}
-                          transition={{ 
-                            duration: 4,
-                            repeat: Infinity,
-                            delay: i * 0.7
-                          }}
-                          className="absolute -top-10 left-0 whitespace-nowrap"
-                        >
-                          <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                            <span className="text-[6px] font-black text-white uppercase tracking-wider">
-                              {node.signals[0]}
-                            </span>
-                          </div>
-                        </motion.div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* SVG for connecting lines */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-20" preserveAspectRatio="none">
-                    <defs>
-                      <filter id="glow-line">
-                        <feGaussianBlur stdDeviation="2" result="blur"/>
-                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                      </filter>
-                      <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="rgba(139,92,246,0)" />
-                        <stop offset="50%" stopColor="rgba(139,92,246,0.3)" />
-                        <stop offset="100%" stopColor="rgba(139,92,246,0.6)" />
-                      </linearGradient>
-                      <linearGradient id="output-path-grad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#8b5cf6" />
-                        <stop offset="100%" stopColor="#10b981" />
-                      </linearGradient>
-                    </defs>
-                    
-                    {/* Input Flow: Sources -> AI Core */}
-                    {[0, 1, 2, 3].map((i) => {
-                      const startX = 24; 
-                      const startY = 32 + (i * 12); 
-                      return (
-                        <g key={`in-line-${i}`} filter="url(#glow-line)">
-                          <motion.path
-                            d={`M ${startX}% ${startY}% L 50% 50%`}
-                            fill="none"
-                            stroke="url(#line-grad)"
-                            strokeWidth="2"
-                            strokeDasharray="8 6"
-                          />
-                          <motion.circle r="3.5" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
-                            <animateMotion 
-                              dur={`${1.2 + i * 0.3}s`} 
-                              repeatCount="indefinite" 
-                              path={`M ${startX}% ${startY}% L 50% 50%`}
-                            />
-                          </motion.circle>
-                        </g>
-                      );
-                    })}
-
-                    {/* Output Flow: AI Core -> Final DM */}
-                    <g filter="url(#glow-line)">
-                      <motion.path
-                        d="M 50% 50% L 50% 84%"
-                        fill="none"
-                        stroke="url(#output-path-grad)"
-                        strokeWidth="4"
-                        strokeDasharray="12 8"
-                      >
-                        <animate attributeName="stroke-dashoffset" from="40" to="0" dur="1s" repeatCount="indefinite" />
-                      </motion.path>
+                {/* Platform Nodes (Mind Map Outer Ring) */}
+                {[
+                  { icon: Globe, label: "WEB", x: "25%", y: "30%", color: "text-blue-400", activity: ThumbsUp },
+                  { icon: Linkedin, label: "IN", x: "25%", y: "70%", color: "text-blue-600", activity: Trophy },
+                  { icon: XIcon, label: "X", x: "75%", y: "30%", color: "text-white", activity: Activity },
+                  { icon: Facebook, label: "FB", x: "75%", y: "70%", color: "text-blue-500", activity: Star }
+                ].map((node, i) => (
+                  <motion.div
+                    key={node.label}
+                    style={{ left: node.x, top: node.y }}
+                    className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: i * 0.2 + 0.5 }}
+                      className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl hover:border-primary/50 transition-all group"
+                    >
+                      <node.icon className={`h-6 w-6 ${node.color} mb-1`} />
+                      <span className="text-[6px] font-black text-white/40 uppercase tracking-widest">{node.label}</span>
                       
-                      <motion.rect width="14" height="8" rx="2" fill="#10b981">
-                        <animateMotion 
-                          dur="1s" 
-                          repeatCount="indefinite" 
-                          path="M 50% 50% L 50% 84%"
-                        />
-                      </motion.rect>
-                    </g>
-                  </svg>
-
-                  <div className="flex-1 h-full" /> 
-                </div>
+                      {/* Smaller Sub-nodes (Activities) */}
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                        className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-md flex items-center justify-center"
+                      >
+                        <node.activity className="h-3 w-3 text-primary" />
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
