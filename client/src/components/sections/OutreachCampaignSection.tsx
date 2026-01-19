@@ -140,107 +140,66 @@ export function OutreachCampaignSection() {
                   ))}
                 </div>
 
-                {/* 3. OUTPUT LAYER: The DM Synthesis Dashboard */}
-                <div className="relative w-full max-w-[400px]">
-                  <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-3xl shadow-[0_0_100px_rgba(139,92,246,0.15)] relative overflow-hidden group">
-                    {/* Glowing Accent */}
-                    <motion.div 
-                      animate={{ opacity: [0.1, 0.3, 0.1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute -top-24 -right-24 w-48 h-48 bg-primary rounded-full blur-[80px] pointer-events-none" 
-                    />
-                    
-                    <div className="flex items-center justify-between mb-8 relative z-10">
-                      <div className="flex items-center gap-4">
-                        <motion.div 
-                          animate={{ 
-                            scale: [1, 1.2, 1],
-                            rotate: [0, 5, -5, 0]
-                          }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                          className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30"
-                        >
-                          <MessageSquare className="h-6 w-6 text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)]" />
-                        </motion.div>
-                        <div className="flex gap-2">
-                          <motion.div
-                            animate={{ opacity: [0.4, 1, 0.4] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
-                          </motion.div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Live Synthesis Visualization - Chat Log Style */}
-                    <div className="space-y-4 relative z-10">
-                      <div className="bg-black/40 rounded-2xl p-6 border border-white/5 shadow-inner min-h-[160px] flex flex-col justify-end gap-3">
-                        {[
-                          { delay: 0, width: "70%", side: "left", color: "bg-primary/20" },
-                          { delay: 1.5, width: "50%", side: "right", color: "bg-emerald-500/10" },
-                          { delay: 3, width: "85%", side: "left", color: "bg-primary/30" }
-                        ].map((msg, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                            animate={{ 
-                              opacity: [0, 1, 1, 0],
-                              y: [10, 0, -10, -20],
-                              x: msg.side === 'left' ? [-10, 0] : [10, 0]
-                            }}
-                            transition={{ 
-                              duration: 5, 
-                              repeat: Infinity, 
-                              delay: msg.delay,
-                              ease: "easeInOut"
-                            }}
-                            className={`flex ${msg.side === 'left' ? 'justify-start' : 'justify-end'}`}
-                          >
-                            <div className={`h-2.5 rounded-full ${msg.color} border border-white/5 relative overflow-hidden`} style={{ width: msg.width }}>
-                              <motion.div 
-                                animate={{ x: ["-100%", "200%"] }}
-                                transition={{ duration: 2, repeat: Infinity, delay: msg.delay + 0.5 }}
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                              />
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      <div className="flex items-center justify-between px-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Synthesis Active</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                           <div className="h-1 w-16 bg-white/5 rounded-full overflow-hidden">
-                              <motion.div 
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_10px_#10b981]"
-                              />
-                           </div>
-                           <Star className="h-3 w-3 text-emerald-400 animate-spin-slow" />
-                        </div>
-                      </div>
-
+                {/* 2. NEURAL SYNTHESIS: The AI Core processing signals */}
+                <div className="relative flex flex-col items-center justify-center">
+                  {/* Floating Signals (Recent Posts, Achievements, etc) */}
+                  <div className="absolute -top-12 flex gap-4">
+                    {[
+                      { icon: Activity, label: "Recent Post", delay: 0 },
+                      { icon: Trophy, label: "Achievement", delay: 0.5 },
+                      { icon: ThumbsUp, label: "Engagement", delay: 1 }
+                    ].map((signal, i) => (
                       <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                        key={i}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ 
+                          opacity: [0, 1, 0],
+                          y: [0, 40],
+                          scale: [0.5, 1, 0.5]
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity, 
+                          delay: signal.delay,
+                          ease: "easeIn"
+                        }}
+                        className="px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1"
                       >
-                        <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                        <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest text-center">
-                          Positive Engagement Secured via Personalized DM
-                        </span>
+                        <signal.icon className="h-2 w-2 text-primary" />
+                        <span className="text-[5px] font-black text-white uppercase tracking-tighter">{signal.label}</span>
                       </motion.div>
-                    </div>
+                    ))}
+                  </div>
 
-                    {/* Background Tech Detail */}
-                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.1),transparent)] pointer-events-none" />
+                  <motion.div
+                    animate={{ 
+                      boxShadow: ["0 0 20px rgba(139,92,246,0.2)", "0 0 60px rgba(139,92,246,0.6)", "0 0 20px rgba(139,92,246,0.2)"]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-20 h-20 rounded-full bg-black border-2 border-primary/40 backdrop-blur-3xl flex items-center justify-center relative group"
+                  >
+                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
+                    <Cpu className="h-10 w-10 text-primary relative z-10 animate-pulse" />
+                    
+                    {/* Rotating Tech Rings */}
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-[-8px] border border-dashed border-primary/20 rounded-full"
+                    />
+                  </motion.div>
+                  <div className="mt-4 flex flex-col items-center">
+                    <span className="text-[8px] font-black text-white uppercase tracking-[0.4em]">Neural Synth Engine</span>
+                    <div className="flex gap-0.5 mt-1">
+                      {[1, 2, 3].map(i => (
+                        <motion.div 
+                          key={i}
+                          animate={{ opacity: [0.2, 1, 0.2] }}
+                          transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                          className="w-1 h-1 rounded-full bg-primary" 
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
