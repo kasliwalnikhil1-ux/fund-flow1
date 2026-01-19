@@ -9,7 +9,10 @@ import {
   Cpu, 
   Zap,
   CheckCircle2,
-  Share2
+  Share2,
+  FileText,
+  MessageCircle,
+  Trophy
 } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -20,6 +23,8 @@ const XIcon = ({ className }: { className?: string }) => (
 
 export function OutreachCampaignSection() {
   const [activeTab, setActiveTab] = useState(0);
+
+  const flowIcons = [FileText, MessageCircle, Trophy];
 
   return (
     <section className="relative min-h-screen bg-[#020202] py-20 overflow-hidden flex flex-col justify-center">
@@ -62,9 +67,9 @@ export function OutreachCampaignSection() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="group relative aspect-[4/3] lg:aspect-square p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col"
+            className="group relative aspect-square p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col"
           >
-            <div className="mb-8">
+            <div className="mb-4">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
                   <Cpu className="h-5 w-5 text-primary" />
@@ -78,9 +83,9 @@ export function OutreachCampaignSection() {
 
             <div className="flex-1 relative flex items-center justify-center">
               {/* Tree Structure Animation */}
-              <div className="relative w-full h-full">
-                {/* Sources */}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6">
+              <div className="relative w-full h-full max-h-[350px]">
+                {/* Sources - Moved slightly inwards to reduce edge space */}
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20">
                   {[
                     { icon: Globe, color: "text-blue-400", label: "Website" },
                     { icon: Linkedin, color: "text-blue-600", label: "LinkedIn" },
@@ -92,83 +97,117 @@ export function OutreachCampaignSection() {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-3 relative"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">
-                        <source.icon className={`h-5 w-5 ${source.color}`} />
-                      </div>
-                      <div className="hidden sm:block">
-                        <div className="text-[8px] font-black text-white/40 uppercase tracking-widest leading-none mb-1">Source</div>
-                        <div className="text-[10px] font-bold text-white">{source.label}</div>
+                      <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors backdrop-blur-md">
+                        <source.icon className={`h-6 w-6 ${source.color}`} />
                       </div>
                       
-                      {/* Connection Line */}
-                      <motion.div 
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        transition={{ delay: 0.5 + i * 0.1, duration: 0.8 }}
-                        className="absolute left-10 h-[1px] bg-gradient-to-r from-primary/50 to-transparent origin-left"
-                        style={{ width: '40px' }}
-                      />
+                      {/* Connection Line to DM */}
+                      <svg className="absolute left-12 top-1/2 w-[calc(100%+80px)] h-[100px] pointer-events-none overflow-visible" style={{ transform: 'translateY(-50%)' }}>
+                        <motion.path
+                          d={`M 0 50 L 120 ${50 - (i - 1.5) * 60}`}
+                          stroke="url(#line-gradient)"
+                          strokeWidth="1"
+                          fill="none"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          whileInView={{ pathLength: 1, opacity: 0.2 }}
+                          transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
+                        />
+                        
+                        {/* Flowing Activity Icons */}
+                        {[0, 1].map((p) => {
+                          const FlowIcon = flowIcons[(i + p) % flowIcons.length];
+                          return (
+                            <motion.g key={p}>
+                              <circle r="2" fill="var(--primary)" opacity="0">
+                                <animateMotion
+                                  dur={`${3 + Math.random() * 2}s`}
+                                  repeatCount="indefinite"
+                                  begin={`${p * 1.5 + i * 0.4}s`}
+                                  path={`M 0 50 L 120 ${50 - (i - 1.5) * 60}`}
+                                />
+                              </circle>
+                              <foreignObject width="20" height="20" x="-10" y="-10">
+                                <motion.div
+                                  animate={{ 
+                                    opacity: [0, 1, 1, 0],
+                                    scale: [0.5, 1, 1, 0.5]
+                                  }}
+                                  transition={{ 
+                                    duration: 3, 
+                                    repeat: Infinity, 
+                                    delay: p * 1.5 + i * 0.4,
+                                    ease: "linear"
+                                  }}
+                                  className="w-5 h-5 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-lg flex items-center justify-center"
+                                >
+                                  <FlowIcon className="h-2.5 w-2.5 text-primary" />
+                                </motion.div>
+                                <animateMotion
+                                  dur="3s"
+                                  repeatCount="indefinite"
+                                  begin={`${p * 1.5 + i * 0.4}s`}
+                                  path={`M 0 50 L 120 ${50 - (i - 1.5) * 60}`}
+                                />
+                              </foreignObject>
+                            </motion.g>
+                          );
+                        })}
+                      </svg>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* Central Brain/Processor */}
-                <motion.div
-                  animate={{ 
-                    boxShadow: ["0 0 20px rgba(139,92,246,0)", "0 0 40px rgba(139,92,246,0.3)", "0 0 20px rgba(139,92,246,0)"]
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center z-10"
-                >
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 border border-dashed border-primary/40 rounded-full"
-                  />
-                  <Cpu className="h-10 w-10 text-primary animate-pulse" />
-                </motion.div>
+                {/* Definitions for SVG gradients */}
+                <svg className="absolute w-0 h-0">
+                  <defs>
+                    <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgba(139, 92, 246, 0.5)" />
+                      <stop offset="100%" stopColor="rgba(139, 92, 246, 0)" />
+                    </linearGradient>
+                  </defs>
+                </svg>
 
-                {/* Output: Personalized DM */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2">
+                {/* Output: Personalized DM - Moved to the right to fill space */}
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    className="w-48 bg-white/[0.05] border border-white/10 rounded-xl p-4 backdrop-blur-md shadow-2xl"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    className="w-56 bg-white/[0.05] border border-white/10 rounded-2xl p-5 backdrop-blur-xl shadow-2xl relative"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                        <MessageSquare className="h-3 w-3 text-emerald-400" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent blur-lg -z-10" />
+                    
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
+                        <MessageSquare className="h-4 w-4 text-emerald-400" />
                       </div>
-                      <span className="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Personalized DM</span>
+                      <div>
+                        <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest block leading-none">AI Agent</span>
+                        <span className="text-[7px] text-white/40 uppercase tracking-tighter">Drafting Personalized DM...</span>
+                      </div>
                     </div>
-                    <div className="space-y-1.5">
-                      <div className="h-1.5 w-full bg-white/10 rounded-full" />
-                      <div className="h-1.5 w-4/5 bg-white/10 rounded-full" />
-                      <div className="h-1.5 w-3/4 bg-primary/30 rounded-full" />
+                    <div className="space-y-2">
+                      <motion.div 
+                        animate={{ width: ["0%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                        className="h-2 w-full bg-white/10 rounded-full overflow-hidden"
+                      >
+                         <div className="h-full w-full bg-primary/40" />
+                      </motion.div>
+                      <div className="h-2 w-4/5 bg-white/10 rounded-full" />
+                      <div className="h-2 w-3/4 bg-white/10 rounded-full" />
                     </div>
+                    
+                    <motion.div 
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="mt-4 flex justify-end"
+                    >
+                      <div className="px-2 py-1 rounded bg-primary/20 border border-primary/30 text-[6px] font-bold text-primary uppercase">Ready to Send</div>
+                    </motion.div>
                   </motion.div>
                 </div>
-
-                {/* Flowing Particles */}
-                {[0, 1, 2, 3].map((i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ left: "20%", top: `${25 + i * 16.6}%`, opacity: 0 }}
-                    animate={{ 
-                      left: ["20%", "50%", "80%"],
-                      opacity: [0, 1, 1, 0]
-                    }}
-                    transition={{ 
-                      duration: 3, 
-                      repeat: Infinity, 
-                      delay: i * 0.4,
-                      ease: "linear"
-                    }}
-                    className="absolute w-1 h-1 bg-primary rounded-full blur-[1px] z-20"
-                  />
-                ))}
               </div>
             </div>
           </motion.div>
