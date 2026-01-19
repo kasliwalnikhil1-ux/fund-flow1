@@ -102,7 +102,7 @@ export function OutreachCampaignSection() {
               </div>
 
               {/* Sources - Left Side */}
-              <div className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 flex flex-col gap-8 lg:gap-12 z-20">
+              <div className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 flex flex-col gap-6 lg:gap-10 z-20">
                 {[
                   { icon: Globe, color: "text-blue-400", label: "Website" },
                   { icon: Linkedin, color: "text-blue-600", label: "LinkedIn" },
@@ -114,9 +114,9 @@ export function OutreachCampaignSection() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md relative shadow-xl"
+                    className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md relative"
                   >
-                    <source.icon className={`h-7 w-7 lg:h-8 lg:w-8 ${source.color}`} />
+                    <source.icon className={`h-5 w-5 lg:h-6 lg:w-6 ${source.color}`} />
                   </motion.div>
                 ))}
               </div>
@@ -125,21 +125,30 @@ export function OutreachCampaignSection() {
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
                 <defs>
                   <linearGradient id="pipe-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="rgba(139, 92, 246, 0.6)" />
-                    <stop offset="100%" stopColor="rgba(139, 92, 246, 0.2)" />
+                    <stop offset="0%" stopColor="rgba(139, 92, 246, 0.4)" />
+                    <stop offset="100%" stopColor="rgba(139, 92, 246, 0.1)" />
                   </linearGradient>
                 </defs>
                 
                 {[0, 1, 2, 3].map((i) => {
-                  const path = `M 18% ${20 + i * 20}% C 35% ${20 + i * 20}%, 40% 50%, 50% 50%`;
+                  // Approximate coordinates for center of card
+                  // Left Sources are at x=~15%, y=~20,40,60,80%
+                  // AI Agent is at x=50%, y=50%
+                  const startX = 60; // Approximate absolute px from left
+                  const startY = 85 + (i * 60); // Approximate vertical spacing
+                  const endX = 180; // Approximate center
+                  const endY = 175; // Center height
+                  
+                  // Using percentages for better responsive fit
+                  const path = `M 15% ${20 + i * 20}% C 35% ${20 + i * 20}%, 40% 50%, 50% 50%`;
                   
                   return (
                     <g key={i}>
                       {/* Pipe Background */}
                       <motion.path
                         d={path}
-                        stroke="rgba(139, 92, 246, 0.1)"
-                        strokeWidth="12"
+                        stroke="rgba(139, 92, 246, 0.05)"
+                        strokeWidth="10"
                         fill="none"
                         strokeLinecap="round"
                       />
@@ -147,7 +156,7 @@ export function OutreachCampaignSection() {
                       <motion.path
                         d={path}
                         stroke="url(#pipe-grad)"
-                        strokeWidth="3"
+                        strokeWidth="2"
                         fill="none"
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
@@ -159,11 +168,11 @@ export function OutreachCampaignSection() {
                         const FlowIcon = flowIcons[(i + p) % flowIcons.length];
                         return (
                           <motion.g key={p}>
-                            <foreignObject width="28" height="28" x="-14" y="-14">
+                            <foreignObject width="24" height="24" x="-12" y="-12">
                               <motion.div
                                 animate={{ 
                                   opacity: [0, 1, 1, 0],
-                                  scale: [0.7, 1.2, 1.2, 0.7],
+                                  scale: [0.6, 1, 1, 0.6],
                                   rotate: [0, 360]
                                 }}
                                 transition={{ 
@@ -172,9 +181,9 @@ export function OutreachCampaignSection() {
                                   delay: p * 1.5 + i * 0.4,
                                   ease: "linear"
                                 }}
-                                className="w-7 h-7 bg-primary/30 backdrop-blur-sm border border-primary/40 rounded-lg flex items-center justify-center shadow-2xl"
+                                className="w-6 h-6 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-lg flex items-center justify-center shadow-lg"
                               >
-                                <FlowIcon className="h-4 w-4 text-primary" />
+                                <FlowIcon className="h-3 w-3 text-primary" />
                               </motion.div>
                               <animateMotion
                                 dur="3s"
@@ -189,30 +198,10 @@ export function OutreachCampaignSection() {
                     </g>
                   );
                 })}
-                
-                {/* Connector from AI Agent to DM */}
-                <motion.path
-                  d="M 50% 50% L 75% 50%"
-                  stroke="rgba(16, 185, 129, 0.2)"
-                  strokeWidth="8"
-                  fill="none"
-                  strokeDasharray="4 4"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                />
-                <motion.path
-                  d="M 50% 50% L 75% 50%"
-                  stroke="rgba(16, 185, 129, 0.5)"
-                  strokeWidth="2"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  transition={{ duration: 1, delay: 1 }}
-                />
               </svg>
 
               {/* Output: Personalized DM - Right Side */}
-              <div className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 z-30">
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
