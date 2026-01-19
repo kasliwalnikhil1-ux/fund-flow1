@@ -200,15 +200,6 @@ export function OutreachCampaignSection() {
                         />
                       ))}
                     </div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1 }}
-                      className="mt-1 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-1.5"
-                    >
-                      <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[6px] font-black text-emerald-400 uppercase tracking-widest">Positive Engagement Secured via Personalized DM</span>
-                    </motion.div>
                   </div>
                 </div>
               </div>
