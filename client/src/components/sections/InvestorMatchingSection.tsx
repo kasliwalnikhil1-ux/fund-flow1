@@ -161,6 +161,8 @@ export function InvestorMatchingSection() {
     }
   ];
 
+  const currentCard = cards[step];
+
   return (
     <section className="relative min-h-[90vh] bg-[#020202] py-20 overflow-hidden flex flex-col justify-center">
       <div className="container mx-auto px-6 relative z-10">
@@ -199,15 +201,15 @@ export function InvestorMatchingSection() {
               <div className="text-center relative z-10 w-full">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                    {cards[step].icon && <cards[step].icon className="h-4 w-4 text-primary" />}
+                    <currentCard.icon className="h-4 w-4 text-primary" />
                   </div>
-                  <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em]">{cards[step].phase}</span>
+                  <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em]">{currentCard.phase}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{cards[step].title}</h3>
+                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{currentCard.title}</h3>
               </div>
 
               <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden">
-                {cards[step].content}
+                {currentCard.content}
               </div>
 
               <div className="text-center relative z-10 mt-4 flex flex-col items-center gap-4">
