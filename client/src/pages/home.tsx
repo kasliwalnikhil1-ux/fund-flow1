@@ -1,8 +1,9 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { Services } from "@/components/sections/Services";
 import { InvestorMatchingSection } from "@/components/sections/InvestorMatchingSection";
+import { OutreachCampaignSection } from "@/components/sections/OutreachCampaignSection";
+import { Services } from "@/components/sections/Services";
 import { Process } from "@/components/sections/Process";
 import { CTA } from "@/components/sections/CTA";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <InvestorMatchingSection />
+        <OutreachCampaignSection />
         <Services />
         <Process />
         <CTA />
