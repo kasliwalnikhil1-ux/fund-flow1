@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const sources = [
   { icon: Linkedin, color: "text-blue-500", label: "LinkedIn" },
   { icon: Twitter, color: "text-sky-400", label: "X / Twitter" },
-  { icon: Globe, color: "text-emerald-500", label: "Web Intelligence" },
+  { icon: Globe, color: "text-purple-500", label: "Web Intelligence" },
 ];
 
 const mockInvestors = [
@@ -26,9 +26,9 @@ export function DataFlowAnimation() {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
-      {/* Background Glows */}
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+      {/* Background Glows updated to purple/violet */}
+      <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
 
       <div className="relative h-full w-full flex items-center justify-center">
         {/* Central Hub */}
@@ -68,7 +68,7 @@ export function DataFlowAnimation() {
           </motion.div>
         ))}
 
-        {/* Floating Investor Cards */}
+        {/* Floating Investor Cards with Purple Tint */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep}
@@ -78,64 +78,65 @@ export function DataFlowAnimation() {
             transition={{ duration: 0.8, ease: "circOut" }}
             className="absolute right-10 md:right-40 top-1/2 -translate-y-1/2 z-20"
           >
-            <div className="w-72 p-6 rounded-2xl bg-card/90 border border-primary/30 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)] backdrop-blur-xl">
+            <div className="w-80 p-6 rounded-2xl bg-card/90 border border-primary/20 shadow-[0_0_80px_-15px_rgba(139,92,246,0.3)] backdrop-blur-xl">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center border border-border/50">
                   <User className="h-6 w-6 text-muted-foreground" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-lg">{mockInvestors[activeStep].name}</h4>
-                  <p className="text-xs text-muted-foreground">{mockInvestors[activeStep].firm}</p>
+                  <h4 className="font-display font-bold text-lg text-foreground">{mockInvestors[activeStep].name}</h4>
+                  <p className="text-xs text-muted-foreground uppercase tracking-widest">{mockInvestors[activeStep].firm}</p>
                 </div>
               </div>
               
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs py-2 border-b border-border/50">
-                  <span className="text-muted-foreground">Investment Stage</span>
-                  <span className="font-medium">{mockInvestors[activeStep].stage}</span>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between text-xs py-3 border-y border-border/30">
+                  <span className="text-muted-foreground uppercase">Target Stage</span>
+                  <span className="font-medium text-foreground">{mockInvestors[activeStep].stage}</span>
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider">
-                    <CheckCircle2 className="h-3 w-3" />
+                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/20">
+                    <CheckCircle2 className="h-3.3 w-3.3" />
                     {mockInvestors[activeStep].status}
                   </span>
-                  <div className="flex items-center gap-1 text-primary text-xs font-bold">
+                  <div className="flex items-center gap-1 text-primary text-xs font-bold tracking-tighter">
                     <DollarSign className="h-3 w-3" />
                     MATCHED
                   </div>
                 </div>
               </div>
 
-              {/* Data Points Tooltip Animation */}
+              {/* Glowing Scan Line */}
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                className="h-1 bg-primary/20 rounded-full mt-4 overflow-hidden"
+                className="h-0.5 bg-primary/30 rounded-full mt-6 overflow-hidden relative"
               >
                 <motion.div 
-                  className="h-full bg-primary"
+                  className="absolute inset-0 bg-primary shadow-[0_0_15px_hsl(var(--primary))]"
                   animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
               </motion.div>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Decorative Particles */}
-        {[...Array(10)].map((_, i) => (
+        {/* Decorative Particles (Purple) */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary/40 rounded-full"
+            className="absolute w-1 h-1 bg-primary/30 rounded-full"
             animate={{
-              x: [Math.random() * 1000 - 500, Math.random() * 1000 - 500],
+              x: [Math.random() * 1200 - 600, Math.random() * 1200 - 600],
               y: [Math.random() * 1000 - 500, Math.random() * 1000 - 500],
-              opacity: [0, 1, 0],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0],
             }}
             transition={{
-              duration: Math.random() * 5 + 5,
+              duration: Math.random() * 6 + 4,
               repeat: Infinity,
               ease: "linear",
             }}
