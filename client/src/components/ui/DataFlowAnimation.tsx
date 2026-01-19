@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Globe, CheckCircle2, User, DollarSign, Facebook, MessageSquareText, Database } from "lucide-react";
+import { Linkedin, Globe, CheckCircle2, User, DollarSign, Facebook, MessageSquareText, Database, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -27,121 +27,148 @@ export function DataFlowAnimation() {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Background Glows */}
-      <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-red-600/20 rounded-full blur-[150px] animate-pulse" />
-      <div className="absolute bottom-1/4 -right-40 w-[600px] h-[600px] bg-yellow-500/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[180px]" />
+      {/* Background Glows - Increased opacity and vibrancy */}
+      <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-red-600/30 rounded-full blur-[150px] animate-pulse" />
+      <div className="absolute bottom-1/4 -right-40 w-[600px] h-[600px] bg-yellow-500/25 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/20 rounded-full blur-[180px]" />
 
-      <div className="relative h-full w-full flex items-center justify-between px-10 max-w-[1600px] mx-auto">
+      <div className="relative h-full w-full flex items-center justify-between px-6 lg:px-20 max-w-[1800px] mx-auto">
         
-        {/* Left Side: Data Scraping & Personalization */}
-        <div className="w-1/3 flex flex-col gap-6 relative">
-          <h5 className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Intelligence Engine</h5>
+        {/* Left Side: Data Intelligence - Animated from side */}
+        <motion.div 
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="w-1/3 flex flex-col gap-4 relative"
+        >
+          <h5 className="text-white/30 text-[11px] font-black uppercase tracking-[0.5em] mb-4">Intelligence Engine</h5>
           
-          {/* Source Scrapers */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {[
               { icon: Linkedin, label: "LinkedIn", color: "text-blue-400" },
               { icon: XIcon, label: "X / Twitter", color: "text-white" },
               { icon: Facebook, label: "Facebook", color: "text-blue-600" },
-              { icon: Globe, label: "Web Intelligence", color: "text-emerald-400" }
+              { icon: Globe, label: "Web Signals", color: "text-emerald-400" }
             ].map((source, i) => (
               <motion.div
                 key={i}
                 animate={{ 
-                  x: [0, 10, 0],
-                  opacity: [0.3, 0.6, 0.3]
+                  x: [0, 15, 0],
+                  opacity: [0.4, 0.8, 0.4]
                 }}
-                transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-                className="flex items-center gap-4 bg-white/[0.03] border border-white/5 p-3 rounded-2xl backdrop-blur-xl"
+                transition={{ duration: 4, delay: i * 0.4, repeat: Infinity }}
+                className="flex items-center gap-4 bg-white/[0.05] border border-white/10 p-4 rounded-2xl backdrop-blur-2xl shadow-xl"
               >
-                <source.icon className={`h-5 w-5 ${source.color}`} />
-                <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest">Scraping {source.label}...</span>
+                <source.icon className={`h-6 w-6 ${source.color}`} />
+                <span className="text-[10px] text-white/60 font-black uppercase tracking-widest">Scanning {source.label}...</span>
               </motion.div>
             ))}
           </div>
 
-          {/* DM Preparation Animation */}
           <motion.div 
-            animate={{ scale: [0.98, 1.02, 0.98] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="mt-8 p-6 rounded-3xl bg-primary/10 border border-primary/20 backdrop-blur-2xl relative overflow-hidden"
+            animate={{ 
+              scale: [0.98, 1.02, 0.98],
+              boxShadow: ["0 0 0px rgba(139,92,246,0)", "0 0 20px rgba(139,92,246,0.2)", "0 0 0px rgba(139,92,246,0)"]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="mt-6 p-6 rounded-3xl bg-primary/20 border border-primary/40 backdrop-blur-3xl relative overflow-hidden"
           >
             <div className="flex items-center gap-3 mb-4">
-              <MessageSquareText className="h-4 w-4 text-primary" />
-              <span className="text-[10px] font-black text-primary uppercase tracking-widest">Crafting Personalized DM</span>
+              <MessageSquareText className="h-5 w-5 text-primary" />
+              <span className="text-[10px] font-black text-primary uppercase tracking-widest">Personalizing Outreach</span>
             </div>
-            <div className="space-y-2">
-              <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+            <div className="space-y-3">
+              <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
                 <motion.div 
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="h-full w-1/2 bg-primary"
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="h-full w-1/3 bg-primary shadow-[0_0_15px_rgba(139,92,246,0.8)]"
                 />
               </div>
-              <div className="h-1.5 w-2/3 bg-white/5 rounded-full" />
+              <div className="h-2 w-3/4 bg-white/10 rounded-full" />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Center: Processing Hub */}
-        <div className="flex flex-col items-center">
+        {/* Center: Processing Hub & Logo */}
+        <div className="flex flex-col items-center justify-center relative">
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="w-32 h-32 rounded-full border-2 border-dashed border-white/10 flex items-center justify-center relative"
+            animate={{ 
+              rotate: 360,
+              scale: [1, 1.05, 1]
+            }}
+            transition={{ 
+              rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+              scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="w-48 h-48 rounded-full border border-dashed border-white/20 flex items-center justify-center relative"
           >
-            <Database className="h-8 w-8 text-white/20" />
-            <motion.div 
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0 bg-primary/10 rounded-full blur-xl"
+            {/* Pulsing center hub */}
+            <div className="absolute inset-4 rounded-full bg-primary/5 border border-primary/20 backdrop-blur-sm" />
+            
+            <motion.div
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute inset-0 bg-primary/10 rounded-full blur-2xl"
             />
           </motion.div>
+
+          {/* Logo / Icon in the middle of the hub */}
+          <div className="absolute inset-0 flex items-center justify-center">
+             <div className="p-4 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-2xl">
+               <Send className="h-10 w-10 text-primary drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]" strokeWidth={2.5} />
+             </div>
+          </div>
         </div>
 
-        {/* Right Side: Multiple Smaller Investor Match Cards */}
-        <div className="w-1/3 flex flex-col gap-4 relative">
-          <h5 className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-4 text-right">Verified Matches</h5>
+        {/* Right Side: Investor Matches - Animated from side */}
+        <motion.div 
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="w-1/3 flex flex-col gap-4 relative"
+        >
+          <h5 className="text-white/30 text-[11px] font-black uppercase tracking-[0.5em] mb-4 text-right">Verified Capital</h5>
           
-          <div className="space-y-3">
+          <div className="space-y-4">
             {investors.map((investor, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ 
-                  opacity: activeStep === i ? 1 : 0.3,
-                  x: activeStep === i ? 0 : 20,
+                  opacity: activeStep === i ? 1 : 0.25,
+                  x: activeStep === i ? 0 : 30,
                   scale: activeStep === i ? 1.05 : 0.95
                 }}
-                className={`p-4 rounded-2xl border transition-all duration-500 ${
+                transition={{ duration: 0.6 }}
+                className={`p-5 rounded-3xl border transition-all duration-500 ${
                   activeStep === i 
-                  ? "bg-white/[0.08] border-primary/30 shadow-[0_0_30px_rgba(139,92,246,0.2)]" 
-                  : "bg-white/[0.02] border-white/5"
+                  ? "bg-white/[0.12] border-primary/40 shadow-[0_0_50px_-10px_rgba(139,92,246,0.3)] backdrop-blur-3xl" 
+                  : "bg-white/[0.03] border-white/5"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                      <User className="h-4 w-4 text-white/60" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                      <User className="h-5 w-5 text-white/80" />
                     </div>
                     <div>
-                      <h6 className="text-xs font-bold text-white">{investor.name}</h6>
-                      <p className="text-[8px] text-white/30 uppercase tracking-widest">{investor.firm}</p>
+                      <h6 className="text-sm font-bold text-white tracking-tight">{investor.name}</h6>
+                      <p className="text-[9px] text-white/40 uppercase tracking-[0.2em] font-black">{investor.firm}</p>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                      <CheckCircle2 className="h-2 w-2 text-emerald-500" />
-                      <span className="text-[8px] font-black text-emerald-500 uppercase">{investor.stage}</span>
+                  <div className="flex flex-col items-end gap-1.5">
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest">{investor.stage}</span>
                     </div>
                     {activeStep === i && (
                       <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-[8px] font-black text-yellow-500 flex items-center gap-0.5"
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-[9px] font-black text-yellow-500 flex items-center gap-1 bg-yellow-500/10 px-2 py-0.5 rounded-md border border-yellow-500/20"
                       >
-                        <DollarSign className="h-2 w-2" /> MATCH
+                        <DollarSign className="h-3 w-3" /> MATCHED
                       </motion.div>
                     )}
                   </div>
@@ -149,17 +176,20 @@ export function DataFlowAnimation() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Global Particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Global Enhanced Particles */}
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            className={`absolute w-1.5 h-1.5 rounded-full blur-[1px] ${
+              i % 3 === 0 ? 'bg-red-500/40' : i % 3 === 1 ? 'bg-yellow-400/40' : 'bg-primary/40'
+            }`}
             animate={{
-              x: [Math.random() * 1400 - 700, Math.random() * 1400 - 700],
-              y: [Math.random() * 1000 - 500, Math.random() * 1000 - 500],
-              opacity: [0, 0.5, 0],
+              x: [Math.random() * 1800 - 900, Math.random() * 1800 - 900],
+              y: [Math.random() * 1200 - 600, Math.random() * 1200 - 600],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0],
             }}
             transition={{ duration: Math.random() * 10 + 5, repeat: Infinity }}
           />
