@@ -140,68 +140,180 @@ export function OutreachCampaignSection() {
                   ))}
                 </div>
 
-                {/* 3. FINAL OUTPUT: Crafted Personalized DMs */}
-                <div className="w-full max-w-2xl mt-8 relative z-10 px-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      { 
-                        platform: "LinkedIn", 
-                        icon: Linkedin, 
-                        color: "text-[#0077b5]",
-                        bg: "bg-[#0077b5]/5",
-                        message: "Hey {name}, loved your recent post about {topic}. Your approach to {industry} is unique. Would love to...",
-                        tag: "Personalized Hook"
-                      },
-                      { 
-                        platform: "X / Twitter", 
-                        icon: XIcon, 
-                        color: "text-white",
-                        bg: "bg-white/5",
-                        message: "Caught your thread on {trend}. Great insights on {keyword}. I've been working on something similar...",
-                        tag: "Interest Based"
-                      }
-                    ].map((dm, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.2 }}
-                        className={`p-4 rounded-2xl ${dm.bg} border border-white/10 backdrop-blur-md relative overflow-hidden group`}
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-2">
-                            <dm.icon className={`h-4 w-4 ${dm.color}`} />
-                            <span className="text-[10px] font-bold text-white uppercase tracking-wider">{dm.platform}</span>
-                          </div>
-                          <span className="text-[8px] font-black text-primary uppercase tracking-tighter bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">{dm.tag}</span>
+                {/* 3. OUTPUT LAYER: The DM Synthesis Dashboard */}
+                <div className="relative w-full max-w-[400px]">
+                  <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-3xl shadow-[0_0_100px_rgba(139,92,246,0.15)] relative overflow-hidden group">
+                    {/* Glowing Accent */}
+                    <motion.div 
+                      animate={{ opacity: [0.1, 0.3, 0.1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="absolute -top-24 -right-24 w-48 h-48 bg-primary rounded-full blur-[80px] pointer-events-none" 
+                    />
+                    
+                    <div className="flex items-center justify-between mb-8 relative z-10">
+                      <div className="flex items-center gap-4">
+                        <motion.div 
+                          animate={{ 
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 5, -5, 0]
+                          }}
+                          transition={{ duration: 4, repeat: Infinity }}
+                          className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30"
+                        >
+                          <MessageSquare className="h-6 w-6 text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)]" />
+                        </motion.div>
+                        <div className="flex gap-2">
+                          <motion.div
+                            animate={{ opacity: [0.4, 1, 0.4] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
+                          </motion.div>
                         </div>
-                        
-                        <div className="relative">
-                          <p className="text-[11px] text-white/70 leading-relaxed font-medium italic">
-                            "{dm.message}"
-                          </p>
-                          {/* Typer effect animation placeholder */}
+                      </div>
+                    </div>
+                    
+                    {/* Live Synthesis Visualization - Chat Log Style */}
+                    <div className="space-y-4 relative z-10">
+                      <div className="bg-black/40 rounded-2xl p-6 border border-white/5 shadow-inner min-h-[160px] flex flex-col justify-end gap-3">
+                        {[
+                          { delay: 0, width: "70%", side: "left", color: "bg-primary/20" },
+                          { delay: 1.5, width: "50%", side: "right", color: "bg-emerald-500/10" },
+                          { delay: 3, width: "85%", side: "left", color: "bg-primary/30" }
+                        ].map((msg, i) => (
                           <motion.div 
-                            animate={{ opacity: [0, 1, 0] }}
-                            transition={{ duration: 0.8, repeat: Infinity }}
-                            className="inline-block w-1 h-3 bg-primary ml-1 align-middle"
-                          />
-                        </div>
+                            key={i}
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ 
+                              opacity: [0, 1, 1, 0],
+                              y: [10, 0, -10, -20],
+                              x: msg.side === 'left' ? [-10, 0] : [10, 0]
+                            }}
+                            transition={{ 
+                              duration: 5, 
+                              repeat: Infinity, 
+                              delay: msg.delay,
+                              ease: "easeInOut"
+                            }}
+                            className={`flex ${msg.side === 'left' ? 'justify-start' : 'justify-end'}`}
+                          >
+                            <div className={`h-2.5 rounded-full ${msg.color} border border-white/5 relative overflow-hidden`} style={{ width: msg.width }}>
+                              <motion.div 
+                                animate={{ x: ["-100%", "200%"] }}
+                                transition={{ duration: 2, repeat: Infinity, delay: msg.delay + 0.5 }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                              />
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
 
-                        {/* Synthesis Glow */}
-                        <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-primary/10 blur-2xl rounded-full group-hover:bg-primary/20 transition-colors" />
+                      <div className="flex items-center justify-between px-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Synthesis Active</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                           <div className="h-1 w-16 bg-white/5 rounded-full overflow-hidden">
+                              <motion.div 
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_10px_#10b981]"
+                              />
+                           </div>
+                           <Star className="h-3 w-3 text-emerald-400 animate-spin-slow" />
+                        </div>
+                      </div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                      >
+                        <CheckCircle2 className="h-3 w-3 text-emerald-400" />
+                        <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest text-center">
+                          Positive Engagement Secured via Personalized DM
+                        </span>
                       </motion.div>
-                    ))}
+                    </div>
+
+                    {/* Background Tech Detail */}
+                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.1),transparent)] pointer-events-none" />
                   </div>
-                  
-                  {/* Connection Line from Engine */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-px h-8 bg-gradient-to-b from-primary to-transparent" />
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Card 2 Removed per user request */}
+          {/* Card 2: Multi-Channel Execution */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="group relative aspect-[4/3] lg:aspect-square p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col"
+          >
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                  <Share2 className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-white uppercase tracking-tight">Omni-Channel Flow</h3>
+              </div>
+              <p className="text-sm text-white/40 leading-relaxed">
+                Coordinated outreach across Cold Email, LinkedIn, and X to maximize touchpoints and conversion.
+              </p>
+            </div>
+
+            <div className="flex-1 relative flex items-center justify-center py-4">
+              <div className="grid grid-cols-1 gap-4 w-full px-4">
+                {[
+                  { icon: Mail, label: "Cold Email", color: "text-rose-400", status: "High Priority" },
+                  { icon: Linkedin, label: "LinkedIn Connect", color: "text-blue-400", status: "Social Proof" },
+                  { icon: XIcon, label: "X Direct Message", color: "text-white", status: "Intent Signal" }
+                ].map((channel, i) => (
+                  <motion.div
+                    key={channel.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.2 }}
+                    className="relative flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all group/item overflow-hidden"
+                  >
+                    <div className="absolute top-0 left-0 w-1 h-full bg-primary/0 group-hover/item:bg-primary transition-colors" />
+                    
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                      <channel.icon className={`h-6 w-6 ${channel.color}`} />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex justify-between items-end mb-1">
+                        <span className="text-xs font-bold text-white">{channel.label}</span>
+                        <span className="text-[7px] font-black text-primary uppercase tracking-widest">{channel.status}</span>
+                      </div>
+                      <div className="relative h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: "0%" }}
+                          whileInView={{ width: "100%" }}
+                          transition={{ duration: 2, delay: 0.5 + i * 0.2 }}
+                          className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary to-primary/20"
+                        />
+                      </div>
+                    </div>
+
+                    <motion.div
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                    >
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500/60" />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Background Glow for Card 2 */}
+              <div className="absolute inset-0 bg-primary/5 rounded-full blur-[80px] -z-10" />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
