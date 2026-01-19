@@ -97,9 +97,9 @@ export function OutreachCampaignSection() {
               </div>
             </div>
 
-            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10 min-h-[500px]">
+            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10 min-h-[400px]">
               {/* Inspiration: Neural Scanning Storyboard */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center gap-16 px-4 z-10">
+              <div className="relative w-full h-full flex flex-col items-center justify-center gap-12 px-4 z-10">
                 
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-8 relative">
@@ -203,74 +203,106 @@ export function OutreachCampaignSection() {
                   </div>
                 </div>
 
-                {/* 3. OUTPUT LAYER: The DM Creation (Visualized as a clean message bubble) */}
-                <div className="relative w-full max-w-[300px]">
-                  <motion.div
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ delay: 1, duration: 0.8 }}
-                    className="bg-[#f0f2f5] rounded-3xl p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4)] border border-white/20 relative"
-                  >
-                    {/* Message Header */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center border-2 border-white">
-                        <User className="h-6 w-6 text-white" />
+                {/* 3. OUTPUT LAYER: The CRAFTING HYPER-PERSONALIZED DM */}
+                <div className="relative w-full max-w-[400px]">
+                  <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-3xl shadow-[0_0_100px_rgba(139,92,246,0.15)] relative overflow-hidden group">
+                    {/* Glowing Accent */}
+                    <motion.div 
+                      animate={{ opacity: [0.1, 0.3, 0.1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="absolute -top-24 -right-24 w-48 h-48 bg-primary rounded-full blur-[80px] pointer-events-none" 
+                    />
+                    
+                    <div className="flex items-center justify-between mb-8 relative z-10">
+                      <div className="flex items-center gap-4">
+                        <motion.div 
+                          animate={{ 
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 5, -5, 0]
+                          }}
+                          transition={{ duration: 4, repeat: Infinity }}
+                          className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30"
+                        >
+                          <MessageSquare className="h-6 w-6 text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)]" />
+                        </motion.div>
+                        <div>
+                          <motion.span 
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-xs font-black text-white uppercase tracking-[0.2em] block mb-1"
+                          >
+                            Crafting Hyper-Personalized DM
+                          </motion.span>
+                          <div className="flex gap-3">
+                            <span className="text-[8px] text-blue-400 uppercase font-bold tracking-widest animate-pulse">Neural Mapping...</span>
+                            <span className="text-[8px] text-amber-400 uppercase font-bold tracking-widest animate-pulse delay-700">Tone matching...</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <div className="h-2 w-24 bg-gray-200 rounded-full mb-2" />
-                        <div className="h-1.5 w-16 bg-gray-100 rounded-full" />
+                      <div className="text-right">
+                        <motion.span 
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                          className="text-xl font-black text-emerald-400 block leading-none"
+                        >
+                          99.4%
+                        </motion.span>
+                        <span className="text-[8px] text-emerald-400/60 uppercase font-black tracking-tighter">Human Score</span>
                       </div>
                     </div>
-
-                    {/* The "Neural" Message Content */}
-                    <div className="space-y-2 relative">
-                      <div className="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
-                        <div className="space-y-2">
+                    
+                    {/* Live Drafting Visualization */}
+                    <div className="space-y-4 relative z-10">
+                      <div className="bg-black/40 rounded-2xl p-4 border border-white/5 shadow-inner">
+                        <div className="flex gap-1.5 mb-4">
+                          <div className="w-2 h-2 rounded-full bg-rose-500/40" />
+                          <div className="w-2 h-2 rounded-full bg-amber-500/40" />
+                          <div className="w-2 h-2 rounded-full bg-emerald-500/40" />
+                        </div>
+                        <div className="space-y-2.5">
                           <motion.div 
                             initial={{ width: "0%" }}
-                            animate={{ width: "90%" }}
-                            transition={{ delay: 1.5, duration: 1 }}
-                            className="h-2 bg-primary/10 rounded-full" 
+                            animate={{ width: ["0%", "85%", "85%", "95%", "95%"] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            className="h-1.5 bg-gradient-to-r from-primary/40 to-primary/10 rounded-full" 
                           />
                           <motion.div 
                             initial={{ width: "0%" }}
-                            animate={{ width: "70%" }}
-                            transition={{ delay: 1.8, duration: 1 }}
-                            className="h-2 bg-primary/5 rounded-full" 
+                            animate={{ width: ["0%", "0%", "65%", "65%", "80%"] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            className="h-1.5 bg-gradient-to-r from-primary/30 to-primary/5 rounded-full" 
                           />
                           <motion.div 
                             initial={{ width: "0%" }}
-                            animate={{ width: "85%" }}
-                            transition={{ delay: 2.1, duration: 1 }}
-                            className="h-2 bg-primary/5 rounded-full" 
+                            animate={{ width: ["0%", "0%", "0%", "45%", "60%"] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            className="h-1.5 bg-gradient-to-r from-primary/20 to-primary/5 rounded-full" 
                           />
                         </div>
                       </div>
 
-                      {/* Sparkle Badge */}
-                      <div className="absolute -right-4 -top-6">
-                        <motion.div
-                          initial={{ scale: 0, rotate: -45 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ delay: 2.5, type: "spring" }}
-                          className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg transform rotate-6"
-                        >
-                          <Star className="h-7 w-7 text-white fill-white" />
-                        </motion.div>
+                      <div className="flex items-center justify-between px-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Synthesis Active</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                           <div className="h-1 w-16 bg-white/5 rounded-full overflow-hidden">
+                              <motion.div 
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_10px_#10b981]"
+                              />
+                           </div>
+                           <Star className="h-3 w-3 text-emerald-400 animate-spin-slow" />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Footer */}
-                    <div className="mt-6 flex justify-between items-center opacity-30">
-                      <div className="flex gap-1">
-                        <div className="w-4 h-4 rounded-full bg-gray-200" />
-                        <div className="w-4 h-4 rounded-full bg-gray-200" />
-                      </div>
-                      <Send className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </motion.div>
+                    {/* Background Tech Detail */}
+                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.1),transparent)] pointer-events-none" />
+                  </div>
                 </div>
-
               </div>
             </div>
 
