@@ -97,20 +97,7 @@ export function OutreachCampaignSection() {
             </div>
 
             <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10">
-              {/* Background Scanning Animation Inspired by Page 1 */}
-              <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8b5cf611_1px,transparent_1px),linear-gradient(to_bottom,#8b5cf611_1px,transparent_1px)] bg-[size:40px_40px]" />
-                <motion.div 
-                  animate={{ 
-                    y: ["0%", "100%", "0%"],
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_20px_rgba(139,92,246,0.5)]"
-                />
-              </div>
-
-              {/* Inspiration-based Mind Map Layout with Sequential Animation */}
+              {/* Inspiration-based Mind Map Layout with Page 1 Scanning Aesthetic */}
               <div className="relative w-full h-full flex flex-col items-center justify-start gap-8 px-4 z-10">
                 
                 {/* 1. Top Row: Platform Icons (Sources) */}
@@ -125,23 +112,13 @@ export function OutreachCampaignSection() {
                       key={platform.label}
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ 
-                        duration: 0.5,
-                        delay: i * 0.1,
-                        ease: "easeOut"
-                      }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
                       className="flex flex-col items-center gap-1.5"
                     >
                       <motion.div 
-                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        whileHover={{ scale: 1.1 }}
                         className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl ${platform.color} flex items-center justify-center shadow-lg border border-white/10 relative overflow-hidden`}
                       >
-                        {/* Internal Scanning Beam */}
-                        <motion.div 
-                          animate={{ x: ["-100%", "200%"] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                          className="absolute top-0 left-0 w-full h-full bg-white/20 skew-x-12"
-                        />
                         <platform.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${platform.iconColor} relative z-10`} />
                       </motion.div>
                       <span className="text-[10px] font-medium text-white/60 tracking-tight">{platform.label}</span>
@@ -149,27 +126,27 @@ export function OutreachCampaignSection() {
                   ))}
                 </div>
 
-                {/* 2. Middle Row: Signal Cards (Transformation) */}
+                {/* 2. Middle Row: Signal Cards (Active Scanning Phase) */}
                 <div className="relative flex justify-center gap-4 w-full h-24 lg:h-32 mt-4">
-                  {/* Connecting Lines with Flowing Particles */}
+                  {/* Dynamic Connecting Lines with Data Particles */}
                   <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
                     {[30, 43, 57, 70].map((x, i) => (
                       <g key={i}>
                         <motion.path
                           d={`M ${x}% 0 L ${x}% 20`}
-                          stroke="rgba(255,255,255,0.1)"
+                          stroke="rgba(139,92,246,0.1)"
                           strokeWidth="1"
                           strokeDasharray="4 4"
                           initial={{ pathLength: 0 }}
                           animate={{ pathLength: 1 }}
-                          transition={{ delay: 0.5, duration: 1 }}
+                          transition={{ duration: 1 }}
                         />
                         <motion.circle r="2" fill="#8b5cf6">
                           <animateMotion 
                             dur="2s" 
                             repeatCount="indefinite" 
                             path={`M ${x}% 0 L ${x}% 20`}
-                            begin={`${i * 0.2 + 0.5}s`}
+                            begin={`${i * 0.2}s`}
                           />
                         </motion.circle>
                       </g>
@@ -185,18 +162,21 @@ export function OutreachCampaignSection() {
                       key={card.label}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: card.delay, duration: 0.5 }}
+                      transition={{ delay: card.delay }}
                       className={`relative w-28 lg:w-36 p-3 rounded-xl border backdrop-blur-md shadow-xl flex flex-col items-center gap-2 overflow-hidden ${
                         card.highlight 
                         ? "bg-white/10 border-white/20 z-10 scale-105" 
                         : "bg-white/5 border-white/10"
                       }`}
                     >
-                      {/* Scanning effect on the cards themselves */}
+                      {/* Neural Scanning Beam - Inspired by Page 1 */}
                       <motion.div 
-                        animate={{ y: ["-100%", "200%"] }}
-                        transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }}
-                        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent z-0"
+                        animate={{ 
+                          y: ["-100%", "200%"],
+                          opacity: [0, 1, 0]
+                        }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
+                        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/40 to-transparent z-0 pointer-events-none"
                       />
                       
                       <span className="text-[8px] lg:text-[10px] font-bold text-white/80 uppercase tracking-tight text-center leading-tight relative z-10">
@@ -205,12 +185,12 @@ export function OutreachCampaignSection() {
                       <div className="w-full h-8 bg-white/5 rounded-md flex items-center justify-center overflow-hidden relative z-10">
                         <card.icon className={`h-4 w-4 ${card.highlight ? "text-amber-400" : "text-white/40"}`} />
                       </div>
+                      
                       {card.highlight && (
                         <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
                           <motion.div 
-                            animate={{ y: [0, -5, 0], opacity: [1, 0.5, 1] }}
+                            animate={{ y: [0, -3, 0], scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
-                            className="flex gap-1"
                           >
                             <Trophy className="h-3 w-3 text-amber-400 fill-amber-400" />
                           </motion.div>
@@ -220,46 +200,49 @@ export function OutreachCampaignSection() {
                   ))}
                 </div>
 
-                {/* 3. Bottom Area: The Resulting DM Card (Personalization) */}
-                <div className="relative w-full max-w-sm mt-4">
-                  {/* Flow Arrow with Pulse Effect */}
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                    <motion.div 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1, y: [0, 5, 0] }}
-                      transition={{ delay: 1.2, duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                    >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </motion.div>
-                  </div>
-
+                {/* AI Core Feed - Transitional Step */}
+                <div className="relative flex flex-col items-center">
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 w-16 h-16 border border-dashed border-primary/20 rounded-full"
+                  />
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center relative z-10 backdrop-blur-xl"
+                  >
+                    <Cpu className="h-5 w-5 text-primary" />
+                  </motion.div>
+                </div>
+
+                {/* 3. Bottom Area: The Generated DM (Output) */}
+                <div className="relative w-full max-w-sm">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ delay: 1.5, type: "spring", stiffness: 100 }}
+                    transition={{ delay: 1.5 }}
                     className="bg-[#f8f9ff] rounded-2xl p-5 shadow-2xl border border-primary/20 relative overflow-hidden"
                   >
-                    {/* Glowing Purple Border from Image */}
+                    {/* Final Success Glow */}
                     <motion.div 
-                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      animate={{ opacity: [0.2, 0.5, 0.2] }}
                       transition={{ duration: 3, repeat: Infinity }}
                       className="absolute inset-0 border-2 border-primary/40 rounded-2xl pointer-events-none" 
                     />
                     
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-white shadow-sm">
                         <User className="w-6 h-6 text-gray-400" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold text-gray-900 leading-none">Hi [Name]</span>
                           <div className="flex gap-0.5">
-                            {[1, 2, 3].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gray-300" />)}
+                            {[1, 2, 3].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gray-200" />)}
                           </div>
                         </div>
-                        <span className="text-[10px] text-gray-400 font-medium">Direct Message</span>
+                        <span className="text-[10px] text-gray-400 font-medium tracking-tight">Direct Message</span>
                       </div>
                     </div>
 
@@ -267,7 +250,7 @@ export function OutreachCampaignSection() {
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2.2, duration: 0.8 }}
+                        transition={{ delay: 2 }}
                         className="bg-primary/5 rounded-xl p-3 border border-primary/10"
                       >
                         <p className="text-[11px] text-gray-700 leading-relaxed font-medium">
@@ -277,37 +260,28 @@ export function OutreachCampaignSection() {
                         </p>
                       </motion.div>
 
-                      {/* Floating Sparkle Icon (The "Aha" moment) */}
+                      {/* AI Sparkle Node */}
                       <div className="absolute -right-2 top-0">
                         <motion.div
-                          initial={{ scale: 0, rotate: -45 }}
+                          initial={{ scale: 0 }}
                           animate={{ scale: 1, rotate: 6 }}
-                          transition={{ 
-                            delay: 2.5, 
-                            type: "spring", 
-                            stiffness: 200, 
-                            damping: 10 
-                          }}
-                          className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/40"
+                          transition={{ delay: 2.3, type: "spring" }}
+                          className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg"
                         >
                           <Star className="h-6 w-6 text-white fill-white" />
                         </motion.div>
                       </div>
 
-                      <div className="flex justify-end pr-2 opacity-50">
-                        <motion.div 
-                          whileHover={{ scale: 1.1, x: 5 }}
-                          className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center cursor-pointer"
-                        >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400">
+                      <div className="flex justify-end pr-1 opacity-40">
+                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                           </svg>
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
                 </div>
-
               </div>
             </div>
 
