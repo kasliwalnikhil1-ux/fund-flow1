@@ -3,13 +3,10 @@ import { useRef, useState, useEffect } from "react";
 import { 
   Linkedin, 
   Globe, 
-  CheckCircle2, 
   Search, 
   Database, 
   Cpu, 
   Zap, 
-  Filter, 
-  Layers,
   LineChart,
   Target,
   Layout,
@@ -37,16 +34,14 @@ const DollarSign = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// High-fidelity logos/icons for data sources
+// Updated data sources as per user request
 const dataSources = [
   { name: "LinkedIn", icon: Linkedin, color: "#0077B5" },
+  { name: "X", icon: XIcon, color: "#000000" },
   { name: "Sales Nav", icon: Search, color: "#00a0dc" },
   { name: "Apollo.io", icon: Target, color: "#ff8f00" },
+  { name: "Bright Data", icon: Globe, color: "#0071C5" },
   { name: "Crunchbase", icon: Database, color: "#0288d1" },
-  { name: "X", icon: XIcon, color: "#ffffff" },
-  { name: "PitchBook", icon: LineChart, color: "#e53935" },
-  { name: "Zendesk", icon: Layout, color: "#03363d" },
-  { name: "Sheets", icon: Table, color: "#34a853" },
 ];
 
 const industries = [
@@ -112,24 +107,22 @@ export function InvestorMatchingSection() {
                 exit={{ opacity: 0, scale: 1.1 }}
                 className="relative w-full h-full flex items-center justify-center"
               >
-                {/* Central Database Hub */}
-                <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(255,255,255,0.1)]">
-                  <div className="w-32 h-32 bg-emerald-500/20 rounded-full flex flex-col items-center justify-center gap-1 border border-emerald-500/30">
-                    <div className="w-16 h-8 bg-emerald-400/80 rounded-t-full rounded-b-md shadow-lg" />
-                    <div className="w-16 h-8 bg-emerald-500/80 rounded-md shadow-lg" />
-                    <div className="w-16 h-8 bg-emerald-600/80 rounded-b-full rounded-t-md shadow-lg" />
+                {/* Central Database Hub - Database Symbol */}
+                <div className="relative z-10 w-48 h-48 rounded-full bg-white flex items-center justify-center shadow-[0_0_100px_rgba(255,255,255,0.15)]">
+                  <div className="flex flex-col items-center justify-center text-emerald-600">
+                    <Database className="h-20 w-20" strokeWidth={2.5} />
                   </div>
                   <motion.div 
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
                     transition={{ duration: 3, repeat: Infinity }}
                     className="absolute inset-0 bg-emerald-400/10 rounded-full blur-2xl"
                   />
                 </div>
 
-                {/* Orbiting Source Icons (Image Inspiration) */}
+                {/* Orbiting Source Icons (Specific User-Requested Logos) */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
-                     const radius = 280;
+                     const radius = 260;
                      const angle = (i * 360) / dataSources.length;
                      return (
                        <motion.div
@@ -142,20 +135,20 @@ export function InvestorMatchingSection() {
                            transform: `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`
                          }}
                        >
-                         <div className="p-5 rounded-2xl bg-white shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer">
+                         <div className="p-5 rounded-2xl bg-white shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer border border-black/5">
                            <source.icon className="h-8 w-8 text-black" style={{ color: source.color === '#ffffff' ? '#000' : source.color }} />
                          </div>
-                         <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">{source.name}</span>
-                         <div className="absolute top-1/2 left-1/2 -z-10 w-[2px] h-[300px] bg-white/5 origin-bottom -translate-x-1/2 -translate-y-full" />
+                         <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
+                         <div className="absolute top-1/2 left-1/2 -z-10 w-[1px] h-[280px] bg-white/10 origin-bottom -translate-x-1/2 -translate-y-full" />
                        </motion.div>
                      );
                    })}
-                   <div className="absolute w-[560px] h-[560px] border border-dashed border-white/5 rounded-full" />
-                   <div className="absolute w-[400px] h-[400px] border border-dashed border-white/5 rounded-full" />
+                   {/* Orbit Rings */}
+                   <div className="absolute w-[520px] h-[520px] border border-dashed border-white/5 rounded-full" />
                 </div>
                 
                 <div className="absolute bottom-0 text-primary font-black uppercase tracking-[0.4em] text-xs">
-                   Phase 1: Multi-Source Data Collection
+                   Phase 1: Multi-Source Intelligence Gathering
                 </div>
               </motion.div>
             )}
