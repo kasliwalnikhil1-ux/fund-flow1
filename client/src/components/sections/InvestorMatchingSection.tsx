@@ -123,6 +123,8 @@ export function InvestorMatchingSection() {
                    {dataSources.map((source, i) => {
                      const radius = 260;
                      const angle = (i * 360) / dataSources.length;
+                     const angleRad = (angle - 90) * Math.PI / 180;
+                     
                      return (
                        <div key={source.name} className="absolute flex flex-col items-center justify-center">
                          <motion.div
@@ -140,24 +142,46 @@ export function InvestorMatchingSection() {
                            <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mt-1">{source.name}</span>
                          </motion.div>
 
-                         {/* Moving Data Particles toward Database */}
+                         {/* Moving Data Particles toward Database (FIXED PATH) */}
                          <motion.div
-                            initial={{ x: 0, y: 0, opacity: 0 }}
+                            initial={{ 
+                              x: Math.cos(angleRad) * radius, 
+                              y: Math.sin(angleRad) * radius, 
+                              opacity: 0 
+                            }}
                             animate={{ 
-                              x: Math.sin(angle * Math.PI / 180) * -radius,
-                              y: Math.cos(angle * Math.PI / 180) * radius,
+                              x: [Math.cos(angleRad) * radius, 0],
+                              y: [Math.sin(angleRad) * radius, 0],
                               opacity: [0, 1, 0]
                             }}
                             transition={{ 
-                              duration: 2, 
+                              duration: 1.5, 
                               repeat: Infinity, 
-                              delay: i * 0.3,
-                              ease: "linear" 
+                              delay: i * 0.4,
+                              ease: "easeIn" 
                             }}
-                            className="absolute w-2 h-2 bg-emerald-400 rounded-full blur-[2px]"
-                            style={{
-                              transform: `rotate(${angle}deg) translateY(-${radius}px)`
+                            className="absolute w-3 h-3 bg-emerald-400 rounded-full blur-[2px] shadow-[0_0_10px_#34d399]"
+                         />
+                         
+                         {/* Additional particle for density */}
+                         <motion.div
+                            initial={{ 
+                              x: Math.cos(angleRad) * radius, 
+                              y: Math.sin(angleRad) * radius, 
+                              opacity: 0 
                             }}
+                            animate={{ 
+                              x: [Math.cos(angleRad) * radius, 0],
+                              y: [Math.sin(angleRad) * radius, 0],
+                              opacity: [0, 1, 0]
+                            }}
+                            transition={{ 
+                              duration: 1.5, 
+                              repeat: Infinity, 
+                              delay: i * 0.4 + 0.75,
+                              ease: "easeIn" 
+                            }}
+                            className="absolute w-2 h-2 bg-emerald-200 rounded-full blur-[1px]"
                          />
                        </div>
                      );
