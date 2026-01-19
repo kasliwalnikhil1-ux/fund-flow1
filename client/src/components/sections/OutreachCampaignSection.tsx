@@ -162,26 +162,26 @@ export function OutreachCampaignSection() {
                           <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
 
-                          <motion.div
-                            key={`signal-${i}`}
-                            animate={{ 
-                              y: [0, -15, 0],
-                              opacity: [0, 1, 0],
-                              scale: [0.8, 1, 0.8]
-                            }}
-                            transition={{ 
-                              duration: 4,
-                              repeat: Infinity,
-                              delay: i * 0.7
-                            }}
-                            className="absolute -top-10 left-0 whitespace-nowrap"
-                          >
-                            <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                              <span className="text-[6px] font-black text-white uppercase tracking-wider">
-                                {node.signals[0]}
-                              </span>
-                            </div>
-                          </motion.div>
+                        <motion.div
+                          key={`signal-${i}`}
+                          animate={{ 
+                            y: [0, -15, 0],
+                            opacity: [0, 1, 0],
+                            scale: [0.8, 1, 0.8]
+                          }}
+                          transition={{ 
+                            duration: 4,
+                            repeat: Infinity,
+                            delay: i * 0.7
+                          }}
+                          className="absolute -top-10 left-0 whitespace-nowrap"
+                        >
+                          <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                            <span className="text-[6px] font-black text-white uppercase tracking-wider">
+                              {node.signals[0]}
+                            </span>
+                          </div>
+                        </motion.div>
                       </motion.div>
                     ))}
                   </div>
@@ -240,8 +240,7 @@ export function OutreachCampaignSection() {
                         <animate attributeName="stroke-dashoffset" from="40" to="0" dur="1s" repeatCount="indefinite" />
                       </motion.path>
                       
-                      {/* Personalized Package */}
-                      <motion.rect width="14" height="8" rx="2" fill="#10b981" shadow-lg>
+                      <motion.rect width="14" height="8" rx="2" fill="#10b981">
                         <animateMotion 
                           dur="1s" 
                           repeatCount="indefinite" 
@@ -253,38 +252,6 @@ export function OutreachCampaignSection() {
 
                   <div className="flex-1 h-full" /> 
                 </div>
-              </div>
-            </div>
-
-                {/* Flowing Data Stream Particles - Enhanced Path Visualization */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
-                  <defs>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {/* Output from Core to Draft - Enhanced Glow */}
-                  <g filter="url(#glow)">
-                    <motion.path
-                      d="M 50% 50% Q 50% 70%, 50% 85%"
-                      fill="none"
-                      stroke="url(#output-gradient)"
-                      strokeWidth="3"
-                      strokeDasharray="6 6"
-                    >
-                      <animate attributeName="stroke-dashoffset" from="30" to="0" dur="1.5s" repeatCount="indefinite" />
-                    </motion.path>
-                    <linearGradient id="output-gradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#10b981" />
-                    </linearGradient>
-                  </g>
-                </svg>
               </div>
             </div>
 
