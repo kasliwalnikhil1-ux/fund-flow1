@@ -81,109 +81,57 @@ export function OutreachCampaignSection() {
               </p>
             </div>
 
-            <div className="flex-1 relative w-full h-full flex items-center justify-center">
-              {/* Central AI Agent */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40">
-                <motion.div
-                  animate={{ 
-                    boxShadow: ["0 0 20px rgba(139,92,246,0.1)", "0 0 60px rgba(139,92,246,0.4)", "0 0 20px rgba(139,92,246,0.1)"]
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-primary/10 border border-primary/30 flex flex-col items-center justify-center backdrop-blur-xl relative"
-                >
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 border border-dashed border-primary/30 rounded-full"
-                  />
-                  <Cpu className="h-8 w-8 lg:h-10 lg:w-10 text-primary mb-1 animate-pulse" />
-                  <span className="text-[7px] lg:text-[8px] font-black text-primary uppercase tracking-widest">AI Agent</span>
-                </motion.div>
-              </div>
-
-              {/* Sources - Left Side */}
-              <div className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 flex flex-col gap-6 lg:gap-10 z-20">
-                {[
-                  { icon: Globe, color: "text-blue-400", label: "Website" },
-                  { icon: Linkedin, color: "text-blue-600", label: "LinkedIn" },
-                  { icon: XIcon, color: "text-white", label: "X" },
-                  { icon: Facebook, color: "text-blue-500", label: "Facebook" }
-                ].map((source, i) => (
-                  <motion.div
-                    key={source.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md relative"
-                  >
-                    <source.icon className={`h-5 w-5 lg:h-6 lg:w-6 ${source.color}`} />
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Neural Pipes & Flowing Icons */}
+            <div className="flex-1 relative w-full h-full flex items-center justify-center min-h-[300px]">
+              {/* Mind Map Connection Lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
                 <defs>
-                  <linearGradient id="pipe-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient id="mind-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(139, 92, 246, 0.4)" />
-                    <stop offset="100%" stopColor="rgba(139, 92, 246, 0.1)" />
+                    <stop offset="100%" stopColor="rgba(139, 92, 246, 0.8)" />
                   </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
                 </defs>
                 
+                {/* Lines from Sources to AI Agent */}
                 {[0, 1, 2, 3].map((i) => {
-                  // Approximate coordinates for center of card
-                  // Left Sources are at x=~15%, y=~20,40,60,80%
-                  // AI Agent is at x=50%, y=50%
-                  const startX = 60; // Approximate absolute px from left
-                  const startY = 85 + (i * 60); // Approximate vertical spacing
-                  const endX = 180; // Approximate center
-                  const endY = 175; // Center height
-                  
-                  // Using percentages for better responsive fit
-                  const path = `M 15% ${20 + i * 20}% C 35% ${20 + i * 20}%, 40% 50%, 50% 50%`;
-                  
+                  const startY = 20 + i * 20;
+                  const path = `M 15% ${startY}% C 25% ${startY}%, 35% 50%, 50% 50%`;
                   return (
-                    <g key={i}>
-                      {/* Pipe Background */}
+                    <g key={`in-${i}`}>
                       <motion.path
                         d={path}
-                        stroke="rgba(139, 92, 246, 0.05)"
-                        strokeWidth="10"
+                        stroke="rgba(139, 92, 246, 0.2)"
+                        strokeWidth="1.5"
                         fill="none"
-                        strokeLinecap="round"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        transition={{ duration: 1.5, delay: i * 0.1 }}
                       />
-                      {/* Animated Pipe Glow */}
-                      <motion.path
-                        d={path}
-                        stroke="url(#pipe-grad)"
-                        strokeWidth="2"
-                        fill="none"
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        whileInView={{ pathLength: 1, opacity: 1 }}
-                        transition={{ duration: 1.5, delay: i * 0.2 }}
-                      />
-                      
-                      {/* Flowing Data Icons */}
+                      {/* Flowing Data Particles */}
                       {[0, 1].map((p) => {
                         const FlowIcon = flowIcons[(i + p) % flowIcons.length];
                         return (
                           <motion.g key={p}>
-                            <foreignObject width="24" height="24" x="-12" y="-12">
+                            <foreignObject width="20" height="20" x="-10" y="-10">
                               <motion.div
                                 animate={{ 
-                                  opacity: [0, 1, 1, 0],
-                                  scale: [0.6, 1, 1, 0.6],
-                                  rotate: [0, 360]
+                                  opacity: [0, 1, 0],
+                                  scale: [0.5, 1, 0.5]
                                 }}
                                 transition={{ 
                                   duration: 3, 
                                   repeat: Infinity, 
-                                  delay: p * 1.5 + i * 0.4,
-                                  ease: "linear"
+                                  delay: p * 1.5 + i * 0.4
                                 }}
-                                className="w-6 h-6 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-lg flex items-center justify-center shadow-lg"
+                                className="w-5 h-5 bg-primary/20 backdrop-blur-sm border border-primary/40 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20"
                               >
-                                <FlowIcon className="h-3 w-3 text-primary" />
+                                <FlowIcon className="h-2.5 w-2.5 text-primary" />
                               </motion.div>
                               <animateMotion
                                 dur="3s"
@@ -198,34 +146,96 @@ export function OutreachCampaignSection() {
                     </g>
                   );
                 })}
+
+                {/* Main Mind-Map Branch: AI Agent to Drafting DM */}
+                <motion.path
+                  d="M 50% 50% C 65% 50%, 75% 50%, 85% 50%"
+                  stroke="url(#mind-grad)"
+                  strokeWidth="3"
+                  fill="none"
+                  filter="url(#glow)"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                />
+                
+                {/* Intelligence Flow from Brain to Card */}
+                <motion.circle
+                  r="3"
+                  fill="#8b5cf6"
+                  filter="url(#glow)"
+                >
+                  <animateMotion
+                    dur="2s"
+                    repeatCount="indefinite"
+                    path="M 50% 50% C 65% 50%, 75% 50%, 85% 50%"
+                  />
+                </motion.circle>
               </svg>
 
-              {/* Output: Personalized DM - Right Side */}
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
+              {/* Sources - Left Side (Mind Map Nodes) */}
+              <div className="absolute left-[10%] top-1/2 -translate-y-1/2 flex flex-col gap-6 lg:gap-10 z-20">
+                {[
+                  { icon: Globe, color: "text-blue-400" },
+                  { icon: Linkedin, color: "text-blue-600" },
+                  { icon: XIcon, color: "text-white" },
+                  { icon: Facebook, color: "text-blue-500" }
+                ].map((source, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ type: "spring", delay: i * 0.1 }}
+                    className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md relative z-20 hover:border-primary transition-colors cursor-pointer"
+                  >
+                    <source.icon className={`h-5 w-5 lg:h-6 lg:w-6 ${source.color}`} />
+                    <div className="absolute -inset-1 bg-primary/10 rounded-full blur-sm -z-10" />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Central AI Agent (Main Hub) */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  animate={{ 
+                    boxShadow: ["0 0 20px rgba(139,92,246,0.1)", "0 0 60px rgba(139,92,246,0.5)", "0 0 20px rgba(139,92,246,0.1)"]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-primary/20 border border-primary/40 flex flex-col items-center justify-center backdrop-blur-xl relative"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 border border-dashed border-primary/40 rounded-full"
+                  />
+                  <Cpu className="h-8 w-8 lg:h-10 lg:w-10 text-primary mb-1 animate-pulse" />
+                  <span className="text-[7px] lg:text-[8px] font-black text-primary uppercase tracking-[0.3em]">Neural Hub</span>
+                </motion.div>
+              </div>
+
+              {/* Output: Personalized DM (Final Node) */}
+              <div className="absolute left-[85%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="w-48 lg:w-56 bg-white/[0.05] border border-white/10 rounded-2xl p-4 lg:p-6 backdrop-blur-xl shadow-2xl relative"
+                  className="w-48 lg:w-56 bg-white/[0.03] border border-white/10 rounded-[2rem] p-5 lg:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden"
                 >
-                  <div className="flex items-center gap-2 lg:gap-3 mb-4">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-primary/30" />
+                  <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
                       <MessageSquare className="h-4 w-4 text-emerald-400" />
                     </div>
                     <div>
-                      <span className="text-[8px] lg:text-[9px] font-black text-emerald-400 uppercase tracking-widest block leading-none">Drafting DM</span>
-                      <span className="text-[6px] lg:text-[7px] text-white/40 uppercase tracking-tighter">AI Verification</span>
+                      <span className="text-[8px] lg:text-[9px] font-black text-emerald-400 uppercase tracking-widest block leading-none">Personalized DM</span>
+                      <span className="text-[6px] lg:text-[7px] text-white/40 uppercase tracking-tighter">Drafted & Verified</span>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                      <motion.div 
-                        animate={{ x: ["-100%", "100%"] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="h-full w-full bg-primary/20"
-                      />
-                    </div>
-                    <div className="h-1.5 lg:h-2 w-4/5 bg-white/5 rounded-full" />
-                    <div className="h-1.5 lg:h-2 w-3/4 bg-white/5 rounded-full" />
+                    <div className="h-1.5 w-full bg-white/5 rounded-full" />
+                    <div className="h-1.5 w-4/5 bg-white/5 rounded-full" />
+                    <div className="h-1.5 w-2/3 bg-primary/20 rounded-full" />
                   </div>
                 </motion.div>
               </div>
