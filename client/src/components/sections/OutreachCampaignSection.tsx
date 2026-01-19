@@ -204,97 +204,115 @@ export function OutreachCampaignSection() {
                 </div>
 
                 {/* 3. OUTPUT LAYER: The DM Synthesis Dashboard */}
-                <div className="relative w-full max-w-[400px]">
-                  <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-3xl shadow-[0_0_100px_rgba(139,92,246,0.15)] relative overflow-hidden group">
+                <div className="relative w-full max-w-[500px]">
+                  <div className="relative overflow-hidden group">
                     {/* Glowing Accent */}
                     <motion.div 
-                      animate={{ opacity: [0.1, 0.3, 0.1] }}
+                      animate={{ opacity: [0.1, 0.2, 0.1] }}
                       transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute -top-24 -right-24 w-48 h-48 bg-primary rounded-full blur-[80px] pointer-events-none" 
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 rounded-full blur-[120px] pointer-events-none" 
                     />
                     
-                    <div className="flex items-center justify-between mb-8 relative z-10">
-                      <div className="flex items-center gap-4">
-                        <motion.div 
-                          animate={{ 
-                            scale: [1, 1.2, 1],
-                            rotate: [0, 5, -5, 0]
-                          }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                          className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30"
-                        >
-                          <MessageSquare className="h-6 w-6 text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)]" />
-                        </motion.div>
-                        <div className="flex gap-2">
-                          <motion.div
-                            animate={{ opacity: [0.4, 1, 0.4] }}
+                    <div className="flex items-center justify-between mb-10 relative z-10 px-6">
+                      <div className="flex items-center gap-5">
+                        <div className="relative">
+                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-emerald-500 p-[1px]">
+                            <div className="w-full h-full rounded-full bg-[#050505] flex items-center justify-center overflow-hidden">
+                              <div className="w-full h-full bg-primary/10 flex items-center justify-center">
+                                <span className="text-lg font-bold text-primary">VC</span>
+                              </div>
+                            </div>
+                          </div>
+                          <motion.div 
+                            animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
-                            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
-                          </motion.div>
+                            className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-black" 
+                          />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-white tracking-tight leading-none mb-1.5">Investor Matching</h4>
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                              <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+                              <span className="text-[7px] font-black text-emerald-400 uppercase tracking-widest">Positive Engagement Locked</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      <motion.div
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
+                      >
+                        <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Synthesis in Progress</span>
+                      </motion.div>
                     </div>
                     
                     {/* Live Synthesis Visualization - Chat Log Style */}
-                    <div className="space-y-4 relative z-10 px-4">
-                      <div className="bg-black/40 rounded-2xl p-6 border border-white/5 shadow-inner min-h-[180px] flex flex-col justify-end gap-4">
+                    <div className="relative z-10 px-6 flex flex-col gap-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
+                          <span className="text-[9px] font-black text-white/60 uppercase tracking-[0.3em]">Live Synthesis Active</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                           <div className="h-1 w-24 bg-white/5 rounded-full overflow-hidden">
+                              <motion.div 
+                                animate={{ x: ["-100%", "100%"] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_15px_#10b981]"
+                              />
+                           </div>
+                           <motion.div
+                             animate={{ rotate: 360 }}
+                             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                           >
+                             <Star className="h-4 w-4 text-emerald-400" />
+                           </motion.div>
+                        </div>
+                      </div>
+
+                      <div className="min-h-[220px] flex flex-col justify-end gap-5">
                         {[0, 1, 2, 3].map((i) => (
                           <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                            initial={{ opacity: 0, y: 30, scale: 0.9 }}
                             animate={{ 
                               opacity: [0, 1, 1, 0],
-                              y: [20, 0, -20, -40],
+                              y: [30, 0, -30, -60],
                               scale: [0.9, 1, 1, 0.95]
                             }}
                             transition={{
-                              duration: 5,
+                              duration: 6,
                               repeat: Infinity,
-                              delay: i * 1.25,
-                              ease: "easeInOut"
+                              delay: i * 1.5,
+                              ease: [0.16, 1, 0.3, 1]
                             }}
                             className={`flex ${i % 2 === 0 ? 'justify-start' : 'justify-end'}`}
                           >
                             <div className={`
-                              h-3 rounded-full 
-                              ${i % 2 === 0 
-                                ? 'bg-primary/20 w-3/4 rounded-bl-none' 
-                                : 'bg-emerald-500/10 w-1/2 rounded-br-none'} 
-                              border border-white/5 relative overflow-hidden
+                              flex flex-col gap-2 max-w-[80%]
+                              ${i % 2 === 0 ? 'items-start' : 'items-end'}
                             `}>
-                              <motion.div
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                              />
+                              <div className={`
+                                h-3 rounded-full 
+                                ${i % 2 === 0 
+                                  ? 'bg-primary/20 w-32 rounded-bl-none' 
+                                  : 'bg-emerald-500/20 w-24 rounded-br-none'} 
+                                border border-white/5 relative overflow-hidden
+                              `}>
+                                <motion.div
+                                  animate={{ x: ["-100%", "200%"] }}
+                                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.4 }}
+                                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                                />
+                              </div>
+                              <div className={`h-1.5 rounded-full bg-white/5 ${i % 2 === 0 ? 'w-20' : 'w-16'}`} />
                             </div>
                           </motion.div>
                         ))}
                       </div>
-
-                      <div className="flex items-center justify-between px-2 mt-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Synthesis Active</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                           <div className="h-1 w-16 bg-white/5 rounded-full overflow-hidden">
-                              <motion.div 
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                                className="h-full w-full bg-emerald-500/40 shadow-[0_0_10px_#10b981]"
-                              />
-                           </div>
-                           <Star className="h-3 w-3 text-emerald-400 animate-spin-slow" />
-                        </div>
-                      </div>
                     </div>
-
-                    {/* Background Tech Detail */}
-                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.1),transparent)] pointer-events-none" />
                   </div>
                 </div>
               </div>
