@@ -213,8 +213,8 @@ export function OutreachCampaignSection() {
                             d={`M ${startX}% ${startY}% L 50% 50%`}
                             fill="none"
                             stroke="url(#line-grad)"
-                            strokeWidth="1.5"
-                            strokeDasharray="4 4"
+                            strokeWidth="2"
+                            strokeDasharray="6 4"
                           />
                           <motion.circle r="3" fill="#8b5cf6">
                             <animateMotion 
@@ -230,21 +230,21 @@ export function OutreachCampaignSection() {
                     {/* Output: Synapse AI -> Drafting Dashboard */}
                     <g filter="url(#glow-line)">
                       <motion.path
-                        d="M 50% 50% L 50% 88%"
+                        d="M 50% 50% L 50% 85%"
                         fill="none"
                         stroke="url(#output-path-grad)"
                         strokeWidth="3"
-                        strokeDasharray="8 8"
+                        strokeDasharray="10 6"
                       >
-                        <animate attributeName="stroke-dashoffset" from="16" to="0" dur="0.8s" repeatCount="indefinite" />
+                        <animate attributeName="stroke-dashoffset" from="32" to="0" dur="1s" repeatCount="indefinite" />
                       </motion.path>
                       
                       {/* Processed Data Packet */}
-                      <motion.rect width="10" height="6" rx="2" fill="#10b981">
+                      <motion.rect width="12" height="6" rx="2" fill="#10b981">
                         <animateMotion 
                           dur="1.2s" 
                           repeatCount="indefinite" 
-                          path="M 50% 50% L 50% 88%"
+                          path="M 50% 50% L 50% 85%"
                         />
                       </motion.rect>
                     </g>
