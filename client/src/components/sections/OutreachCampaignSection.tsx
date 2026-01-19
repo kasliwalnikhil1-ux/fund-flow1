@@ -112,25 +112,26 @@ export function OutreachCampaignSection() {
                   <motion.div
                     animate={{ 
                       scale: [1, 1.05, 1],
-                      boxShadow: ["0 0 40px rgba(139,92,246,0.1)", "0 0 80px rgba(139,92,246,0.3)", "0 0 40px rgba(139,92,246,0.1)"]
+                      boxShadow: ["0 0 40px rgba(139,92,246,0.1)", "0 0 100px rgba(139,92,246,0.5)", "0 0 40px rgba(139,92,246,0.1)"]
                     }}
                     transition={{ duration: 4, repeat: Infinity }}
-                    className="w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-b from-primary/20 to-primary/5 border border-primary/30 backdrop-blur-3xl flex flex-col items-center justify-center p-4 text-center"
+                    className="w-32 h-32 lg:w-48 lg:h-48 rounded-full bg-gradient-to-b from-primary/30 to-primary/5 border border-primary/40 backdrop-blur-3xl flex flex-col items-center justify-center p-4 text-center relative overflow-hidden"
                   >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2)_0%,transparent_70%)]" />
                     <div className="relative">
-                      <Cpu className="h-12 w-12 lg:h-16 lg:w-16 text-primary mb-2 opacity-80" />
+                      <Cpu className="h-12 w-12 lg:h-20 lg:w-20 text-primary mb-2 opacity-90 filter drop-shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
                       <motion.div 
-                        animate={{ opacity: [0, 1, 0] }}
+                        animate={{ opacity: [0, 0.5, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 blur-xl bg-primary/40"
+                        className="absolute inset-0 blur-2xl bg-primary/60"
                       />
                     </div>
-                    <span className="text-[10px] font-black text-white uppercase tracking-[0.4em] mb-1">AI CORE</span>
-                    <div className="h-1 w-12 bg-primary/30 rounded-full overflow-hidden">
+                    <span className="text-[10px] lg:text-[12px] font-black text-white uppercase tracking-[0.5em] mb-1 z-10">AI CORE</span>
+                    <div className="h-1 w-16 bg-primary/30 rounded-full overflow-hidden z-10">
                       <motion.div 
                         animate={{ x: ["-100%", "100%"] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
-                        className="h-full w-full bg-primary"
+                        className="h-full w-full bg-primary shadow-[0_0_10px_#8b5cf6]"
                       />
                     </div>
                   </motion.div>
@@ -143,14 +144,14 @@ export function OutreachCampaignSection() {
                   { icon: XIcon, label: "X", angle: 180, color: "text-white" },
                   { icon: Facebook, label: "FB", angle: 270, color: "text-blue-500" }
                 ].map((node, i) => {
-                  const radius = typeof window !== 'undefined' && window.innerWidth < 1024 ? 120 : 150;
+                  const radius = typeof window !== 'undefined' && window.innerWidth < 1024 ? 120 : 170;
                   return (
                     <motion.div
                       key={node.label}
                       animate={{ 
                         rotate: 360,
                       }}
-                      transition={{ duration: 20 + i * 5, repeat: Infinity, ease: "linear" }}
+                      transition={{ duration: 25 + i * 5, repeat: Infinity, ease: "linear" }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <motion.div 
@@ -159,15 +160,15 @@ export function OutreachCampaignSection() {
                       >
                         <motion.div
                           animate={{ rotate: -360 }}
-                          transition={{ duration: 20 + i * 5, repeat: Infinity, ease: "linear" }}
-                          className="w-12 h-12 lg:w-14 lg:h-14 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-2xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/40 transition-colors"
+                          transition={{ duration: 25 + i * 5, repeat: Infinity, ease: "linear" }}
+                          className="w-14 h-14 lg:w-16 lg:h-16 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-center shadow-2xl group-hover:border-primary/60 transition-all duration-500 hover:scale-110"
                         >
-                          <node.icon className={`h-5 w-5 lg:h-6 lg:w-6 ${node.color} mb-1`} />
-                          <span className="text-[6px] font-black text-white/40 uppercase tracking-widest">{node.label}</span>
+                          <node.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${node.color} mb-1.5`} />
+                          <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
                         
                         {/* Connecting Line to Core */}
-                        <div className="absolute top-1/2 right-full w-[100px] h-[1px] bg-gradient-to-l from-primary/20 to-transparent -translate-y-1/2 -z-10" />
+                        <div className="absolute top-1/2 right-full w-[120px] h-[1px] bg-gradient-to-l from-primary/30 to-transparent -translate-y-1/2 -z-10" />
                       </motion.div>
                     </motion.div>
                   );
@@ -190,24 +191,37 @@ export function OutreachCampaignSection() {
 
             {/* Bottom Status Panel */}
             <div className="relative z-20 p-8 pt-0">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-emerald-400" />
-                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">Generated Output</span>
+              <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                      <MessageSquare className="h-4 w-4 text-emerald-400" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-white uppercase tracking-wider block leading-none mb-1">PROCESSED OUTPUT</span>
+                      <span className="text-[7px] text-white/30 uppercase font-black tracking-widest">Neural Calibration Active</span>
+                    </div>
                   </div>
-                  <span className="text-[8px] font-black text-primary uppercase tracking-widest">99.4% Match</span>
+                  <div className="text-right">
+                    <span className="text-[12px] font-black text-emerald-400 block leading-none mb-1">99.4%</span>
+                    <span className="text-[6px] text-emerald-400/40 uppercase font-black tracking-tighter">Match Accuracy</span>
+                  </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="flex gap-2">
-                    <div className="h-1.5 w-1/3 bg-primary/40 rounded-full" />
-                    <div className="h-1.5 w-2/3 bg-white/10 rounded-full" />
+                    <div className="h-2 w-1/3 bg-primary/30 rounded-full overflow-hidden">
+                       <motion.div 
+                         animate={{ x: ["-100%", "100%"] }}
+                         transition={{ duration: 1, repeat: Infinity }}
+                         className="h-full w-full bg-primary"
+                       />
+                    </div>
+                    <div className="h-2 w-2/3 bg-white/10 rounded-full" />
                   </div>
-                  <div className="h-1.5 w-full bg-white/5 rounded-full" />
+                  <div className="h-2 w-full bg-white/5 rounded-full" />
                 </div>
               </div>
             </div>
-          </motion.div>
           </motion.div>
 
           {/* Card 2: Multi-Channel Execution */}
