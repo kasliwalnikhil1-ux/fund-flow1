@@ -15,7 +15,7 @@ import {
 
 // Local assets from attached_assets
 import linkedinLogo from "@assets/icons8-linkedin-48_1768851532438.png";
-import xLogo from "@assets/icons8-x-50_1768851727235.png";
+import xLogo from "@assets/icons8-x-48_1768852504235.png";
 import salesNavLogo from "@assets/download_(1)_1768851727203.jpeg";
 import apolloLogo from "@assets/download_(1)_1768851727228.png";
 import crunchbaseLogo from "@assets/download_1768851727230.jpeg";
@@ -105,7 +105,7 @@ export function InvestorMatchingSection() {
                 exit={{ opacity: 0, scale: 1.05 }}
                 className="relative w-full h-full flex items-center justify-center"
               >
-                {/* Central Database Hub - More integrated, less "huge white block" */}
+                {/* Central Database Hub */}
                 <div className="relative z-10 w-32 h-32 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
                   <div className="flex flex-col items-center justify-center text-primary/80">
                     <Database className="h-12 w-12" strokeWidth={1.5} />
@@ -117,10 +117,10 @@ export function InvestorMatchingSection() {
                   />
                 </div>
 
-                {/* Orbiting Source Icons - Closer and more muted */}
+                {/* Orbiting Source Icons */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
-                     const radius = 200; // Closer radius
+                     const radius = 200; 
                      const angle = (i * 360) / dataSources.length;
                      const angleRad = (angle - 90) * Math.PI / 180;
                      
@@ -141,14 +141,13 @@ export function InvestorMatchingSection() {
                                <img 
                                  src={source.logo} 
                                  alt={source.name} 
-                                 className="w-8 h-8 object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
+                                 className={`w-8 h-8 object-contain opacity-70 group-hover:opacity-100 transition-opacity ${source.name === 'Apollo.io' ? 'scale-125' : ''}`} 
                                />
                              </div>
-                             <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">{source.name}</span>
                            </div>
                          </motion.div>
 
-                         {/* Moving Data Particles toward Database (SOFTER) */}
+                         {/* Moving Data Particles toward Database */}
                          <motion.div
                             initial={{ x, y, opacity: 0 }}
                             animate={{ 
@@ -167,7 +166,6 @@ export function InvestorMatchingSection() {
                        </div>
                      );
                    })}
-                   {/* Subtle Orbit Ring */}
                    <div className="absolute w-[400px] h-[400px] border border-white/[0.03] rounded-full" />
                 </div>
                 
