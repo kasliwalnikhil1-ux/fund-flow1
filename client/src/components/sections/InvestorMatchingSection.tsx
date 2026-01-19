@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Database, 
   Cpu, 
@@ -8,7 +8,10 @@ import {
   CheckCircle2,
   Search,
   ZapIcon,
-  ShieldCheck
+  ShieldCheck,
+  Globe,
+  Linkedin,
+  Facebook
 } from "lucide-react";
 
 // Local assets
@@ -18,6 +21,12 @@ import salesNavLogo from "@assets/download_(1)_1768852688690.jpeg";
 import apolloLogo from "@assets/download_1768852688742.png";
 import crunchbaseLogo from "@assets/download_1768852688740.jpeg";
 
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
 const dataSources = [
   { name: "LinkedIn", logo: linkedinLogo },
   { name: "X", logo: xLogo },
@@ -26,14 +35,23 @@ const dataSources = [
   { name: "Crunchbase", logo: crunchbaseLogo },
 ];
 
-const industries = [
-  { name: "SaaS", icon: Cpu },
-  { name: "Biotech", icon: Zap },
-  { name: "EdTech", icon: Share2 },
+const scanSources = [
+  { name: "Website", icon: Globe, color: "text-blue-400" },
+  { name: "LinkedIn", icon: Linkedin, color: "text-blue-600" },
+  { name: "X (Twitter)", icon: XIcon, color: "text-white" },
+  { name: "Facebook", icon: Facebook, color: "text-blue-500" },
 ];
 
 export function InvestorMatchingSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [scanIndex, setScanIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScanIndex((prev) => (prev + 1) % scanSources.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   const cards = [
     {
@@ -82,28 +100,50 @@ export function InvestorMatchingSection() {
       title: "Thesis Alignment",
       phase: "Phase 02",
       icon: ShieldCheck,
-      description: "Verifying investment patterns with 94.8% precision.",
+      description: "Neural analysis of investor activity and sector focus.",
       content: (
-        <div className="w-full h-full flex flex-col justify-center relative px-6">
-          <div className="space-y-3 relative z-10">
-            {industries.map((ind, i) => (
-              <div 
-                key={ind.name}
-                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between bg-white/[0.03]"
+        <div className="w-full h-full flex flex-col items-center justify-center relative px-6">
+          <div className="w-full space-y-4 relative z-10">
+            {scanSources.map((source, i) => (
+              <motion.div 
+                key={source.name}
+                animate={{ 
+                  opacity: scanIndex === i ? 1 : 0.2,
+                  scale: scanIndex === i ? 1.02 : 0.98,
+                  x: scanIndex === i ? 0 : -5,
+                  backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.15)" : "rgba(255, 255, 255, 0.02)"
+                }}
+                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between"
               >
                 <div className="flex items-center gap-3">
-                  <ind.icon className="h-4 w-4 text-primary" />
-                  <span className="text-[10px] font-black text-white uppercase tracking-widest">{ind.name}</span>
+                  <source.icon className={`h-5 w-5 ${source.color}`} />
+                  <span className="text-[10px] font-black text-white uppercase tracking-widest">{source.name}</span>
                 </div>
-                {i === 0 && <CheckCircle2 className="h-4 w-4 text-primary" />}
-              </div>
+                {scanIndex === i && (
+                   <motion.div
+                     initial={{ opacity: 0, scale: 0.5 }}
+                     animate={{ opacity: 1, scale: 1 }}
+                     className="flex items-center gap-2"
+                   >
+                     <span className="text-[8px] font-bold text-primary animate-pulse">MATCHING...</span>
+                     <CheckCircle2 className="h-4 w-4 text-primary" />
+                   </motion.div>
+                )}
+              </motion.div>
             ))}
           </div>
+
+          {/* Neural Scan Line */}
           <motion.div 
-            animate={{ y: [-80, 80, -80] }}
+            animate={{ y: [-100, 100, -100] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="absolute left-0 right-0 h-0.5 bg-primary/40 shadow-[0_0_15px_#8b5cf6] z-0"
+            className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent shadow-[0_0_20px_rgba(139,92,246,0.8)] z-0"
           />
+          
+          <div className="mt-6 text-center">
+            <div className="text-2xl font-display font-bold text-primary tracking-tighter">Thesis Verified</div>
+            <div className="text-[8px] text-white/40 uppercase tracking-[0.2em]">Cross-Platform Analysis</div>
+          </div>
         </div>
       )
     },
@@ -167,7 +207,6 @@ export function InvestorMatchingSection() {
         <div className="relative h-[600px] max-w-6xl mx-auto flex items-center justify-center">
           <div className="flex flex-row justify-center items-center gap-4 lg:gap-8">
             {cards.map((card, index) => {
-              // Calculate tilt and position based on hover
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
               
@@ -177,7 +216,6 @@ export function InvestorMatchingSection() {
               let scale = 1;
 
               if (!anyHovered) {
-                // Fan out effect initially
                 rotate = (index - 1) * 8;
                 x = (index - 1) * 60;
               } else if (isHovered) {
@@ -185,7 +223,6 @@ export function InvestorMatchingSection() {
                 zIndex = 10;
                 scale = 1.05;
               } else {
-                // Push other cards away
                 const direction = index < hoveredCard ? -1 : 1;
                 x = direction * 40;
                 rotate = direction * 5;
