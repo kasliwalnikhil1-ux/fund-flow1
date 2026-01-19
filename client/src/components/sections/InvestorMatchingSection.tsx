@@ -114,7 +114,9 @@ export function InvestorMatchingSection() {
                 className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between shadow-lg"
               >
                 <div className="flex items-center gap-3">
-                  <source.icon className={`h-5 w-5 ${source.color}`} />
+                  <div className={`p-2 rounded-lg bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary' : 'text-white/40'}`}>
+                    <source.icon className="h-5 w-5" />
+                  </div>
                   <span className="text-[10px] font-black text-white uppercase tracking-widest">{source.name}</span>
                 </div>
                 {scanIndex === i && (
