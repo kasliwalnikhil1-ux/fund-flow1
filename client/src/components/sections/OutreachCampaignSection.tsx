@@ -16,7 +16,8 @@ import {
   Activity,
   ThumbsUp,
   Star,
-  Cpu
+  Cpu,
+  Send
 } from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -96,188 +97,159 @@ export function OutreachCampaignSection() {
               </div>
             </div>
 
-            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10">
-              {/* Inspiration-based Mind Map Layout with Page 1 Scanning Aesthetic */}
-              <div className="relative w-full h-full flex flex-col items-center justify-start gap-8 px-4 z-10">
+            <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10 min-h-[500px]">
+              {/* Sequential Storytelling Animation */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center gap-12 px-4 z-10">
                 
-                {/* 1. Top Row: Platform Icons (Sources) */}
-                <div className="flex justify-center gap-6 lg:gap-10">
+                {/* 1. SOURCE LAYER: Platforms appearing one by one */}
+                <div className="flex justify-center gap-6 lg:gap-10 relative">
                   {[
-                    { icon: Globe, label: "Website", color: "bg-blue-500", iconColor: "text-white" },
-                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]", iconColor: "text-white" },
-                    { icon: XIcon, label: "X", color: "bg-black", iconColor: "text-white" },
-                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]", iconColor: "text-white" }
+                    { icon: Globe, label: "Website", color: "bg-blue-500" },
+                    { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]" },
+                    { icon: XIcon, label: "X", color: "bg-black" },
+                    { icon: Facebook, label: "Facebook", color: "bg-[#1877f2]" }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      initial={{ opacity: 0, scale: 0, y: -20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: i * 0.2,
+                        type: "spring",
+                        stiffness: 100 
+                      }}
                       className="flex flex-col items-center gap-1.5"
                     >
-                      <motion.div 
-                        whileHover={{ scale: 1.1 }}
-                        className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl ${platform.color} flex items-center justify-center shadow-lg border border-white/10 relative overflow-hidden`}
-                      >
-                        <platform.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${platform.iconColor} relative z-10`} />
-                      </motion.div>
-                      <span className="text-[10px] font-medium text-white/60 tracking-tight">{platform.label}</span>
+                      <div className={`w-14 h-14 rounded-2xl ${platform.color} flex items-center justify-center shadow-xl border border-white/10 relative overflow-hidden group`}>
+                        <platform.icon className="h-7 w-7 text-white relative z-10" />
+                        <motion.div 
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                          className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100"
+                        />
+                      </div>
+                      <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{platform.label}</span>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* 2. Middle Row: Signal Cards (Active Scanning Phase) */}
-                <div className="relative flex justify-center gap-4 w-full h-24 lg:h-32 mt-4">
-                  {/* Dynamic Connecting Lines with Data Particles */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                    {[30, 43, 57, 70].map((x, i) => (
+                {/* 2. PROCESSING LAYER: The "AI Pulse" that gathers the data */}
+                <div className="relative flex items-center justify-center w-full h-20">
+                  {/* Flowing Data Particles from Sources to AI Core */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                    {[28, 42, 58, 72].map((x, i) => (
                       <g key={i}>
-                        <motion.path
-                          d={`M ${x}% 0 L ${x}% 20`}
-                          stroke="rgba(139,92,246,0.1)"
-                          strokeWidth="1"
-                          strokeDasharray="4 4"
-                          initial={{ pathLength: 0 }}
-                          animate={{ pathLength: 1 }}
-                          transition={{ duration: 1 }}
-                        />
-                        <motion.circle r="2" fill="#8b5cf6">
+                        <motion.circle r="3" fill="#8b5cf6" filter="blur(1px)">
                           <animateMotion 
-                            dur="2s" 
+                            dur="1.5s" 
                             repeatCount="indefinite" 
-                            path={`M ${x}% 0 L ${x}% 20`}
-                            begin={`${i * 0.2}s`}
+                            path={`M ${x}% -40 L 50% 50%`}
+                            begin={`${i * 0.4}s`}
                           />
                         </motion.circle>
                       </g>
                     ))}
                   </svg>
-                  
-                  {[
-                    { label: "Recent Posts", icon: Activity, delay: 0.6 },
-                    { label: "Achievements", icon: Trophy, delay: 0.8, highlight: true },
-                    { label: "Engagement Signals", icon: ThumbsUp, delay: 1.0 }
-                  ].map((card, i) => (
-                    <motion.div
-                      key={card.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: card.delay }}
-                      className={`relative w-28 lg:w-36 p-3 rounded-xl border backdrop-blur-md shadow-xl flex flex-col items-center gap-2 overflow-hidden ${
-                        card.highlight 
-                        ? "bg-white/10 border-white/20 z-10 scale-105" 
-                        : "bg-white/5 border-white/10"
-                      }`}
-                    >
-                      {/* Neural Scanning Beam - Inspired by Page 1 */}
-                      <motion.div 
-                        animate={{ 
-                          y: ["-100%", "200%"],
-                          opacity: [0, 1, 0]
-                        }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
-                        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/40 to-transparent z-0 pointer-events-none"
-                      />
-                      
-                      <span className="text-[8px] lg:text-[10px] font-bold text-white/80 uppercase tracking-tight text-center leading-tight relative z-10">
-                        {card.label}
-                      </span>
-                      <div className="w-full h-8 bg-white/5 rounded-md flex items-center justify-center overflow-hidden relative z-10">
-                        <card.icon className={`h-4 w-4 ${card.highlight ? "text-amber-400" : "text-white/40"}`} />
-                      </div>
-                      
-                      {card.highlight && (
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
-                          <motion.div 
-                            animate={{ y: [0, -3, 0], scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          >
-                            <Trophy className="h-3 w-3 text-amber-400 fill-amber-400" />
-                          </motion.div>
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
 
-                {/* AI Core Feed - Transitional Step */}
-                <div className="relative flex flex-col items-center">
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 w-16 h-16 border border-dashed border-primary/20 rounded-full"
-                  />
                   <motion.div
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center relative z-10 backdrop-blur-xl"
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 1, duration: 0.8, type: "spring" }}
+                    className="relative flex items-center justify-center"
                   >
-                    <Cpu className="h-5 w-5 text-primary" />
+                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary/40 backdrop-blur-xl flex items-center justify-center">
+                      <Cpu className="h-8 w-8 text-primary" />
+                      {/* Radial Ripple */}
+                      <motion.div 
+                        animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute inset-0 rounded-full border border-primary/50"
+                      />
+                    </div>
+                    <div className="absolute -bottom-6 whitespace-nowrap">
+                      <span className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Neural Synthesis</span>
+                    </div>
                   </motion.div>
                 </div>
 
-                {/* 3. Bottom Area: The Generated DM (Output) */}
-                <div className="relative w-full max-w-sm">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ delay: 1.5 }}
-                    className="bg-[#f8f9ff] rounded-2xl p-5 shadow-2xl border border-primary/20 relative overflow-hidden"
-                  >
-                    {/* Final Success Glow */}
-                    <motion.div 
-                      animate={{ opacity: [0.2, 0.5, 0.2] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute inset-0 border-2 border-primary/40 rounded-2xl pointer-events-none" 
+                {/* 3. OUTPUT LAYER: The Personalized DM Card */}
+                <div className="relative w-full max-w-[340px]">
+                  {/* Flowing Output Stream */}
+                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-12 pointer-events-none">
+                    <motion.path
+                      d="M 4 0 L 4 48"
+                      stroke="url(#outputFlow)"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
+                      className="origin-top"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ delay: 1.8, duration: 0.5 }}
                     />
-                    
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-white shadow-sm">
+                    <linearGradient id="outputFlow" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                  </svg>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ delay: 2, duration: 0.8 }}
+                    className="bg-white rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 border-primary/20 relative"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
                         <User className="w-6 h-6 text-gray-400" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-gray-900 leading-none">Hi [Name]</span>
-                          <div className="flex gap-0.5">
-                            {[1, 2, 3].map(i => <div key={i} className="w-1 h-1 rounded-full bg-gray-200" />)}
+                          <span className="text-xs font-black text-gray-900 leading-none">Hi Jason Schmidt</span>
+                          <div className="flex gap-1 items-center">
+                            <motion.div 
+                              animate={{ opacity: [1, 0, 1] }}
+                              transition={{ duration: 1, repeat: Infinity }}
+                              className="w-1.5 h-1.5 rounded-full bg-emerald-500" 
+                            />
+                            <span className="text-[7px] font-bold text-emerald-600 uppercase">Personalized</span>
                           </div>
                         </div>
-                        <span className="text-[10px] text-gray-400 font-medium tracking-tight">Direct Message</span>
+                        <span className="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">Hyper-Customized Outreach</span>
                       </div>
                     </div>
 
-                    <div className="space-y-3 relative">
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2 }}
-                        className="bg-primary/5 rounded-xl p-3 border border-primary/10"
-                      >
-                        <p className="text-[11px] text-gray-700 leading-relaxed font-medium">
-                          Loved your recent post about! <br />
-                          Congrats on the [Topic] <br />
-                          Achievement!
-                        </p>
-                      </motion.div>
-
-                      {/* AI Sparkle Node */}
-                      <div className="absolute -right-2 top-0">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1, rotate: 6 }}
-                          transition={{ delay: 2.3, type: "spring" }}
-                          className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg"
+                    <div className="space-y-2 relative">
+                      <div className="bg-primary/5 rounded-xl p-3 border border-primary/10">
+                        <motion.p 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 2.5, duration: 0.5 }}
+                          className="text-[11px] text-gray-800 leading-relaxed font-medium"
                         >
-                          <Star className="h-6 w-6 text-white fill-white" />
-                        </motion.div>
+                          "Loved your recent post about <span className="text-primary font-bold italic underline">SaaS efficiency</span>! 
+                          Congrats on the <span className="text-primary font-bold italic underline">LinkedIn milestone</span>. 
+                          We should connect!"
+                        </motion.p>
                       </div>
 
-                      <div className="flex justify-end pr-1 opacity-40">
-                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-gray-400">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                          </svg>
-                        </div>
+                      {/* AI Quality Badge */}
+                      <div className="absolute -right-6 -top-4">
+                        <motion.div
+                          initial={{ scale: 0, rotate: -20 }}
+                          animate={{ scale: 1, rotate: 10 }}
+                          transition={{ delay: 3, type: "spring" }}
+                          className="bg-primary text-white p-2 rounded-xl shadow-lg border-2 border-white/20"
+                        >
+                          <Star className="h-5 w-5 fill-white" />
+                        </motion.div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                      <span className="text-[8px] font-black text-gray-300 uppercase tracking-[0.2em]">Ready to send</span>
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Send className="h-3 w-3 text-primary" />
                       </div>
                     </div>
                   </motion.div>
