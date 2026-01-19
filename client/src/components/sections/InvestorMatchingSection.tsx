@@ -2,15 +2,12 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
   Database, 
-  Cpu, 
-  Zap, 
-  Share2,
-  CheckCircle2,
-  Search,
-  ZapIcon,
-  Globe,
-  Linkedin,
-  UserCheck
+  CheckCircle2, 
+  Search, 
+  ZapIcon, 
+  Globe, 
+  Linkedin, 
+  UserCheck 
 } from "lucide-react";
 
 // Local assets
@@ -36,8 +33,8 @@ const dataSources = [
 
 const scanSources = [
   { name: "Website Scanning", icon: Globe, color: "text-blue-400" },
-  { name: "LinkedIn", icon: Linkedin, color: "text-blue-600" },
-  { name: "X", icon: XIcon, color: "text-white" },
+  { name: "LinkedIn Profile", icon: Linkedin, color: "text-blue-600" },
+  { name: "X Analysis", icon: XIcon, color: "text-white" },
 ];
 
 export function InvestorMatchingSection() {
@@ -98,9 +95,10 @@ export function InvestorMatchingSection() {
       title: "Investor Deep-Scan",
       phase: "Phase 02",
       icon: UserCheck,
-      description: "Scanning every profile for active sector investment match.",
+      description: "Neural analysis of investor activity and sector focus.",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-6">
+          {/* Detailed Scanning Animation */}
           <div className="w-full space-y-4 relative z-10">
             {scanSources.map((source, i) => (
               <motion.div 
@@ -111,13 +109,24 @@ export function InvestorMatchingSection() {
                   x: scanIndex === i ? 0 : -5,
                   backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.15)" : "rgba(255, 255, 255, 0.02)"
                 }}
-                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between shadow-lg"
+                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between shadow-lg backdrop-blur-md"
               >
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary' : 'text-white/40'}`}>
+                  <div className={`p-2 rounded-xl bg-white/5 border border-white/10 transition-colors duration-500 ${scanIndex === i ? 'text-primary border-primary/30' : 'text-white/40'}`}>
                     <source.icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-black text-white uppercase tracking-widest">{source.name}</span>
+                  <div>
+                    <span className="text-[10px] font-black text-white uppercase tracking-widest block">{source.name}</span>
+                    {scanIndex === i && (
+                      <motion.span 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-[7px] text-primary font-bold uppercase tracking-tighter"
+                      >
+                        Analyzing recent check sizes...
+                      </motion.span>
+                    )}
+                  </div>
                 </div>
                 {scanIndex === i && (
                    <motion.div
@@ -125,7 +134,10 @@ export function InvestorMatchingSection() {
                      animate={{ opacity: 1, scale: 1 }}
                      className="flex items-center gap-2"
                    >
-                     <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter">MATCHING...</span>
+                     <div className="flex flex-col items-end">
+                        <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter uppercase">Matching</span>
+                        <span className="text-[6px] text-white/40 uppercase">Industry: FinTech</span>
+                     </div>
                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                    </motion.div>
                 )}
@@ -133,15 +145,23 @@ export function InvestorMatchingSection() {
             ))}
           </div>
 
+          {/* Neural Scan Line - Moving Laser */}
           <motion.div 
-            animate={{ y: [-100, 100, -100] }}
+            animate={{ y: [-120, 120, -120] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent shadow-[0_0_20px_rgba(139,92,246,0.8)] z-0"
+            className="absolute left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-primary/60 to-transparent shadow-[0_0_25px_rgba(139,92,246,0.9)] z-0"
           />
           
-          <div className="mt-8 text-center p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm">
-            <div className="text-xl font-display font-bold text-emerald-400 tracking-tighter">Investor Verified</div>
-            <div className="text-[8px] text-emerald-400/60 uppercase tracking-[0.2em] font-black">Active Industry Funder</div>
+          <div className="mt-8 text-center p-4 rounded-2xl bg-primary/10 border border-primary/20 backdrop-blur-xl relative overflow-hidden group">
+            <motion.div 
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute inset-0 bg-primary/5" 
+            />
+            <div className="relative z-10">
+              <div className="text-xl font-display font-bold text-white tracking-tighter uppercase">Verified Match</div>
+              <div className="text-[8px] text-primary font-black uppercase tracking-[0.3em]">Neural Intelligence Confirmed</div>
+            </div>
           </div>
         </div>
       )
