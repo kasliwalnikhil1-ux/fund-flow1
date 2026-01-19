@@ -98,7 +98,7 @@ export function InvestorMatchingSection() {
       description: "Verifying real-time industry investment activity.",
       content: (
         <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
-          <div className="w-full space-y-2 relative z-10">
+          <div className="w-full space-y-1.5 relative z-10">
             {scanSources.map((source, i) => (
               <motion.div 
                 key={source.name}
@@ -107,19 +107,19 @@ export function InvestorMatchingSection() {
                   scale: scanIndex === i ? 1 : 0.95,
                   backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.1)" : "rgba(255, 255, 255, 0.02)"
                 }}
-                className="p-2 rounded-xl border border-white/10 flex items-center justify-between backdrop-blur-sm"
+                className="p-1.5 rounded-lg border border-white/10 flex items-center justify-between backdrop-blur-sm"
               >
                 <div className="flex items-center gap-2">
-                  <div className={`p-1.5 rounded-lg bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary border-primary/20' : 'text-white/40'}`}>
-                    <source.icon className="h-3.5 w-3.5" />
+                  <div className={`p-1 rounded-md bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary border-primary/20' : 'text-white/40'}`}>
+                    <source.icon className="h-3 w-3" />
                   </div>
                   <div>
-                    <span className="text-[9px] font-black text-white uppercase tracking-wider block leading-none">{source.name}</span>
+                    <span className="text-[8px] font-black text-white uppercase tracking-wider block leading-none">{source.name}</span>
                     {scanIndex === i && (
                       <motion.span 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-[6px] text-primary font-bold uppercase tracking-tighter"
+                        className="text-[6px] text-primary font-bold uppercase tracking-tighter block mt-0.5"
                       >
                         Checking Industry Fit...
                       </motion.span>
@@ -130,9 +130,9 @@ export function InvestorMatchingSection() {
                    <motion.div
                      initial={{ opacity: 0, scale: 0.5 }}
                      animate={{ opacity: 1, scale: 1 }}
-                     className="flex items-center gap-1.5"
+                     className="flex items-center gap-1"
                    >
-                     <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                     <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
                    </motion.div>
                 )}
               </motion.div>
@@ -140,15 +140,15 @@ export function InvestorMatchingSection() {
           </div>
 
           <motion.div 
-            animate={{ y: [-80, 80, -80] }}
+            animate={{ y: [-60, 60, -60] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent shadow-[0_0_15px_rgba(139,92,246,0.6)] z-0"
           />
           
-          <div className="mt-4 text-center p-2.5 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
+          <div className="mt-3 text-center p-2 rounded-lg bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
             <div className="relative z-10">
-              <div className="text-sm font-display font-bold text-white tracking-tighter uppercase">Industry Match</div>
-              <div className="text-[7px] text-primary font-black uppercase tracking-[0.2em]">Active Sector Funder</div>
+              <div className="text-xs font-display font-bold text-white tracking-tighter uppercase">Industry Match</div>
+              <div className="text-[6px] text-primary font-black uppercase tracking-[0.2em]">Active Sector Funder</div>
             </div>
           </div>
         </div>
@@ -266,11 +266,11 @@ export function InvestorMatchingSection() {
                     <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{card.title}</h3>
                   </div>
 
-                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-2">
+                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-1">
                     {card.content}
                   </div>
 
-                  <div className="text-center relative z-10 mt-2 flex flex-col items-center gap-2">
+                  <div className="text-center relative z-10 mt-1 flex flex-col items-center gap-1">
                     <p className="text-[10px] text-white/40 max-w-[200px] leading-relaxed">
                       {card.description}
                     </p>
