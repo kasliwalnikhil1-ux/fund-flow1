@@ -142,10 +142,10 @@ export function OutreachCampaignSection() {
                   {/* Left Side: Nodes */}
                   <div className="flex flex-col gap-8 lg:gap-12 relative z-40 pointer-events-auto">
                     {[
-                      { icon: Globe, label: "WEB", color: "text-blue-400" },
-                      { icon: Linkedin, label: "IN", color: "text-blue-600" },
-                      { icon: XIcon, label: "X", color: "text-white" },
-                      { icon: Facebook, label: "FB", color: "text-blue-500" }
+                      { icon: Globe, label: "WEB", color: "text-blue-400", signals: ["RECENT POST", "WEB EVENT"] },
+                      { icon: Linkedin, label: "IN", color: "text-blue-600", signals: ["ACHIEVEMENT", "NEW ROLE"] },
+                      { icon: XIcon, label: "X", color: "text-white", signals: ["MILESTONE", "ENGAGEMENT"] },
+                      { icon: Facebook, label: "FB", color: "text-blue-500", signals: ["EVENT", "SIGNAL"] }
                     ].map((node, i) => (
                       <motion.div
                         key={node.label}
@@ -162,25 +162,26 @@ export function OutreachCampaignSection() {
                           <span className="text-[7px] font-black text-white/60 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
 
-                        {/* Activity Signals */}
-                        <motion.div
-                          animate={{ 
-                            y: [0, -5, 0],
-                            opacity: [0, 1, 0]
-                          }}
-                          transition={{ 
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.5
-                          }}
-                          className="absolute -top-6 left-0 whitespace-nowrap"
-                        >
-                          <div className="px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 backdrop-blur-md">
-                            <span className="text-[5px] font-black text-white uppercase tracking-tighter">
-                              {i === 0 ? "POST" : i === 1 ? "ACHIEVEMENT" : i === 2 ? "SIGNAL" : "ENGAGEMENT"}
-                            </span>
-                          </div>
-                        </motion.div>
+                          <motion.div
+                            key={`signal-${i}`}
+                            animate={{ 
+                              y: [0, -15, 0],
+                              opacity: [0, 1, 0],
+                              scale: [0.8, 1, 0.8]
+                            }}
+                            transition={{ 
+                              duration: 4,
+                              repeat: Infinity,
+                              delay: i * 0.7
+                            }}
+                            className="absolute -top-10 left-0 whitespace-nowrap"
+                          >
+                            <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                              <span className="text-[6px] font-black text-white uppercase tracking-wider">
+                                {node.signals[0]}
+                              </span>
+                            </div>
+                          </motion.div>
                       </motion.div>
                     ))}
                   </div>
@@ -195,7 +196,7 @@ export function OutreachCampaignSection() {
                       <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
                         <stop offset="0%" stopColor="rgba(139,92,246,0)" />
                         <stop offset="50%" stopColor="rgba(139,92,246,0.3)" />
-                        <stop offset="100%" stopColor="rgba(139,92,246,0.5)" />
+                        <stop offset="100%" stopColor="rgba(139,92,246,0.6)" />
                       </linearGradient>
                       <linearGradient id="output-path-grad" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#8b5cf6" />
@@ -203,10 +204,10 @@ export function OutreachCampaignSection() {
                       </linearGradient>
                     </defs>
                     
-                    {/* Input: Nodes -> Synapse AI */}
+                    {/* Input Flow: Sources -> AI Core */}
                     {[0, 1, 2, 3].map((i) => {
-                      const startX = 22; // Approx % for icons on left
-                      const startY = 32 + (i * 12); // Vertical spacing matching the nodes
+                      const startX = 24; 
+                      const startY = 32 + (i * 12); 
                       return (
                         <g key={`in-line-${i}`} filter="url(#glow-line)">
                           <motion.path
@@ -214,11 +215,11 @@ export function OutreachCampaignSection() {
                             fill="none"
                             stroke="url(#line-grad)"
                             strokeWidth="2"
-                            strokeDasharray="6 4"
+                            strokeDasharray="8 6"
                           />
-                          <motion.circle r="3" fill="#8b5cf6">
+                          <motion.circle r="3.5" fill={i % 2 === 0 ? "#8b5cf6" : "#fbbf24"}>
                             <animateMotion 
-                              dur={`${1.5 + i * 0.2}s`} 
+                              dur={`${1.2 + i * 0.3}s`} 
                               repeatCount="indefinite" 
                               path={`M ${startX}% ${startY}% L 50% 50%`}
                             />
@@ -227,31 +228,33 @@ export function OutreachCampaignSection() {
                       );
                     })}
 
-                    {/* Output: Synapse AI -> Drafting Dashboard */}
+                    {/* Output Flow: AI Core -> Final DM */}
                     <g filter="url(#glow-line)">
                       <motion.path
-                        d="M 50% 50% L 50% 85%"
+                        d="M 50% 50% L 50% 84%"
                         fill="none"
                         stroke="url(#output-path-grad)"
-                        strokeWidth="3"
-                        strokeDasharray="10 6"
+                        strokeWidth="4"
+                        strokeDasharray="12 8"
                       >
-                        <animate attributeName="stroke-dashoffset" from="32" to="0" dur="1s" repeatCount="indefinite" />
+                        <animate attributeName="stroke-dashoffset" from="40" to="0" dur="1s" repeatCount="indefinite" />
                       </motion.path>
                       
-                      {/* Processed Data Packet */}
-                      <motion.rect width="12" height="6" rx="2" fill="#10b981">
+                      {/* Personalized Package */}
+                      <motion.rect width="14" height="8" rx="2" fill="#10b981" shadow-lg>
                         <animateMotion 
-                          dur="1.2s" 
+                          dur="1s" 
                           repeatCount="indefinite" 
-                          path="M 50% 50% L 50% 85%"
+                          path="M 50% 50% L 50% 84%"
                         />
                       </motion.rect>
                     </g>
                   </svg>
 
-                  <div className="flex-1 h-full" /> {/* Spacer to keep core centered */}
+                  <div className="flex-1 h-full" /> 
                 </div>
+              </div>
+            </div>
 
                 {/* Flowing Data Stream Particles - Enhanced Path Visualization */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
