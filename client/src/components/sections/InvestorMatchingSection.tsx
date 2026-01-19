@@ -1,27 +1,20 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { 
-  Globe, 
-  Search, 
   Database, 
   Cpu, 
   Zap, 
-  LineChart, 
-  Target, 
-  Layout, 
-  Table, 
   Share2 
 } from "lucide-react";
 
-// Local assets from attached_assets
-import linkedinLogo from "@assets/icons8-linkedin-48_1768851532438.png";
-import xLogo from "@assets/icons8-x-48_1768852504235.png";
-import salesNavLogo from "@assets/download_(1)_1768851727203.jpeg";
-import apolloLogo from "@assets/download_(1)_1768851727228.png";
-import crunchbaseLogo from "@assets/download_1768851727230.jpeg";
-import brightDataLogo from "@assets/download_1768851727230.png";
+// Updated local assets as per user's latest request
+import linkedinLogo from "@assets/icons8-linkedin-48_1768852688743.png";
+import xLogo from "@assets/icons8-x-50_1768852688746.png";
+import salesNavLogo from "@assets/download_(1)_1768852688690.jpeg";
+import apolloLogo from "@assets/download_1768852688742.png";
+import crunchbaseLogo from "@assets/download_1768852688740.jpeg";
 
-const User = ({ className }: { className?: string }) => (
+const UserIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
@@ -37,9 +30,9 @@ const DollarSign = ({ className }: { className?: string }) => (
 
 const dataSources = [
   { name: "LinkedIn", logo: linkedinLogo },
+  { name: "X", logo: xLogo },
   { name: "Sales Nav", logo: salesNavLogo },
   { name: "Apollo.io", logo: apolloLogo },
-  { name: "Bright Data", logo: brightDataLogo },
   { name: "Crunchbase", logo: crunchbaseLogo },
 ];
 
@@ -105,21 +98,21 @@ export function InvestorMatchingSection() {
                 className="relative w-full h-full flex items-center justify-center"
               >
                 {/* Central Database Hub */}
-                <div className="relative z-10 w-32 h-32 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
+                <div className="relative z-10 w-24 h-24 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.1)]">
                   <div className="flex flex-col items-center justify-center text-primary/80">
-                    <Database className="h-12 w-12" strokeWidth={1.5} />
+                    <Database className="h-10 w-10" strokeWidth={1.5} />
                   </div>
                   <motion.div 
                     animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
                     transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute inset-0 bg-primary rounded-3xl blur-2xl"
+                    className="absolute inset-0 bg-primary rounded-2xl blur-2xl"
                   />
                 </div>
 
                 {/* Orbiting Source Icons */}
                 <div className="absolute inset-0 flex items-center justify-center">
                    {dataSources.map((source, i) => {
-                     const radius = 200; 
+                     const radius = 180; 
                      const angle = (i * 360) / dataSources.length;
                      const angleRad = (angle - 90) * Math.PI / 180;
                      
@@ -135,12 +128,12 @@ export function InvestorMatchingSection() {
                            className="absolute pointer-events-auto"
                            style={{ x, y }}
                          >
-                           <div className="flex flex-col items-center gap-2">
-                             <div className="w-14 h-14 rounded-2xl bg-white/[0.03] backdrop-blur-md border border-white/10 flex items-center justify-center group hover:scale-105 transition-transform cursor-pointer overflow-hidden">
+                           <div className="flex flex-col items-center">
+                             <div className="w-14 h-14 rounded-full bg-white shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden group hover:scale-110 transition-transform cursor-pointer">
                                <img 
                                  src={source.logo} 
                                  alt={source.name} 
-                                 className={`w-8 h-8 object-contain opacity-70 group-hover:opacity-100 transition-opacity ${source.name === 'Apollo.io' ? 'scale-125' : ''}`} 
+                                 className="w-10 h-10 object-contain" 
                                />
                              </div>
                            </div>
@@ -155,9 +148,9 @@ export function InvestorMatchingSection() {
                               opacity: [0, 0.5, 0]
                             }}
                             transition={{ 
-                              duration: 2, 
+                              duration: 1.8, 
                               repeat: Infinity, 
-                              delay: i * 0.5,
+                              delay: i * 0.4,
                               ease: "easeIn" 
                             }}
                             className="absolute w-1 h-1 bg-primary/40 rounded-full blur-[1px]"
@@ -165,11 +158,11 @@ export function InvestorMatchingSection() {
                        </div>
                      );
                    })}
-                   <div className="absolute w-[400px] h-[400px] border border-white/[0.03] rounded-full" />
+                   <div className="absolute w-[360px] h-[360px] border border-white/[0.03] rounded-full" />
                 </div>
                 
                 <div className="absolute bottom-0 text-white/20 font-bold uppercase tracking-[0.4em] text-[10px]">
-                   Phase 1: Multi-Source Intelligence Gathering
+                   Phase 1: Intelligence Gathering
                 </div>
               </motion.div>
             )}
@@ -186,7 +179,7 @@ export function InvestorMatchingSection() {
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent" />
                   <div className="flex items-center gap-4 mb-8">
                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                      <User className="h-7 w-7 text-primary" />
+                      <UserIcon className="h-7 w-7 text-primary" />
                     </div>
                     <div>
                       <h4 className="text-lg font-bold text-white">Investor DNA</h4>
