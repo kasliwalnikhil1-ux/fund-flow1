@@ -97,8 +97,21 @@ export function OutreachCampaignSection() {
             </div>
 
             <div className="flex-1 relative flex items-center justify-center overflow-hidden py-10">
+              {/* Background Scanning Animation Inspired by Page 1 */}
+              <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8b5cf611_1px,transparent_1px),linear-gradient(to_bottom,#8b5cf611_1px,transparent_1px)] bg-[size:40px_40px]" />
+                <motion.div 
+                  animate={{ 
+                    y: ["0%", "100%", "0%"],
+                    opacity: [0, 1, 0]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+                />
+              </div>
+
               {/* Inspiration-based Mind Map Layout with Sequential Animation */}
-              <div className="relative w-full h-full flex flex-col items-center justify-start gap-8 px-4">
+              <div className="relative w-full h-full flex flex-col items-center justify-start gap-8 px-4 z-10">
                 
                 {/* 1. Top Row: Platform Icons (Sources) */}
                 <div className="flex justify-center gap-6 lg:gap-10">
@@ -121,9 +134,15 @@ export function OutreachCampaignSection() {
                     >
                       <motion.div 
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl ${platform.color} flex items-center justify-center shadow-lg border border-white/10`}
+                        className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl ${platform.color} flex items-center justify-center shadow-lg border border-white/10 relative overflow-hidden`}
                       >
-                        <platform.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${platform.iconColor}`} />
+                        {/* Internal Scanning Beam */}
+                        <motion.div 
+                          animate={{ x: ["-100%", "200%"] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                          className="absolute top-0 left-0 w-full h-full bg-white/20 skew-x-12"
+                        />
+                        <platform.icon className={`h-6 w-6 lg:h-7 lg:w-7 ${platform.iconColor} relative z-10`} />
                       </motion.div>
                       <span className="text-[10px] font-medium text-white/60 tracking-tight">{platform.label}</span>
                     </motion.div>
@@ -167,20 +186,27 @@ export function OutreachCampaignSection() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: card.delay, duration: 0.5 }}
-                      className={`relative w-28 lg:w-36 p-3 rounded-xl border backdrop-blur-md shadow-xl flex flex-col items-center gap-2 ${
+                      className={`relative w-28 lg:w-36 p-3 rounded-xl border backdrop-blur-md shadow-xl flex flex-col items-center gap-2 overflow-hidden ${
                         card.highlight 
                         ? "bg-white/10 border-white/20 z-10 scale-105" 
                         : "bg-white/5 border-white/10"
                       }`}
                     >
-                      <span className="text-[8px] lg:text-[10px] font-bold text-white/80 uppercase tracking-tight text-center leading-tight">
+                      {/* Scanning effect on the cards themselves */}
+                      <motion.div 
+                        animate={{ y: ["-100%", "200%"] }}
+                        transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }}
+                        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent z-0"
+                      />
+                      
+                      <span className="text-[8px] lg:text-[10px] font-bold text-white/80 uppercase tracking-tight text-center leading-tight relative z-10">
                         {card.label}
                       </span>
-                      <div className="w-full h-8 bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
+                      <div className="w-full h-8 bg-white/5 rounded-md flex items-center justify-center overflow-hidden relative z-10">
                         <card.icon className={`h-4 w-4 ${card.highlight ? "text-amber-400" : "text-white/40"}`} />
                       </div>
                       {card.highlight && (
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2">
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
                           <motion.div 
                             animate={{ y: [0, -5, 0], opacity: [1, 0.5, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
