@@ -32,9 +32,9 @@ const dataSources = [
 ];
 
 const scanSources = [
-  { name: "Website Scanning", icon: Globe, color: "text-blue-400" },
-  { name: "LinkedIn Profile", icon: Linkedin, color: "text-blue-600" },
-  { name: "X Analysis", icon: XIcon, color: "text-white" },
+  { name: "Website Scanning", icon: Globe },
+  { name: "LinkedIn Profile", icon: Linkedin },
+  { name: "X Analysis", icon: XIcon },
 ];
 
 export function InvestorMatchingSection() {
@@ -95,35 +95,33 @@ export function InvestorMatchingSection() {
       title: "Investor Deep-Scan",
       phase: "Phase 02",
       icon: UserCheck,
-      description: "Neural analysis of investor activity and sector focus.",
+      description: "Neural analysis of investor activity and focus.",
       content: (
-        <div className="w-full h-full flex flex-col items-center justify-center relative px-6">
-          {/* Detailed Scanning Animation */}
-          <div className="w-full space-y-4 relative z-10">
+        <div className="w-full h-full flex flex-col items-center justify-center relative px-4">
+          <div className="w-full space-y-2 relative z-10">
             {scanSources.map((source, i) => (
               <motion.div 
                 key={source.name}
                 animate={{ 
                   opacity: scanIndex === i ? 1 : 0.2,
-                  scale: scanIndex === i ? 1.02 : 0.98,
-                  x: scanIndex === i ? 0 : -5,
-                  backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.15)" : "rgba(255, 255, 255, 0.02)"
+                  scale: scanIndex === i ? 1 : 0.95,
+                  backgroundColor: scanIndex === i ? "rgba(139, 92, 246, 0.1)" : "rgba(255, 255, 255, 0.02)"
                 }}
-                className="p-3.5 rounded-2xl border border-white/10 flex items-center justify-between shadow-lg backdrop-blur-md"
+                className="p-2 rounded-xl border border-white/10 flex items-center justify-between backdrop-blur-sm"
               >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-xl bg-white/5 border border-white/10 transition-colors duration-500 ${scanIndex === i ? 'text-primary border-primary/30' : 'text-white/40'}`}>
-                    <source.icon className="h-5 w-5" />
+                <div className="flex items-center gap-2">
+                  <div className={`p-1.5 rounded-lg bg-white/5 border border-white/10 ${scanIndex === i ? 'text-primary border-primary/20' : 'text-white/40'}`}>
+                    <source.icon className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-black text-white uppercase tracking-widest block">{source.name}</span>
+                    <span className="text-[9px] font-black text-white uppercase tracking-wider block leading-none">{source.name}</span>
                     {scanIndex === i && (
                       <motion.span 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-[7px] text-primary font-bold uppercase tracking-tighter"
+                        className="text-[6px] text-primary font-bold uppercase tracking-tighter"
                       >
-                        Analyzing recent check sizes...
+                        Analyzing focus...
                       </motion.span>
                     )}
                   </div>
@@ -132,35 +130,25 @@ export function InvestorMatchingSection() {
                    <motion.div
                      initial={{ opacity: 0, scale: 0.5 }}
                      animate={{ opacity: 1, scale: 1 }}
-                     className="flex items-center gap-2"
+                     className="flex items-center gap-1.5"
                    >
-                     <div className="flex flex-col items-end">
-                        <span className="text-[8px] font-bold text-primary animate-pulse tracking-tighter uppercase">Matching</span>
-                        <span className="text-[6px] text-white/40 uppercase">Industry: FinTech</span>
-                     </div>
-                     <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                     <CheckCircle2 className="h-3 w-3 text-emerald-500" />
                    </motion.div>
                 )}
               </motion.div>
             ))}
           </div>
 
-          {/* Neural Scan Line - Moving Laser */}
           <motion.div 
-            animate={{ y: [-120, 120, -120] }}
+            animate={{ y: [-80, 80, -80] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="absolute left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-primary/60 to-transparent shadow-[0_0_25px_rgba(139,92,246,0.9)] z-0"
+            className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent shadow-[0_0_15px_rgba(139,92,246,0.6)] z-0"
           />
           
-          <div className="mt-8 text-center p-4 rounded-2xl bg-primary/10 border border-primary/20 backdrop-blur-xl relative overflow-hidden group">
-            <motion.div 
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0 bg-primary/5" 
-            />
+          <div className="mt-4 text-center p-2.5 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-md relative overflow-hidden w-full">
             <div className="relative z-10">
-              <div className="text-xl font-display font-bold text-white tracking-tighter uppercase">Verified Match</div>
-              <div className="text-[8px] text-primary font-black uppercase tracking-[0.3em]">Neural Intelligence Confirmed</div>
+              <div className="text-sm font-display font-bold text-white tracking-tighter uppercase">Verified Match</div>
+              <div className="text-[7px] text-primary font-black uppercase tracking-[0.2em]">Neural Match Confirmed</div>
             </div>
           </div>
         </div>
@@ -263,7 +251,7 @@ export function InvestorMatchingSection() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="w-[300px] aspect-[4/5] p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[280px] aspect-[4/5] p-6 lg:p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
@@ -278,11 +266,11 @@ export function InvestorMatchingSection() {
                     <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{card.title}</h3>
                   </div>
 
-                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-4">
+                  <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden py-2">
                     {card.content}
                   </div>
 
-                  <div className="text-center relative z-10 mt-4 flex flex-col items-center gap-2">
+                  <div className="text-center relative z-10 mt-2 flex flex-col items-center gap-2">
                     <p className="text-[10px] text-white/40 max-w-[200px] leading-relaxed">
                       {card.description}
                     </p>
