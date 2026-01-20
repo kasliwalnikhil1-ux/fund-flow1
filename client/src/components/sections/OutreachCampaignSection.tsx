@@ -44,7 +44,7 @@ export function OutreachCampaignSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
             <Zap className="h-3 w-3 text-primary" />
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Phase 03: Hyper-Outreach</span>
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Phase 05 & Phase 06</span>
           </motion.div>
           
           <motion.h2 
