@@ -195,11 +195,17 @@ export function Phase07Section() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 tracking-tight"
           >
-            Everything you need to raise capital. <br />
-            <span className="text-primary text-xl md:text-2xl lg:text-3xl font-medium block mt-4 opacity-80">
-              Stop spraying and praying. We run a surgical process to get you in front of the right check-writers.
-            </span>
+            Everything you need <br className="hidden md:block" />
+            <span className="text-primary">to raise capital.</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-sm md:text-base lg:text-lg text-white/60 max-w-xl mx-auto leading-relaxed"
+          >
+            Stop spraying and praying. We run a surgical process to get you in front of the right check-writers.
+          </motion.p>
         </div>
 
         {/* Deck of Cards Container */}
