@@ -16,41 +16,36 @@ import {
 const performanceMetrics = [
   { label: "Reply Rate", value: "32%", change: "+12%" },
   { label: "Meeting Rate", value: "8%", change: "+4%" },
-  { label: "Positive Intent", value: "45%", change: "+18%" }
 ];
 
 const cards = [
   {
     id: 0,
     title: "Targeted Investor Discovery",
-    phase: "Phase 07",
     icon: Search,
     description: "WE IDENTIFY AND SHORTLIST INVESTORS WHO ARE ACTIVELY DEPLOYING CAPITAL IN YOUR SPECIFIC INDUSTRY AND STAGE.",
     content: (
-      <div className="w-full h-full flex flex-col justify-center p-3">
+      <div className="w-full h-full flex flex-col justify-center px-2 py-4">
         <div className="space-y-3">
           {performanceMetrics.map((metric, i) => (
-            <motion.div 
+            <div 
               key={metric.label}
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-2 rounded-xl bg-white/[0.03] border border-white/5"
+              className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
             >
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-[8px] text-white/40 uppercase font-bold">{metric.label}</span>
-                <span className="text-[8px] text-emerald-400 font-bold">{metric.change}</span>
+              <div className="flex justify-between items-center mb-1.5">
+                <span className="text-[8px] text-white/40 uppercase font-bold tracking-wider">{metric.label}</span>
+                <span className="text-[9px] text-emerald-400 font-bold">{metric.change}</span>
               </div>
-              <div className="text-sm font-bold text-white">{metric.value}</div>
-              <div className="mt-1 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+              <div className="text-sm font-bold text-white mb-2">{metric.value}</div>
+              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
                   whileInView={{ width: metric.value }}
-                  transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
+                  transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
                   className="h-full bg-primary"
                 />
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -59,44 +54,24 @@ const cards = [
   {
     id: 1,
     title: "Hyper-Personalized Outreach",
-    phase: "Phase 08",
     icon: Zap,
     description: "WE ANALYZE INVESTOR PROFILES ACROSS LINKEDIN, X, AND WEB TO CRAFT MESSAGES THAT ACTUALLY GET READ.",
     content: (
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <div className="relative w-full aspect-square max-w-[120px]">
+        <div className="relative w-24 h-24 flex items-center justify-center">
+          <div className="absolute inset-0 rounded-full border border-primary/10" />
           <motion.div 
             animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border border-dashed border-primary/20"
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 rounded-full border border-dashed border-primary/30"
           />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center backdrop-blur-xl">
-              <TrendingUp className="h-8 w-8 text-primary" />
-            </div>
+          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center backdrop-blur-xl relative z-10">
+            <Zap className="h-6 w-6 text-primary" />
           </div>
-          {[0, 1, 2, 3].map((i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 rounded-full bg-primary"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.6, 0.3],
-                rotate: (i * 90) + 360
-              }}
-              transition={{ duration: 4, repeat: Infinity, delay: i * 1 }}
-              style={{
-                top: "50%",
-                left: "50%",
-                transformOrigin: "0 60px",
-                transform: `rotate(${i * 90}deg) translate(-50%, -50%)`
-              }}
-            />
-          ))}
         </div>
-        <div className="mt-4 text-center">
-          <span className="text-[10px] font-bold text-white/80 block uppercase tracking-widest">Scaling Best Path</span>
-          <span className="text-[8px] text-primary font-black uppercase mt-1 block">99.8% Efficiency</span>
+        <div className="mt-6 text-center">
+          <div className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Neural Analysis</div>
+          <div className="text-[8px] text-primary font-black uppercase mt-1 tracking-tighter">Active Scaling</div>
         </div>
       </div>
     )
@@ -104,76 +79,71 @@ const cards = [
   {
     id: 2,
     title: "Multi-Channel Engagement",
-    phase: "Phase 09",
     icon: ShieldCheck,
     description: "COORDINATED TOUCHPOINTS ACROSS EMAIL, LINKEDIN, AND X TO MAXIMIZE VISIBILITY AND RESPONSE RATES.",
     content: (
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <div className="w-full space-y-2">
+      <div className="w-full h-full flex flex-col items-center justify-center px-2 py-4">
+        <div className="w-full space-y-2.5">
           {[
-            { label: "IP Warmup", status: "Protected", icon: Globe },
+            { label: "IP Warmup", status: "Active", icon: Globe },
             { label: "SPF/DKIM", status: "Verified", icon: Lock },
-            { label: "Proxy Rotation", status: "Active", icon: ShieldCheck }
           ].map((item, i) => (
-            <motion.div 
+            <div 
               key={item.label}
-              className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5"
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
             >
-              <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center">
-                <item.icon className="h-3 w-3 text-white/60" />
+              <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center">
+                <item.icon className="h-3.5 w-3.5 text-white/60" />
               </div>
               <div className="flex-1">
-                <div className="text-[8px] font-bold text-white">{item.label}</div>
-                <div className="text-[6px] text-emerald-400 font-black uppercase tracking-widest">{item.status}</div>
+                <div className="text-[9px] font-bold text-white">{item.label}</div>
+                <div className="text-[7px] text-emerald-400 font-black uppercase tracking-widest">{item.status}</div>
               </div>
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            </motion.div>
+            </div>
           ))}
         </div>
-        <motion.div 
-          animate={{ scale: [1, 1.05, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="mt-4 w-full h-12 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 flex items-center justify-center gap-2"
-        >
-          <ShieldCheck className="h-4 w-4 text-emerald-500" />
-          <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-tighter">Safe Mode Enabled</span>
-        </motion.div>
       </div>
     )
   },
   {
     id: 3,
     title: "Meeting Setup",
-    phase: "Phase 10",
     icon: Search,
     description: "WE HANDLE THE BACK-AND-FORTH SCHEDULING SO YOU SIMPLY SHOW UP TO WARM CONVERSATIONS.",
     content: (
-      <div className="w-full h-full flex flex-col justify-center p-3">
-        <div className="relative h-24 w-full rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden p-2">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-4 h-4 rounded bg-primary/20 flex items-center justify-center">
-              <PieChart className="h-2 w-2 text-primary" />
+      <div className="w-full h-full flex flex-col justify-center px-2 py-4">
+        <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 relative overflow-hidden">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center">
+              <PieChart className="h-3 w-3 text-primary" />
             </div>
-            <span className="text-[7px] text-white/60 font-bold uppercase">Audience Segments</span>
+            <span className="text-[8px] text-white/60 font-bold uppercase tracking-wider">Lead Activity</span>
           </div>
-          <div className="space-y-1">
-            <div className="h-2 w-3/4 bg-primary/40 rounded-full" />
-            <div className="h-2 w-1/2 bg-white/10 rounded-full" />
-            <div className="h-2 w-2/3 bg-white/5 rounded-full" />
+          <div className="space-y-2">
+            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: "75%" }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="h-full bg-primary/60"
+              />
+            </div>
+            <div className="h-1.5 w-2/3 bg-white/10 rounded-full" />
           </div>
           <motion.div 
-            animate={{ x: [-100, 200] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 bottom-0 w-16 bg-gradient-to-r from-transparent via-primary/20 to-transparent skew-x-12"
+            animate={{ x: [-150, 250] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
           />
         </div>
-        <div className="mt-3 flex gap-2">
-          <div className="flex-1 p-2 rounded-lg bg-white/[0.03] border border-white/5">
-            <div className="text-[6px] text-white/40 uppercase font-black">Hot Leads</div>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="p-2 rounded-lg bg-white/[0.03] border border-white/5 text-center">
+            <div className="text-[7px] text-white/40 uppercase font-black mb-0.5 tracking-tighter">Hot Leads</div>
             <div className="text-xs font-bold text-white">142</div>
           </div>
-          <div className="flex-1 p-2 rounded-lg bg-white/[0.03] border border-white/5">
-            <div className="text-[6px] text-white/40 uppercase font-black">Interested</div>
+          <div className="p-2 rounded-lg bg-white/[0.03] border border-white/5 text-center">
+            <div className="text-[7px] text-white/40 uppercase font-black mb-0.5 tracking-tighter">Interested</div>
             <div className="text-xs font-bold text-white">89</div>
           </div>
         </div>
