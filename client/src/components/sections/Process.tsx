@@ -5,26 +5,26 @@ import { Search, Zap, Share2, Calendar } from "lucide-react";
 const steps = [
   {
     number: "01",
-    title: "Investor Data & List Building",
-    description: "We use proprietary signals to find investors actively deploying capital in your specific sector and stage.",
+    title: "Onboarding & Strategy",
+    description: "We deep dive into your business, pitch deck, and ideal investor profile to build a custom targeting strategy.",
     icon: Search,
   },
   {
     number: "02",
-    title: "Personalized DMs",
-    description: "Our neural engine analyzes every investor profile to craft high-conversion outreach that feels human.",
+    title: "List Building",
+    description: "Our team hand-curates a list of high-relevance investors using our proprietary data and signals.",
     icon: Zap,
   },
   {
     number: "03",
-    title: "Multi-Channel Outreach",
-    description: "We execute coordinated campaigns across Cold Email, LinkedIn, and X for maximum visibility.",
+    title: "Campaign Launch",
+    description: "We launch multi-channel campaigns (Email, LinkedIn, X) with A/B tested messaging to maximize engagement.",
     icon: Share2,
   },
   {
     number: "04",
     title: "Meetings Booked",
-    description: "You simply show up to warm conversations. We handle the scheduling and follow-ups end-to-end.",
+    description: "We handle the scheduling coordination. You just check your calendar and show up to pitch.",
     icon: Calendar,
   }
 ];
@@ -41,7 +41,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight"
           >
-            Our Surgical <span className="text-primary">Process</span>
+            How it Works
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
@@ -49,7 +49,7 @@ export function Process() {
             transition={{ delay: 0.1 }}
             className="text-white/60 text-lg"
           >
-            A simple, transparent flow designed to get you in front of the right investors.
+            A simple, transparent process designed to get you results fast.
           </motion.p>
         </div>
 
