@@ -324,6 +324,7 @@ export function InvestorMatchingSection() {
               
               let rotate = 0;
               let x = 0;
+              let y = 0;
               let zIndex = index;
               let scale = 1;
 
@@ -334,15 +335,18 @@ export function InvestorMatchingSection() {
                 if (isMobile) {
                   rotate = 0;
                   x = 0;
+                  y = 0;
                 } else {
-                  rotate = (index - 1.5) * 6;
-                  x = (index - 1.5) * 40; 
+                  rotate = (index - 1.5) * 12;
+                  x = (index - 1.5) * 60; 
+                  y = Math.abs(index - 1.5) * 15;
                 }
               } else if (isHovered) {
                 rotate = 0;
-                zIndex = 10;
-                scale = 1.1;
+                zIndex = 20;
+                scale = 1.15;
                 x = 0;
+                y = -30;
               } else {
                 if (!isMobile) {
                   const direction = index < hoveredCard ? -1 : 1;
@@ -364,6 +368,7 @@ export function InvestorMatchingSection() {
                   animate={{ 
                     rotate, 
                     x, 
+                    y,
                     zIndex,
                     scale,
                   }}
