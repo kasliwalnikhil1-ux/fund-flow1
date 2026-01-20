@@ -12,7 +12,7 @@ const steps = [
   {
     number: "02",
     title: "List Building",
-    description: "Our team hand-curates a list of high-relevance investors using our proprietary data and signals.",
+    description: "It carefully selects a list of investors who are most relevant, using our own data and insights.",
     icon: Zap,
   },
   {
