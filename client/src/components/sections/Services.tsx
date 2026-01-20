@@ -77,9 +77,13 @@ export function Services() {
             {processSteps.map((step, index) => {
               const isActive = activeIndex === index;
               return (
-                <div key={step.id} className="relative flex flex-col items-center text-center lg:items-start lg:text-left">
+                <div 
+                  key={step.id} 
+                  className="relative flex flex-col items-center text-center lg:items-start lg:text-left group cursor-pointer" 
+                  onMouseEnter={() => setActiveIndex(index)}
+                >
                   {/* Step Circle & Icon */}
-                  <div className="relative mb-10 group cursor-pointer" onClick={() => setActiveIndex(index)}>
+                  <div className="relative mb-10">
                     {/* Active Icon Indicator */}
                     <AnimatePresence mode="wait">
                       {isActive && (
@@ -101,13 +105,15 @@ export function Services() {
                         borderColor: isActive ? "rgba(139, 92, 246, 1)" : "rgba(255, 255, 255, 0.1)",
                         boxShadow: isActive ? "0 0 40px rgba(139, 92, 246, 0.2)" : "none",
                         scale: isActive ? 1.05 : 1,
+                        y: isActive ? -10 : 0,
                       }}
-                      className="w-24 h-24 rounded-full border-2 flex items-center justify-center bg-[#020202] relative z-10 transition-all duration-500 overflow-hidden"
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="w-24 h-24 rounded-full border-2 flex items-center justify-center bg-[#020202] relative z-10 overflow-hidden"
                     >
                       {isActive && (
                         <motion.div 
                           initial={{ opacity: 0 }}
-                          animate={{ opacity: 0.1 }}
+                          animate={{ opacity: 0.15 }}
                           className="absolute inset-0 bg-primary"
                         />
                       )}
@@ -129,7 +135,7 @@ export function Services() {
                     <h3 className={`text-2xl font-bold tracking-tight transition-colors duration-300 ${isActive ? 'text-primary' : 'text-white'}`}>
                       {step.title}
                     </h3>
-                    <p className="text-white/50 text-base leading-relaxed max-w-[260px]">
+                    <p className={`text-base leading-relaxed max-w-[260px] transition-colors duration-300 ${isActive ? 'text-white/70' : 'text-white/50'}`}>
                       {step.description}
                     </p>
                   </motion.div>
