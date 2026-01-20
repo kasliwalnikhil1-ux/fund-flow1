@@ -337,9 +337,9 @@ export function InvestorMatchingSection() {
                   x = 0;
                   y = 0;
                 } else {
-                  rotate = (index - 1.5) * 12;
-                  x = (index - 1.5) * 60; 
-                  y = Math.abs(index - 1.5) * 15;
+                  rotate = (index - 1.5) * 8;
+                  x = (index - 1.5) * 45; 
+                  y = Math.abs(index - 1.5) * 10;
                 }
               } else if (isHovered) {
                 rotate = 0;
@@ -375,7 +375,7 @@ export function InvestorMatchingSection() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-[160px] xs:w-[180px] md:w-[220px] lg:w-[240px] aspect-[4/5] p-4 lg:p-5 rounded-[1.5rem] lg:rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[140px] xs:w-[160px] md:w-[180px] lg:w-[200px] aspect-[4/5] p-3 lg:p-4 rounded-[1.2rem] lg:rounded-[1.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
