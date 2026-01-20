@@ -234,67 +234,93 @@ export function OutreachCampaignSection() {
             </div>
           </motion.div>
 
-          {/* Card 2: Multi-Channel Execution */}
+          {/* Card 2: Omni-Channel Execution */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="group relative aspect-[4/3] lg:aspect-square p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col"
+            className="group relative h-full p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
           >
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                  <Share2 className="h-5 w-5 text-primary" />
+            {/* Ambient Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-50" />
+            
+            <div className="relative z-20">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 backdrop-blur-sm">
+                    <Share2 className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white tracking-tight">PHASE 06</h3>
+                    <p className="text-xs font-medium text-white/60 leading-tight max-w-[200px] mt-1">
+                      Coordinated outreach across Cold Email, LinkedIn, X, and WhatsApp for maximum touchpoints.
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-tight">Omni-Channel Flow</h3>
               </div>
-              <p className="text-sm text-white/40 leading-relaxed">
-                Coordinated outreach across Cold Email, LinkedIn, and X to maximize touchpoints and conversion.
-              </p>
             </div>
 
-            <div className="flex-1 relative flex items-center justify-center py-4">
-              <div className="grid grid-cols-1 gap-4 w-full px-4">
-                {[
-                  { icon: Mail, label: "Cold Email", color: "text-rose-400", status: "High Priority" },
-                  { icon: Linkedin, label: "LinkedIn Connect", color: "text-blue-400", status: "Social Proof" },
-                  { icon: XIcon, label: "X Direct Message", color: "text-white", status: "Intent Signal" }
-                ].map((channel, i) => (
-                  <motion.div
-                    key={channel.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.2 }}
-                    className="relative flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all group/item overflow-hidden"
-                  >
-                    <div className="absolute top-0 left-0 w-1 h-full bg-primary/0 group-hover/item:bg-primary transition-colors" />
-                    
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                      <channel.icon className={`h-6 w-6 ${channel.color}`} />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex justify-between items-end mb-1">
-                        <span className="text-xs font-bold text-white">{channel.label}</span>
-                        <span className="text-[7px] font-black text-primary uppercase tracking-widest">{channel.status}</span>
-                      </div>
-                      <div className="relative h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: "0%" }}
-                          whileInView={{ width: "100%" }}
-                          transition={{ duration: 2, delay: 0.5 + i * 0.2 }}
-                          className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary to-primary/20"
-                        />
-                      </div>
-                    </div>
+            <div className="flex-1 relative flex flex-col items-center justify-center py-4">
+              <div className="w-full max-w-[320px] relative">
+                {/* Decision Node: Top */}
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  className="mx-auto w-fit px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mb-8 relative z-20"
+                >
+                  <div className="flex items-center gap-2">
+                    <User className="h-3 w-3 text-primary" />
+                    <span className="text-[10px] font-bold text-white/80">Lead has contact data</span>
+                  </div>
+                </motion.div>
 
+                {/* Vertical Connector lines */}
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-px h-[240px] bg-gradient-to-b from-primary/40 via-primary/20 to-transparent -z-10" />
+
+                {/* Flow Channels */}
+                <div className="space-y-4">
+                  {[
+                    { icon: Mail, label: "Cold Email", color: "text-rose-400", side: "left", delay: 0.2 },
+                    { icon: Linkedin, label: "LinkedIn Connect", color: "text-blue-400", side: "right", delay: 0.4 },
+                    { icon: MessageSquare, label: "WhatsApp Message", color: "text-emerald-500", side: "left", delay: 0.6 },
+                    { icon: XIcon, label: "X Direct Message", color: "text-white", side: "right", delay: 0.8 }
+                  ].map((channel, i) => (
                     <motion.div
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                      key={channel.label}
+                      initial={{ opacity: 0, x: channel.side === "left" ? -20 : 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: channel.delay }}
+                      className={`flex items-center gap-4 p-3 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-xl relative overflow-hidden group/item hover:border-primary/40 transition-colors ${channel.side === "left" ? "mr-12" : "ml-12"}`}
                     >
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500/60" />
+                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                        <channel.icon className={`h-4 w-4 ${channel.color}`} />
+                      </div>
+                      <span className="text-[10px] font-bold text-white/90">{channel.label}</span>
+                      
+                      {/* Completion indicator */}
+                      <motion.div 
+                        animate={{ opacity: [0.3, 1, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                        className="ml-auto"
+                      >
+                        <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                      </motion.div>
+
+                      {/* Line connector to main stem */}
+                      <div className={`absolute top-1/2 w-12 h-px bg-primary/20 -z-10 ${channel.side === "left" ? "left-full" : "right-full"}`} />
                     </motion.div>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
+
+                {/* Action button mock */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.2 }}
+                  className="mt-8 mx-auto w-fit px-6 py-2 rounded-full bg-primary shadow-[0_0_20px_rgba(139,92,246,0.4)] flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
+                >
+                  <Send className="h-3 w-3 text-white" />
+                  <span className="text-[10px] font-black text-white uppercase tracking-widest">Send Sequence</span>
+                </motion.div>
               </div>
 
               {/* Background Glow for Card 2 */}
