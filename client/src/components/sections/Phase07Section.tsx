@@ -33,19 +33,22 @@ const cards = [
       <div className="w-full h-full flex flex-col justify-center px-2 py-4 relative overflow-hidden">
         <div className="space-y-2 relative z-10">
           {[
-            { stage: "Pre-Seed Match", color: "text-blue-400" },
-            { stage: "Seed Match", color: "text-emerald-400" },
-            { stage: "Series A Match", color: "text-primary" }
+            { stage: "Pre-Seed Match", check: "$500K - $1M", color: "text-blue-400" },
+            { stage: "Seed Match", check: "$1M - $5M", color: "text-emerald-400" },
+            { stage: "Series A Match", check: "$10M - $30M", color: "text-primary" }
           ].map((m, i) => (
             <motion.div
               key={m.stage}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: [0, 1, 0.4], x: 0 }}
               transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }}
-              className="p-2 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-between"
+              className="p-2 rounded-lg bg-white/[0.03] border border-white/5 flex flex-col"
             >
-              <span className={`text-[8px] font-bold uppercase tracking-wider ${m.color}`}>{m.stage}</span>
-              <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
+              <div className="flex items-center justify-between mb-0.5">
+                <span className={`text-[8px] font-bold uppercase tracking-wider ${m.color}`}>{m.stage}</span>
+                <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
+              </div>
+              <div className="text-[10px] font-bold text-white/90">{m.check}</div>
             </motion.div>
           ))}
         </div>
@@ -225,6 +228,7 @@ export function Phase07Section() {
               let zIndex = index;
               let scale = 1;
 
+              let y = 0;
               // Responsive animation logic
               const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
@@ -239,14 +243,15 @@ export function Phase07Section() {
               } else if (isHovered) {
                 rotate = 0;
                 zIndex = 10;
-                scale = 1.1;
+                scale = 1.15;
                 x = 0;
+                y = -30;
               } else {
                 if (!isMobile) {
                   const direction = index < hoveredCard ? -1 : 1;
-                  x = direction * 30;
-                  rotate = direction * 4;
-                  scale = 0.9;
+                  x = direction * 80;
+                  rotate = direction * 12;
+                  scale = 0.85;
                   zIndex = 1;
                 } else {
                   scale = 0.95;
@@ -261,6 +266,7 @@ export function Phase07Section() {
                   animate={{ 
                     rotate, 
                     x, 
+                    y,
                     zIndex,
                     scale,
                     opacity: anyHovered && !isHovered && isMobile ? 0.5 : 1
