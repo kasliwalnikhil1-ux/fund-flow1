@@ -10,13 +10,18 @@ import {
   ArrowUpRight,
   Globe,
   Lock,
-  Search
+  Search,
+  CheckCircle2,
+  Share2,
+  Mail,
+  Linkedin
 } from "lucide-react";
 
-const performanceMetrics = [
-  { label: "Reply Rate", value: "32%", change: "+12%" },
-  { label: "Meeting Rate", value: "8%", change: "+4%" },
-];
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 const cards = [
   {
@@ -25,29 +30,30 @@ const cards = [
     icon: Search,
     description: "WE IDENTIFY AND SHORTLIST INVESTORS WHO ARE ACTIVELY DEPLOYING CAPITAL IN YOUR SPECIFIC INDUSTRY AND STAGE.",
     content: (
-      <div className="w-full h-full flex flex-col justify-center px-2 py-4">
-        <div className="space-y-3">
-          {performanceMetrics.map((metric, i) => (
-            <div 
-              key={metric.label}
-              className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
+      <div className="w-full h-full flex flex-col justify-center px-2 py-4 relative overflow-hidden">
+        <div className="space-y-2 relative z-10">
+          {[
+            { stage: "Pre-Seed Match", color: "text-blue-400" },
+            { stage: "Seed Match", color: "text-emerald-400" },
+            { stage: "Series A Match", color: "text-primary" }
+          ].map((m, i) => (
+            <motion.div
+              key={m.stage}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: [0, 1, 0.4], x: 0 }}
+              transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }}
+              className="p-2 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-between"
             >
-              <div className="flex justify-between items-center mb-1.5">
-                <span className="text-[8px] text-white/40 uppercase font-bold tracking-wider">{metric.label}</span>
-                <span className="text-[9px] text-emerald-400 font-bold">{metric.change}</span>
-              </div>
-              <div className="text-sm font-bold text-white mb-2">{metric.value}</div>
-              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  whileInView={{ width: metric.value }}
-                  transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
-                  className="h-full bg-primary"
-                />
-              </div>
-            </div>
+              <span className={`text-[8px] font-bold uppercase tracking-wider ${m.color}`}>{m.stage}</span>
+              <CheckCircle2 className="h-2.5 w-2.5 text-emerald-500" />
+            </motion.div>
           ))}
         </div>
+        <motion.div 
+          animate={{ y: [-100, 100] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-x-0 h-0.5 bg-primary/20 shadow-[0_0_15px_rgba(139,92,246,0.5)] z-0"
+        />
       </div>
     )
   },
@@ -58,20 +64,40 @@ const cards = [
     description: "WE ANALYZE INVESTOR PROFILES ACROSS LINKEDIN, X, AND WEB TO CRAFT MESSAGES THAT ACTUALLY GET READ.",
     content: (
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <div className="relative w-24 h-24 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border border-primary/10" />
+        <div className="relative w-full space-y-3">
           <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border border-dashed border-primary/30"
-          />
-          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center backdrop-blur-xl relative z-10">
-            <Zap className="h-6 w-6 text-primary" />
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-3 rounded-xl bg-white/[0.05] border border-primary/20 backdrop-blur-md relative"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[7px] font-bold text-white/60 uppercase tracking-widest">Personalized DM</span>
+            </div>
+            <div className="space-y-1.5">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="h-1 bg-white/10 rounded-full"
+              />
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: "80%" }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                className="h-1 bg-white/10 rounded-full"
+              />
+            </div>
+          </motion.div>
+          <div className="flex justify-center">
+            <motion.div 
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-[8px] font-bold text-primary uppercase"
+            >
+              Tailored Insight Found
+            </motion.div>
           </div>
-        </div>
-        <div className="mt-6 text-center">
-          <div className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Neural Analysis</div>
-          <div className="text-[8px] text-primary font-black uppercase mt-1 tracking-tighter">Active Scaling</div>
         </div>
       </div>
     )
@@ -83,24 +109,37 @@ const cards = [
     description: "COORDINATED TOUCHPOINTS ACROSS EMAIL, LINKEDIN, AND X TO MAXIMIZE VISIBILITY AND RESPONSE RATES.",
     content: (
       <div className="w-full h-full flex flex-col items-center justify-center px-2 py-4">
-        <div className="w-full space-y-2.5">
+        <div className="relative w-full flex justify-center items-center h-32">
+          {/* Central Hub */}
+          <div className="w-10 h-10 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center relative z-10">
+            <Share2 className="h-5 w-5 text-primary" />
+          </div>
+          
+          {/* Channels */}
           {[
-            { label: "IP Warmup", status: "Active", icon: Globe },
-            { label: "SPF/DKIM", status: "Verified", icon: Lock },
-          ].map((item, i) => (
-            <div 
-              key={item.label}
-              className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
+            { icon: Mail, color: "text-rose-400", delay: 0, x: -40, y: -40 },
+            { icon: Linkedin, color: "text-blue-400", delay: 0.5, x: 40, y: -20 },
+            { icon: XIcon, color: "text-white", delay: 1, x: -30, y: 40 }
+          ].map((ch, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: ch.delay, duration: 0.5 }}
+              className="absolute"
+              style={{ x: ch.x, y: ch.y }}
             >
-              <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center">
-                <item.icon className="h-3.5 w-3.5 text-white/60" />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md">
+                <ch.icon className={`h-4 w-4 ${ch.color}`} />
               </div>
-              <div className="flex-1">
-                <div className="text-[9px] font-bold text-white">{item.label}</div>
-                <div className="text-[7px] text-emerald-400 font-black uppercase tracking-widest">{item.status}</div>
-              </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            </div>
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: 40 }}
+                transition={{ delay: ch.delay + 0.3 }}
+                className="absolute top-1/2 left-1/2 h-px bg-primary/20 -z-10 origin-left"
+                style={{ rotate: Math.atan2(-ch.y, -ch.x) * 180 / Math.PI }}
+              />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -113,39 +152,35 @@ const cards = [
     description: "WE HANDLE THE BACK-AND-FORTH SCHEDULING SO YOU SIMPLY SHOW UP TO WARM CONVERSATIONS.",
     content: (
       <div className="w-full h-full flex flex-col justify-center px-2 py-4">
-        <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 relative overflow-hidden">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center">
-              <PieChart className="h-3 w-3 text-primary" />
-            </div>
-            <span className="text-[8px] text-white/60 font-bold uppercase tracking-wider">Lead Activity</span>
-          </div>
-          <div className="space-y-2">
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-              <motion.div 
-                initial={{ width: 0 }}
-                whileInView={{ width: "75%" }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="h-full bg-primary/60"
-              />
-            </div>
-            <div className="h-1.5 w-2/3 bg-white/10 rounded-full" />
-          </div>
+        <div className="space-y-3">
           <motion.div 
-            animate={{ x: [-150, 250] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
-          />
-        </div>
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <div className="p-2 rounded-lg bg-white/[0.03] border border-white/5 text-center">
-            <div className="text-[7px] text-white/40 uppercase font-black mb-0.5 tracking-tighter">Hot Leads</div>
-            <div className="text-xs font-bold text-white">142</div>
-          </div>
-          <div className="p-2 rounded-lg bg-white/[0.03] border border-white/5 text-center">
-            <div className="text-[7px] text-white/40 uppercase font-black mb-0.5 tracking-tighter">Interested</div>
-            <div className="text-xs font-bold text-white">89</div>
-          </div>
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3"
+          >
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center shrink-0">
+              <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+            </div>
+            <div>
+              <div className="text-[9px] font-bold text-white uppercase">Meeting Booked</div>
+              <div className="text-[7px] text-emerald-400 font-medium">Verified Calendar Invite</div>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className="p-3 rounded-xl bg-primary/10 border border-primary/20 flex items-center gap-3"
+          >
+            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+              <TrendingUp className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <div className="text-[9px] font-bold text-white uppercase">Positive Reply</div>
+              <div className="text-[7px] text-primary/80 font-medium">Intent Signal Detected</div>
+            </div>
+          </motion.div>
         </div>
       </div>
     )
