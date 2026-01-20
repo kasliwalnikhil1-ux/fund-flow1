@@ -217,8 +217,8 @@ export function Phase07Section() {
         </div>
 
         {/* Deck of Cards Container */}
-        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[450px] lg:min-h-[500px] py-10 lg:py-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 w-full relative h-full place-items-center">
+        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[400px]">
+          <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4 lg:gap-6 w-full">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
@@ -233,22 +233,29 @@ export function Phase07Section() {
               const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
               if (!anyHovered) {
-                rotate = 0;
-                x = 0;
-                y = 0;
-                scale = 1;
+                if (isMobile) {
+                  rotate = 0;
+                  x = 0;
+                } else {
+                  rotate = (index - 1.5) * 6;
+                  x = (index - 1.5) * 40; 
+                }
               } else if (isHovered) {
                 rotate = 0;
-                zIndex = 20;
-                scale = 1.05;
+                zIndex = 10;
+                scale = 1.15;
                 x = 0;
-                y = 0;
+                y = -30;
               } else {
-                rotate = 0;
-                x = 0;
-                y = 0;
-                scale = 0.95;
-                zIndex = 1;
+                if (!isMobile) {
+                  const direction = index < hoveredCard ? -1 : 1;
+                  x = direction * 80;
+                  rotate = direction * 12;
+                  scale = 0.85;
+                  zIndex = 1;
+                } else {
+                  scale = 0.95;
+                }
               }
 
               return (
@@ -267,7 +274,7 @@ export function Phase07Section() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-full max-w-[320px] lg:w-[240px] aspect-[4/5] p-5 lg:p-5 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[160px] xs:w-[180px] md:w-[220px] lg:w-[240px] aspect-[4/5] p-4 lg:p-5 rounded-[1.5rem] lg:rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
