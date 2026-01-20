@@ -260,66 +260,70 @@ export function OutreachCampaignSection() {
             </div>
 
             <div className="flex-1 relative flex flex-col items-center justify-center py-4">
-              <div className="w-full max-w-[320px] relative">
+              <div className="w-full max-w-[320px] relative min-h-[320px]">
                 {/* Decision Node: Top */}
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  className="mx-auto w-fit px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mb-8 relative z-20"
+                  className="mx-auto w-fit px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mb-12 relative z-20"
                 >
                   <div className="flex items-center gap-2">
                     <User className="h-3 w-3 text-primary" />
-                    <span className="text-[10px] font-bold text-white/80">Lead has contact data</span>
+                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Target Identified</span>
                   </div>
                 </motion.div>
 
-                {/* Vertical Connector lines */}
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-px h-[240px] bg-gradient-to-b from-primary/40 via-primary/20 to-transparent -z-10" />
+                {/* Main Stem Line */}
+                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-px h-[180px] bg-gradient-to-b from-primary/40 via-primary/20 to-transparent -z-10" />
 
-                {/* Flow Channels */}
-                <div className="space-y-4">
+                {/* Flow Channels with Connected Lines */}
+                <div className="relative space-y-8">
                   {[
                     { icon: Mail, label: "Cold Email", color: "text-rose-400", side: "left", delay: 0.2 },
                     { icon: Linkedin, label: "LinkedIn Connect", color: "text-blue-400", side: "right", delay: 0.4 },
-                    { icon: MessageSquare, label: "WhatsApp Message", color: "text-emerald-500", side: "left", delay: 0.6 },
-                    { icon: XIcon, label: "X Direct Message", color: "text-white", side: "right", delay: 0.8 }
+                    { icon: XIcon, label: "X Direct Message", color: "text-white", side: "left", delay: 0.6 }
                   ].map((channel, i) => (
-                    <motion.div
-                      key={channel.label}
-                      initial={{ opacity: 0, x: channel.side === "left" ? -20 : 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: channel.delay }}
-                      className={`flex items-center gap-4 p-3 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-xl relative overflow-hidden group/item hover:border-primary/40 transition-colors ${channel.side === "left" ? "mr-12" : "ml-12"}`}
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                        <channel.icon className={`h-4 w-4 ${channel.color}`} />
-                      </div>
-                      <span className="text-[10px] font-bold text-white/90">{channel.label}</span>
-                      
-                      {/* Completion indicator */}
+                    <div key={channel.label} className="relative">
+                      {/* Branching Line from Stem to Card */}
                       <motion.div 
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                        className="ml-auto"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "48px" }}
+                        transition={{ delay: channel.delay, duration: 0.5 }}
+                        className={`absolute top-1/2 h-[1px] bg-primary/30 -z-10 ${channel.side === "left" ? "right-1/2" : "left-1/2"}`}
+                      />
+                      
+                      <motion.div
+                        initial={{ opacity: 0, x: channel.side === "left" ? -30 : 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: channel.delay + 0.2 }}
+                        className={`flex items-center gap-3 p-3 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-xl relative overflow-hidden group/item hover:border-primary/40 transition-colors w-[180px] ${channel.side === "left" ? "mr-auto" : "ml-auto"}`}
                       >
-                        <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                        <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                          <channel.icon className={`h-4 w-4 ${channel.color}`} />
+                        </div>
+                        <span className="text-[9px] font-bold text-white/90">{channel.label}</span>
+                        
+                        <motion.div 
+                          animate={{ opacity: [0.3, 1, 0.3] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                          className="ml-auto"
+                        >
+                          <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                        </motion.div>
                       </motion.div>
-
-                      {/* Line connector to main stem */}
-                      <div className={`absolute top-1/2 w-12 h-px bg-primary/20 -z-10 ${channel.side === "left" ? "left-full" : "right-full"}`} />
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
                 {/* Action button mock */}
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 }}
-                  className="mt-8 mx-auto w-fit px-6 py-2 rounded-full bg-primary shadow-[0_0_20px_rgba(139,92,246,0.4)] flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
+                  className="mt-12 mx-auto w-fit px-6 py-2.5 rounded-full bg-primary shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 >
                   <Send className="h-3 w-3 text-white" />
-                  <span className="text-[10px] font-black text-white uppercase tracking-widest">Send Sequence</span>
+                  <span className="text-[9px] font-black text-white uppercase tracking-[0.2em]">Launch Sequence</span>
                 </motion.div>
               </div>
 
