@@ -332,33 +332,22 @@ export function InvestorMatchingSection() {
               const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
               if (!anyHovered) {
-                if (isMobile) {
-                  rotate = (index - 1.5) * 4;
-                  x = (index - 1.5) * 20;
-                  y = Math.abs(index - 1.5) * 8;
-                  scale = 0.95;
-                } else {
-                  rotate = (index - 1.5) * 12;
-                  x = (index - 1.5) * 60; 
-                  y = Math.abs(index - 1.5) * 15;
-                }
+                rotate = 0;
+                x = 0;
+                y = 0;
+                scale = 1;
               } else if (isHovered) {
                 rotate = 0;
                 zIndex = 20;
-                scale = 1.15;
+                scale = 1.05;
                 x = 0;
-                y = -30;
+                y = 0;
               } else {
-                if (!isMobile) {
-                  const direction = index < hoveredCard ? -1 : 1;
-                  x = direction * 30;
-                  rotate = direction * 4;
-                  scale = 0.9;
-                  zIndex = 1;
-                } else {
-                  scale = 0.95;
-                  opacity: 0.5;
-                }
+                rotate = 0;
+                x = 0;
+                y = 0;
+                scale = 0.95;
+                zIndex = 1;
               }
 
               return (
