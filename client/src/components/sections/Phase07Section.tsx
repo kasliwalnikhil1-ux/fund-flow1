@@ -218,7 +218,7 @@ export function Phase07Section() {
 
         {/* Deck of Cards Container */}
         <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[450px] lg:min-h-[500px]">
-          <div className="flex lg:flex-nowrap justify-center items-center gap-2 lg:gap-6 w-full relative h-full">
+          <div className="flex flex-nowrap justify-center items-center gap-2 lg:gap-6 w-full relative h-full">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
@@ -234,10 +234,10 @@ export function Phase07Section() {
 
               if (!anyHovered) {
                 if (isMobile) {
-                  rotate = (index - 1.5) * 4;
-                  x = (index - 1.5) * 20;
-                  y = Math.abs(index - 1.5) * 8;
-                  scale = 0.95;
+                  rotate = (index - 1.5) * 2;
+                  x = (index - 1.5) * 12;
+                  y = Math.abs(index - 1.5) * 4;
+                  scale = 0.85;
                 } else {
                   rotate = (index - 1.5) * 12;
                   x = (index - 1.5) * 60; 
@@ -277,7 +277,7 @@ export function Phase07Section() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-[160px] xs:w-[180px] md:w-[220px] lg:w-[240px] aspect-[4/5] p-4 lg:p-5 rounded-[1.5rem] lg:rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
+                  className="w-[140px] xs:w-[180px] md:w-[220px] lg:w-[240px] aspect-[4/5] p-3 lg:p-5 rounded-[1.2rem] lg:rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl flex flex-col items-center justify-between relative overflow-hidden shadow-2xl cursor-pointer"
                   style={{ transformOrigin: "bottom center" }}
                 >
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
