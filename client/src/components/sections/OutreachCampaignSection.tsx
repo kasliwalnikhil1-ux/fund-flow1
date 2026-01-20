@@ -269,7 +269,7 @@ export function OutreachCampaignSection() {
                 >
                   <div className="flex items-center gap-2">
                     <User className="h-3 w-3 text-primary" />
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Target Identified</span>
+                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Target Investor</span>
                   </div>
                 </motion.div>
 
