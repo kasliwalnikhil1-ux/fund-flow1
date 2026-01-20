@@ -9,20 +9,45 @@ export function Navbar() {
 
   const NavItems = () => (
     <>
-      <a href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+      <a 
+        href="#home" 
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+      >
         Home
       </a>
-      <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+      <a 
+        href="#features" 
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+      >
         Features
       </a>
-      <a href="#outreach" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+      <a 
+        href="#outreach" 
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('outreach')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+      >
         Outreach
       </a>
-      <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+      <a 
+        href="#how-it-works" 
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+      >
         How it Works
-      </a>
-      <a href="#results" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-        Results
       </a>
     </>
   );

@@ -32,7 +32,7 @@ export function OutreachCampaignSection() {
   const flowIcons = [FileText, MessageCircle, Trophy];
 
   return (
-    <section id="outreach" className="relative min-h-screen bg-[#020202] py-20 overflow-hidden flex flex-col justify-center">
+    <section id="outreach" className="relative min-h-screen bg-[#020202] py-20 overflow-hidden flex flex-col justify-center scroll-mt-16">
       {/* Matching background effects from previous pages */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />

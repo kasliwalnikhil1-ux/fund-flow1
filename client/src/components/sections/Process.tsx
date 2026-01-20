@@ -33,7 +33,7 @@ export function Process() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="how-it-works" className="py-24 bg-[#020202] overflow-hidden">
+    <section id="how-it-works" className="relative min-h-screen py-24 bg-[#020202] overflow-hidden flex flex-col justify-center scroll-mt-16">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20">
           <motion.h2 

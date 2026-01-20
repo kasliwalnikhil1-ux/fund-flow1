@@ -5,7 +5,7 @@ import { DataFlowAnimation } from "@/components/ui/DataFlowAnimation";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#020202] text-center">
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#020202] text-center scroll-mt-16">
       {/* Dynamic Background Animation */}
       <DataFlowAnimation />
       
