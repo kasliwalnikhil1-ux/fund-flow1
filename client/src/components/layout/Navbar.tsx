@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Zap } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -26,10 +26,12 @@ export function Navbar() {
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 font-display font-bold text-xl tracking-tight">
-            <span className="text-primary text-2xl">●</span>
-            lemni.
-          </a>
+          <div className="flex items-center gap-2 font-display font-bold text-xl tracking-tight cursor-pointer group">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Zap className="h-4 w-4 text-white" />
+            </div>
+            <span className="text-white tracking-tighter">Lemni</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -39,8 +41,12 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" className="font-medium">Sign In</Button>
-          <Button className="font-medium rounded-full px-6">Get Started</Button>
+          <Link href="/login">
+            <Button variant="ghost" className="font-medium text-white/60 hover:text-white transition-colors">Sign In</Button>
+          </Link>
+          <Link href="/login">
+            <Button className="bg-primary hover:bg-primary/90 text-white font-medium rounded-full px-6 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all hover:scale-105">Get Started</Button>
+          </Link>
         </div>
 
         {/* Mobile Nav */}
@@ -54,9 +60,13 @@ export function Navbar() {
             <SheetContent>
               <div className="flex flex-col gap-6 mt-10">
                 <NavItems />
-                <div className="h-px bg-border my-2" />
-                <Button variant="outline" className="w-full">Sign In</Button>
-                <Button className="w-full">Get Started</Button>
+                <div className="h-px bg-white/10 my-2" />
+                <Link href="/login">
+                  <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5">Sign In</Button>
+                </Link>
+                <Link href="/login">
+                  <Button className="w-full bg-primary text-white hover:bg-primary/90">Get Started</Button>
+                </Link>
               </div>
             </SheetContent>
           </Sheet>
