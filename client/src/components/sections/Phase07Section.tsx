@@ -217,8 +217,8 @@ export function Phase07Section() {
         </div>
 
         {/* Deck of Cards Container */}
-        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[400px]">
-          <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4 lg:gap-6 w-full">
+        <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[450px] lg:min-h-[500px]">
+          <div className="flex lg:flex-nowrap justify-center items-center gap-2 lg:gap-6 w-full relative h-full">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
@@ -234,11 +234,14 @@ export function Phase07Section() {
 
               if (!anyHovered) {
                 if (isMobile) {
-                  rotate = 0;
-                  x = 0;
+                  rotate = (index - 1.5) * 4;
+                  x = (index - 1.5) * 20;
+                  y = Math.abs(index - 1.5) * 8;
+                  scale = 0.95;
                 } else {
-                  rotate = (index - 1.5) * 6;
-                  x = (index - 1.5) * 40; 
+                  rotate = (index - 1.5) * 12;
+                  x = (index - 1.5) * 60; 
+                  y = Math.abs(index - 1.5) * 15;
                 }
               } else if (isHovered) {
                 rotate = 0;
