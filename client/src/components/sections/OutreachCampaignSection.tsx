@@ -36,7 +36,6 @@ export function OutreachCampaignSection() {
       {/* Matching background effects from previous pages */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
-      
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.div
@@ -85,9 +84,7 @@ export function OutreachCampaignSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white tracking-tight">PHASE 05</h3>
-                    <p className="text-xs font-medium text-white/60 leading-tight max-w-[200px] mt-1">
-                      Our platform scans multiple data points to craft a high-converting, human outreach strategy.
-                    </p>
+                    <p className="text-xs font-medium text-white/60 leading-tight max-w-[200px] mt-1">We scan multiple data points to craft a high-converting, human outreach strategy.</p>
                   </div>
                 </div>
               </div>
