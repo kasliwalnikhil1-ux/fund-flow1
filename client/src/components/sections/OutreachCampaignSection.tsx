@@ -78,25 +78,21 @@ export function OutreachCampaignSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-50" />
             
             <div className="relative z-20">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 backdrop-blur-sm">
-                    <Cpu className="h-5 w-5 text-primary" />
+                    <Zap className="h-5 w-5 text-primary" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white tracking-tight">NEURAL SYNAPSE</h3>
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.2em]">Live Personalization Engine</span>
-                    </div>
-                  </div>
+                  <p className="text-sm font-medium text-white/60 leading-tight max-w-[200px]">
+                    Neural engine synthesizing real-time social data into high-conversion investor outreach.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="flex-1 relative flex flex-col items-center justify-center py-6">
+            <div className="flex-1 relative flex flex-col items-center justify-center py-2">
               {/* Inspiration: Neural Scanning Storyboard */}
-              <div className="w-full flex flex-col items-center gap-8 px-4 z-10">
+              <div className="w-full flex flex-col items-center gap-6 px-4 z-10 scale-[0.95]">
                 
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-6 w-full relative">
