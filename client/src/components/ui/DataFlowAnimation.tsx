@@ -32,14 +32,14 @@ export function DataFlowAnimation() {
       <div className="absolute bottom-1/4 -right-40 w-[600px] h-[600px] bg-yellow-500/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[180px]" />
 
-      <div className="relative h-full w-full flex items-center justify-between px-6 lg:px-20 max-w-[1800px] mx-auto overflow-hidden">
+      <div className="relative h-full w-full flex items-center justify-between px-6 lg:px-20 max-w-[1800px] mx-auto">
         
-        {/* Left Side: Data Intelligence - Hidden on mobile */}
+        {/* Left Side: Data Intelligence */}
         <motion.div 
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="hidden lg:flex w-1/3 flex flex-col gap-4 relative"
+          className="w-1/3 flex flex-col gap-4 relative"
         >
           <h5 className="text-white/20 text-[11px] font-black uppercase tracking-[0.5em] mb-4">Intelligence Engine</h5>
           
@@ -116,12 +116,12 @@ export function DataFlowAnimation() {
           <div className="absolute h-[400px] w-[1px] bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
         </div>
 
-        {/* Right Side: Investor Matches - Hidden on mobile */}
+        {/* Right Side: Investor Matches */}
         <motion.div 
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="hidden lg:flex w-1/3 flex flex-col gap-4 relative"
+          className="w-1/3 flex flex-col gap-4 relative"
         >
           <h5 className="text-white/20 text-[11px] font-black uppercase tracking-[0.5em] mb-4 text-right">Verified Capital</h5>
           
