@@ -86,7 +86,7 @@ export function OutreachCampaignSection() {
                   <div>
                     <h3 className="text-xl font-bold text-white tracking-tight">PHASE 05</h3>
                     <p className="text-xs font-medium text-white/60 leading-tight max-w-[200px] mt-1">
-                      Neural engine synthesizing real-time social data into high-conversion investor outreach.
+                      Our platform scans multiple data points to craft a high-converting, human outreach strategy.
                     </p>
                   </div>
                 </div>
