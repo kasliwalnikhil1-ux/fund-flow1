@@ -273,7 +273,6 @@ export function Phase07Section() {
                       <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
                         <card.icon className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-primary" />
                       </div>
-                      <span className="text-[6px] lg:text-[7px] font-black text-primary uppercase tracking-[0.4em]">{card.phase}</span>
                     </div>
                     <h3 className="text-xs lg:text-sm font-bold text-white mb-1 tracking-tight">{card.title}</h3>
                   </div>
