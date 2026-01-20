@@ -218,7 +218,7 @@ export function Phase07Section() {
 
         {/* Deck of Cards Container */}
         <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[450px] lg:min-h-[500px]">
-          <div className="flex lg:flex-nowrap justify-center items-center gap-2 lg:gap-6 w-full relative h-full">
+          <div className="flex flex-col lg:flex-row lg:flex-nowrap justify-center items-center gap-6 lg:gap-6 w-full relative h-full py-10 lg:py-0">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
