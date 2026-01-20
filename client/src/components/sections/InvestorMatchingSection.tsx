@@ -317,7 +317,7 @@ export function InvestorMatchingSection() {
 
         {/* Deck of Cards Container */}
         <div className="relative flex-1 max-w-5xl mx-auto w-full flex items-center justify-center min-h-[450px] lg:min-h-[500px] py-10 lg:py-0">
-          <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-6 w-full relative h-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 w-full relative h-full place-items-center">
             {cards.map((card, index) => {
               const isHovered = hoveredCard === index;
               const anyHovered = hoveredCard !== null;
