@@ -36,7 +36,7 @@ export default function Login() {
               <span className="text-2xl font-display font-bold text-white tracking-tighter">Lemni</span>
             </div>
           </Link>
-          <h1 className="text-3xl font-display font-bold text-white mb-2">Welcome Back</h1>
+          <h1 className="text-3xl font-display font-bold text-white mb-2">Access Pipeline</h1>
           <p className="text-white/40">Secure access to your investor pipeline</p>
         </div>
 
@@ -109,22 +109,14 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <Button 
                 variant="outline" 
-                className="bg-white/[0.02] border-white/10 hover:bg-white/5 hover:text-white text-white/60 rounded-xl h-12 transition-all flex gap-2"
+                className="bg-white/[0.02] border-white/10 hover:bg-white/5 hover:text-white text-white/60 rounded-xl h-12 transition-all flex gap-2 w-full"
                 onClick={() => setLocation("/")}
               >
                 <Chrome className="h-4 w-4" />
-                Google
-              </Button>
-              <Button 
-                variant="outline" 
-                className="bg-white/[0.02] border-white/10 hover:bg-white/5 hover:text-white text-white/60 rounded-xl h-12 transition-all flex gap-2"
-                onClick={() => setLocation("/")}
-              >
-                <Github className="h-4 w-4" />
-                GitHub
+                Sign in with Google
               </Button>
             </div>
           </form>
