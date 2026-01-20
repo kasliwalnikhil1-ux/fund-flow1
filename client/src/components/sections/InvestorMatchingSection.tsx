@@ -293,7 +293,7 @@ export function InvestorMatchingSection() {
   ];
 
   return (
-    <section className="relative min-h-[100vh] lg:h-screen bg-[#020202] py-8 lg:py-0 overflow-hidden flex flex-col justify-center">
+    <section id="features" className="relative min-h-[100vh] lg:h-screen bg-[#020202] py-8 lg:py-0 overflow-hidden flex flex-col justify-center">
       <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col h-full justify-center">
         
         <div className="max-w-4xl mx-auto text-center mb-8 lg:mb-12 shrink-0">

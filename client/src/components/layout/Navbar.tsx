@@ -9,8 +9,14 @@ export function Navbar() {
 
   const NavItems = () => (
     <>
+      <a href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+        Home
+      </a>
       <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
         Features
+      </a>
+      <a href="#outreach" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+        Outreach
       </a>
       <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
         How it Works
