@@ -22,10 +22,10 @@ const performanceMetrics = [
 const cards = [
   {
     id: 0,
-    title: "Performance Analytics",
+    title: "Targeted Investor Discovery",
     phase: "Phase 07",
-    icon: BarChart3,
-    description: "REAL-TIME CAMPAIGN TRACKING",
+    icon: Search,
+    description: "WE IDENTIFY AND SHORTLIST INVESTORS WHO ARE ACTIVELY DEPLOYING CAPITAL IN YOUR SPECIFIC INDUSTRY AND STAGE.",
     content: (
       <div className="w-full h-full flex flex-col justify-center p-3">
         <div className="space-y-3">
@@ -58,10 +58,10 @@ const cards = [
   },
   {
     id: 1,
-    title: "Smart Optimization",
+    title: "Hyper-Personalized Outreach",
     phase: "Phase 08",
     icon: Zap,
-    description: "AUTONOMOUS A/B TESTING",
+    description: "WE ANALYZE INVESTOR PROFILES ACROSS LINKEDIN, X, AND WEB TO CRAFT MESSAGES THAT ACTUALLY GET READ.",
     content: (
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <div className="relative w-full aspect-square max-w-[120px]">
@@ -103,10 +103,10 @@ const cards = [
   },
   {
     id: 2,
-    title: "Security Shield",
+    title: "Multi-Channel Engagement",
     phase: "Phase 09",
     icon: ShieldCheck,
-    description: "ADVANCED DELIVERABILITY",
+    description: "COORDINATED TOUCHPOINTS ACROSS EMAIL, LINKEDIN, AND X TO MAXIMIZE VISIBILITY AND RESPONSE RATES.",
     content: (
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <div className="w-full space-y-2">
@@ -143,10 +143,10 @@ const cards = [
   },
   {
     id: 3,
-    title: "Lead Intelligence",
+    title: "Meeting Setup",
     phase: "Phase 10",
     icon: Search,
-    description: "INTENT-DRIVEN RE-TARGETING",
+    description: "WE HANDLE THE BACK-AND-FORTH SCHEDULING SO YOU SIMPLY SHOW UP TO WARM CONVERSATIONS.",
     content: (
       <div className="w-full h-full flex flex-col justify-center p-3">
         <div className="relative h-24 w-full rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden p-2">
@@ -195,17 +195,11 @@ export function Phase07Section() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 tracking-tight"
           >
-            Performance Scaling. <br />
-            <span className="text-primary">Optimized for Conversion.</span>
+            Everything you need to raise capital. <br />
+            <span className="text-primary text-xl md:text-2xl lg:text-3xl font-medium block mt-4 opacity-80">
+              Stop spraying and praying. We run a surgical process to get you in front of the right check-writers.
+            </span>
           </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-sm md:text-base lg:text-lg text-white/60 max-w-xl mx-auto leading-relaxed"
-          >
-            Monitor, scale, and secure your outreach with enterprise-grade analytics and deliverability protection.
-          </motion.p>
         </div>
 
         {/* Deck of Cards Container */}
