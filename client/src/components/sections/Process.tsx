@@ -41,7 +41,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight"
           >
-            How it Works
+            How it <span className="text-primary">Works</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
