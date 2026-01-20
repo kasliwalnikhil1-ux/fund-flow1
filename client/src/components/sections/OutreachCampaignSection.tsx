@@ -83,9 +83,12 @@ export function OutreachCampaignSection() {
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 backdrop-blur-sm">
                     <Zap className="h-5 w-5 text-primary" />
                   </div>
-                  <p className="text-sm font-medium text-white/60 leading-tight max-w-[200px]">
-                    Neural engine synthesizing real-time social data into high-conversion investor outreach.
-                  </p>
+                  <div>
+                    <h3 className="text-xl font-bold text-white tracking-tight">PHASE 05</h3>
+                    <p className="text-xs font-medium text-white/60 leading-tight max-w-[200px] mt-1">
+                      Neural engine synthesizing real-time social data into high-conversion investor outreach.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
