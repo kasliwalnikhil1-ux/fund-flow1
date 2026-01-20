@@ -101,10 +101,10 @@ export function OutreachCampaignSection() {
                 {/* 1. SCANNING LAYER: Platforms with "Deep-Scan" status */}
                 <div className="flex justify-center gap-4 lg:gap-6 w-full relative">
                   {[
-                    { icon: Globe, label: "Website", color: "text-blue-400" },
-                    { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]" },
-                    { icon: XIcon, label: "X", color: "text-white" },
-                    { icon: Facebook, label: "Facebook", color: "text-blue-600" }
+                    { icon: Globe, label: "Website", color: "text-blue-400", signal: { icon: Activity, label: "Recent Post" } },
+                    { icon: Linkedin, label: "LinkedIn", color: "text-[#0077b5]", signal: { icon: Trophy, label: "Achievement" } },
+                    { icon: XIcon, label: "X", color: "text-white", signal: { icon: ThumbsUp, label: "Engagement" } },
+                    { icon: Facebook, label: "Facebook", color: "text-blue-600", signal: { icon: Activity, label: "Signal" } }
                   ].map((platform, i) => (
                     <motion.div
                       key={platform.label}
@@ -113,10 +113,10 @@ export function OutreachCampaignSection() {
                       transition={{ delay: i * 0.1 }}
                       className="flex flex-col items-center gap-2 flex-1 max-w-[80px] relative"
                     >
-                      {/* Random Falling Signals for all icons */}
+                      {/* Randomized Falling Signals with specific labels */}
                       <div className="absolute left-1/2 -translate-x-1/2 top-10 w-full h-32 pointer-events-none z-0">
                         <AnimatePresence>
-                          {[0, 1].map((sIndex) => (
+                          {[0].map((sIndex) => (
                             <motion.div
                               key={`${platform.label}-signal-${sIndex}`}
                               initial={{ opacity: 0, y: 0, scale: 0.5 }}
@@ -129,12 +129,13 @@ export function OutreachCampaignSection() {
                               transition={{ 
                                 duration: 3 + Math.random() * 2, 
                                 repeat: Infinity, 
-                                delay: Math.random() * 5,
+                                delay: i * 1.2 + Math.random(),
                                 ease: "linear"
                               }}
-                              className="absolute left-1/2 -translate-x-1/2 p-1 rounded-full bg-primary/20 border border-primary/30 backdrop-blur-md shadow-[0_0_10px_rgba(139,92,246,0.2)]"
+                              className="absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md flex items-center gap-1.5 shadow-lg shadow-primary/5 whitespace-nowrap"
                             >
-                              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                              <platform.signal.icon className="h-2 w-2 text-primary" />
+                              <span className="text-[6px] font-black text-white uppercase tracking-tighter">{platform.signal.label}</span>
                             </motion.div>
                           ))}
                         </AnimatePresence>
