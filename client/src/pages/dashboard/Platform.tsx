@@ -6,7 +6,7 @@ import {
   GitBranch, Network, Settings, LogOut, Search,
   Filter, Sparkles, MoreVertical, CheckCircle2,
   ChevronDown, ChevronRight, LayoutDashboard,
-  ShieldCheck, ExternalLink, Zap
+  ShieldCheck, ExternalLink, Zap, ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
