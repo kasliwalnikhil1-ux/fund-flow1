@@ -1,0 +1,328 @@
+1. Founder Identity
+Step 1.1 — Name
+Question: What’s your name?
+First name (required)
+
+
+Last name (required)
+
+
+Inline validation
+
+
+CTA: Continue
+
+
+
+2. Organization Setup
+Step 2.1 — Join or Create Organization
+Purpose: Workspace creation
+Message: Join or create an organization
+
+
+If no invites:
+
+
+CTA: Create New Organization
+
+
+CTA advances onboarding
+
+
+
+3. Founder Details
+Step 3.1 — Section Introduction
+Title: Founder Details
+Explains why founder background matters
+
+
+CTA: Continue
+
+
+
+Step 3.2 — Fundraising Experience
+Question: Which best describes your prior experience raising venture rounds?
+Options:
+Getting Started — First time raising venture capital
+
+
+Seasoned — Raised 1–2 venture rounds
+
+
+Expert — Raised 3+ venture rounds
+
+
+Required
+
+
+CTA: Next
+
+
+
+Step 3.3 — Capital Raised to Date
+Question: What is your total capital raised to date?
+Dropdown:
+No amount raised
+
+
+Less than $100K
+
+
+$100K–$500K
+
+
+$500K–$2M
+
+
+$2M–$10M
+
+
+More than $10M
+
+
+
+4. Company Details
+Step 4.1 — Section Introduction
+Title: Company Details
+Explains investor relevance
+
+
+CTA: Continue
+
+
+
+Step 4.2 — Company Sector
+Question: Select your company’s sector
+Sector (required)
+
+
+Sub-sector (optional)
+
+
+
+Step 4.3 — Upcoming Fundraising Stage
+Question: Upcoming round stage
+Dropdown (e.g., Pre-Seed, Seed, Series A)
+
+
+Required
+
+
+
+Step 4.4 — Company HQ
+Question: Select company’s HQ country
+Country dropdown
+
+
+Required
+
+
+
+Step 4.5 — Product / Service Description
+Question: What product or service does your company offer?
+Multi-line text area
+
+
+Required
+
+
+Used for:
+
+
+Investor matching
+
+
+Pitch context
+
+
+Outreach personalization
+
+
+
+Step 4.6 — Customer Description
+Question: Who are your customers?
+Multi-line text input
+
+
+Minimum character validation
+
+
+Example placeholder text
+
+
+
+Step 4.7 — Revenue Status
+Question: Is your company currently generating revenue?
+Button options:
+
+
+Yes
+
+
+No
+
+
+
+Step 4.8 — ARR Growth (Conditional)
+Shown only if revenue = Yes
+Title: Annual Recurring Revenue (ARR)
+Month/year picker
+
+
+ARR input ($)
+
+
+Add/remove months
+
+
+Optional
+
+
+Option: Skip for now
+
+
+
+5. Data Sources
+Step 5.1 — Existing Investors
+Title: Select Your Existing Investors
+Search by keyword
+
+
+Select investor entities
+
+
+Empty state shown if none
+
+
+Option:
+
+
+“I don’t have any existing investors”
+
+
+Purpose:
+Warm intro discovery
+
+
+Network graph building
+
+
+
+6. Investment Focus
+Step 6.1 — Investing Themes
+Title: Suggested Investing Themes
+Multi-select cards
+
+
+Examples:
+
+
+Marketing Technology (MarTech)
+
+
+AI in Sales
+
+
+Customer Support Automation
+
+
+Business Process Automation
+
+
+Optional
+
+
+Option: Skip for now
+
+
+
+Step 6.2 — Similar Companies
+Title: Select Similar Companies
+Instruction:
+
+
+Identify 1–2 similar or adjacent companies
+
+
+Logo-based selection
+
+
+Multi-select allowed
+
+
+
+7. Round Dynamics
+Step 7.1 — Section Introduction
+Title: Round Dynamics
+Explains importance of round data
+
+
+CTA: Continue
+
+
+
+Step 7.2 — Fundraising Timeline
+Question: When are you planning to raise your next round?
+Dropdown:
+Near-term (1–3 months)
+
+
+Mid-term (3–6 months)
+
+
+Later (6+ months)
+
+
+
+Step 7.3 — Target Round Size
+Question: What round size are you looking for?
+Dropdown:
+Less than $500K
+
+
+$500K–$2M
+
+
+$2M–$10M
+
+
+More than $10M
+
+
+
+Step 7.4 — Investor Type Preference
+Question: Are you looking for a lead investor or follow-on investors?
+Options:
+Lead investors
+
+
+Follow-on investors
+
+
+Both
+
+
+
+8. Onboarding Completion
+Step 8.1 — Success & Handoff
+Title: Welcome to Metal!
+Green checkmark success icon
+
+
+Value statement:
+
+
+ Metal’s high-precision software enables founders to bring efficiency and intelligence to their fundraising process.
+
+
+
+Primary CTA:
+
+
+Launch Platform
+
+
+Secondary:
+
+
+Back
