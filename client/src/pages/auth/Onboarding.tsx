@@ -515,7 +515,7 @@ export default function Onboarding() {
                 </div>
 
                 <div className="pt-8">
-                  <Button onClick={() => setLocation("/")} className="w-full h-16 bg-primary hover:bg-primary/90 rounded-2xl text-xl font-bold shadow-[0_20px_45px_-10px_rgba(139,92,246,0.4)] group">
+                  <Button onClick={() => setLocation("/platform")} className="w-full h-16 bg-primary hover:bg-primary/90 rounded-2xl text-xl font-bold shadow-[0_20px_45px_-10px_rgba(139,92,246,0.4)] group">
                     Launch Platform
                     <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1.5 transition-transform" strokeWidth={3} />
                   </Button>
