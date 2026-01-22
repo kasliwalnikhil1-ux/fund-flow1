@@ -30,32 +30,32 @@ export function Hero() {
             </div>
             
             {/* Simple but Grabby Headline - Centered */}
-            <h1 className="text-6xl md:text-8xl font-display font-bold leading-[1] mb-10 tracking-tighter">
-              Raise capital <br />
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-bold leading-[1.1] md:leading-[1] mb-6 md:mb-10 tracking-tighter">
+              Raise capital <br className="hidden sm:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/80 to-white/30">on autopilot.</span>
             </h1>
             
             {/* Description - Same as before, Centered */}
-            <p className="text-lg md:text-xl text-white/60 leading-relaxed mb-12 max-w-2xl font-medium">
+            <p className="text-base md:text-xl text-white/60 leading-relaxed mb-8 md:mb-12 max-w-2xl font-medium px-4 md:px-0">
               We leverage multi-channel intelligence to identify active investors and launch hyper-personalized campaigns that secure <span className="text-white">qualified meetings</span> with the right check-writers.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 mb-24 justify-center">
-              <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="text-base font-black rounded-full h-16 px-14 bg-white text-black hover:bg-white/90 shadow-[0_20px_45px_-10px_rgba(255,255,255,0.4)] transition-all hover:scale-[1.05] active:scale-[0.95] group">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-5 mb-16 md:mb-24 justify-center w-full max-w-sm sm:max-w-none">
+              <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto text-base font-black rounded-full h-14 md:h-16 px-8 md:px-14 bg-white text-black hover:bg-white/90 shadow-[0_20px_45px_-10px_rgba(255,255,255,0.4)] transition-all hover:scale-[1.05] active:scale-[0.95] group">
                   Start Free
                   <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1.5" strokeWidth={3} />
                 </Button>
               </a>
-              <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="text-base font-black rounded-full h-16 px-12 bg-white/5 backdrop-blur-2xl border-white/10 hover:bg-white/10 transition-all text-white/90">
+              <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto text-base font-black rounded-full h-14 md:h-16 px-8 md:px-12 bg-white/5 backdrop-blur-2xl border-white/10 hover:bg-white/10 transition-all text-white/90">
                   Live Demo
                 </Button>
               </a>
             </div>
 
             {/* Centered Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 border-t border-white/5 pt-16 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 border-t border-white/5 pt-12 md:pt-16 w-full px-4 md:px-0">
               <div className="flex flex-col items-center space-y-3">
                 <div className="flex items-center gap-3 text-primary">
                   <CheckCircle2 className="h-5 w-5" strokeWidth={3} />

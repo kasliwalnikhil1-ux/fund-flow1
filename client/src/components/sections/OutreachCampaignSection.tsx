@@ -51,27 +51,27 @@ export function OutreachCampaignSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight"
+            className="text-3xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight"
           >
-            Hyper-Personalized <br />
+            Hyper-Personalized <br className="hidden md:block" />
             <span className="text-primary">Multi-Channel Outreach.</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-white/60 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-white/60 max-w-2xl mx-auto px-4 md:px-0"
           >
             We don't just send messages. We analyze recent activities across all platforms to craft human-like, high-conversion interactions.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto px-4 md:px-0">
           {/* Card 1: Hyper-Personalization Engine */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="group relative h-full p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
+            className="group relative h-auto min-h-[500px] md:h-full p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
           >
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-50" />
@@ -238,7 +238,7 @@ export function OutreachCampaignSection() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="group relative h-full p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
+            className="group relative h-auto min-h-[500px] md:h-full p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-3xl overflow-hidden flex flex-col justify-between"
           >
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-50" />
