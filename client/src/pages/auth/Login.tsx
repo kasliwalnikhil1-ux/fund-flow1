@@ -12,8 +12,8 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In mockup mode, we just simulate a login and go to onboarding
-    setLocation("/onboarding");
+    // In mockup mode, we just simulate a login
+    setLocation("/");
   };
 
   return (
