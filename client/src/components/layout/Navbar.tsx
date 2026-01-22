@@ -75,9 +75,9 @@ export function Navbar() {
           <Link href="/login">
             <Button variant="ghost" className="font-medium text-white/60 hover:text-white transition-colors">Sign In</Button>
           </Link>
-          <Link href="/login">
+          <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer">
             <Button className="bg-primary hover:bg-primary/90 text-white font-medium rounded-full px-6 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all hover:scale-105">Get Started</Button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Nav */}
@@ -95,9 +95,9 @@ export function Navbar() {
                 <Link href="/login">
                   <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5">Sign In</Button>
                 </Link>
-                <Link href="/login">
+                <a href="https://calendly.com/rajadurgarao567/30min" target="_blank" rel="noopener noreferrer">
                   <Button className="w-full bg-primary text-white hover:bg-primary/90">Get Started</Button>
-                </Link>
+                </a>
               </div>
             </SheetContent>
           </Sheet>
